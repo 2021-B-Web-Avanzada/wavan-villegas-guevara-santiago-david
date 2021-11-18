@@ -75,7 +75,7 @@ if(undefined){
 
 const santiago={
     nombre:"Santiago", //llave:valor,
-    false:"Villegas",
+    apellido:"Villegas",
     edad: 22,
     hijos: null,
     zapatos: undefined,
@@ -86,11 +86,79 @@ const santiago={
     },
     mascotas:['Kiara','Loky'],
 };
+//Acceder a las propiedades del objeto
+santiago.nombre;
+santiago.apellido;
+santiago["nombre"];
+console.log(santiago);
+santiago.nombre="David";
+console.log(santiago);
+santiago["nombre"]="Santiago";
+santiago.sueldo;
+console.log(santiago.sueldo);
+
+//agregar propiedades a un objeto
+santiago.sueldo=1.2;
+console.log(santiago.sueldo);
+santiago["gastos"]=0.8;
+console.log(santiago.gastos);
+santiago.nombre=undefined;
+console.log(santiago);
+console.log(Object.keys(santiago));
+console.log(Object.values(santiago));
+
+delete  santiago.nombre;//elimina la llave
+console.log(santiago)
+
+//Las variables por valor son las primitivas.
+let edadSantiago=32;
+let edadDadvid=edadSantiago;// Guardamos una primitiva en otra variable
+console.log(edadSantiago);
+console.log(edadDadvid);
+//Se guarda el valo no la referencia
+edadSantiago=edadDadvid+1;
+console.log(edadSantiago);
+console.log(edadDadvid);
+
+//Variables por referencia: object({}[])
+// let rafael={
+//     nombre:"Rafael"
+// };
+// let lenin=rafael;
+// console.log(rafael);
+// console.log(lenin);
+// lenin.nombre="Lenin";
+// console.log(rafael);
+// console.log(lenin);
+// delete  rafael.nombre;
+// console.log(rafael);
+// console.log(lenin);
 
 
 
+//Clonacion de objetos
 
-
+let rafael={
+nombre:"Rafael"
+};
+let lenin=Object.assign({},rafael);
+console.log(rafael);
+console.log(lenin);
+lenin.nombre="Lenin";
+console.log(rafael);
+console.log(lenin);
+delete  rafael.nombre;
+console.log(rafael);
+console.log(lenin);
+//Clonacion de un arreglo
+let arregloNumeros=[1,2,3,4,5];
+let arregloClonado= Object.assign([],arregloNumeros);
+console.log(arregloNumeros)
+console.log(arregloClonado)
+arregloNumeros[0]=200;
+arregloClonado[0]=100;
+console.log(arregloNumeros)
+console.log(arregloClonado)
 
 
 
