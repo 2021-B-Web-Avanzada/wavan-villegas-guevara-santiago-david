@@ -1,5 +1,6 @@
 import { BaseDeDatosMemoria } from "./BaseDeDatosMemoria"
 export class  Videojuego{
+    public id:string;
     public  nombre:string;
     public  recaudacion:number;
     public  fechaDeSalida:string;
@@ -7,12 +8,14 @@ export class  Videojuego{
     public  multijugador:boolean;
 
     constructor(
+        idParametro:string,
         nombreParametro:string,
         recaudacionParametro:number,
         fechaDeSalidaParametro:string,
         generoPrincipalParametro:string,
         multijugadorParametro:boolean,
     ) {
+        this.id=idParametro,
         this.nombre=nombreParametro;
         this.recaudacion=recaudacionParametro;
         this.fechaDeSalida=fechaDeSalidaParametro;

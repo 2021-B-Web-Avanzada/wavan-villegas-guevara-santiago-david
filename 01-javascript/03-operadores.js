@@ -81,8 +81,8 @@ console.log("respuestaIndex",respuestaIndex) ;//si no encuentra devuelve -1 .
 //ITERA EL ARREGLO
 const respuestaForEach = arreglo
 .forEach(
-    function (valorActual,indiceActual,arregloCompleto){
-        console.log("valorActual",valorActual)
+    function (empresaActual,indiceActual,arregloCompleto){
+        console.log("valorActual",empresaActual.toString())
     }
 
 );
