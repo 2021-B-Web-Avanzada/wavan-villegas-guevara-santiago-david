@@ -28,16 +28,6 @@ var Empresa = /** @class */ (function () {
         this.arregloVideojuegos.splice(indice, 1);
         BaseDeDatosMemoria_1.BaseDeDatosMemoria.actualizarJson();
     };
-    Empresa.prototype.toString = function () {
-        var valor = "Nombre de la empresa:" + this.nombre +
-            "\n Número de trabajadores:" + this.numeroTrabajadores +
-            "\n Fecha de fundación:" + this.fechaDeFundacion +
-            "\n País:" + this.pais +
-            "\n Es idenpendiente?:" + this.independiente +
-            "\n Número de videojuegos?:" + this.arregloVideojuegos.length;
-        console.log(valor);
-        return valor;
-    };
     return Empresa;
 }());
 exports.Empresa = Empresa;

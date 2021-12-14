@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var Videojuego_1 = require("./Videojuego");
 var Empresa_1 = require("./Empresa");
 var BaseDeDatosMemoria_1 = require("./BaseDeDatosMemoria");
 var inquirer = require('inquirer');
@@ -80,7 +81,101 @@ function crearEmpresaMain() {
                     if (datosEmpresa.independiente === "No") {
                         idenpendiente = false;
                     }
-                    BaseDeDatosMemoria_1.BaseDeDatosMemoria.agregarEmpresa(new Empresa_1.Empresa("111", datosEmpresa.nombre, datosEmpresa.fechaDeFundacion, datosEmpresa.numeroTrabajadores, datosEmpresa.pais, idenpendiente, []));
+                    BaseDeDatosMemoria_1.BaseDeDatosMemoria.agregarEmpresa(new Empresa_1.Empresa("111", datosEmpresa.nombre, datosEmpresa.numeroTrabajadores, datosEmpresa.fechaDeFundacion, datosEmpresa.pais, idenpendiente, []));
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function editarEmpresaMain(indiceEmpresa) {
+    return __awaiter(this, void 0, void 0, function () {
+        var datosEmpresaNuevos, idenpendienteNuevo;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    console.log("Datos nuevos de la empresa a crear");
+                    return [4 /*yield*/, inquirer.prompt([
+                            {
+                                type: 'input',
+                                name: 'nombre',
+                                message: 'Ingrese el nuevo nombre de la empresa'
+                            },
+                            {
+                                type: 'input',
+                                name: 'fechaDeFundacion',
+                                message: 'Ingrese la nueva fecha de fundación de la empresa'
+                            },
+                            {
+                                type: 'number',
+                                name: 'numeroTrabajadores',
+                                message: 'Ingrese el nuevo número de trabajores'
+                            },
+                            {
+                                type: 'input',
+                                name: 'pais',
+                                message: 'Ingrese el nuevo país de la empresa'
+                            },
+                            {
+                                type: 'list',
+                                name: 'independiente',
+                                message: 'Es idependiente la empresa?',
+                                choices: ["Si", "No"]
+                            }
+                        ])];
+                case 1:
+                    datosEmpresaNuevos = _a.sent();
+                    idenpendienteNuevo = true;
+                    if (datosEmpresaNuevos.independiente === "No") {
+                        idenpendienteNuevo = false;
+                    }
+                    BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas[indiceEmpresa].actualizar(datosEmpresaNuevos.nombre, datosEmpresaNuevos.numeroTrabajadores, datosEmpresaNuevos.fechaDeFundacion, datosEmpresaNuevos.pais, idenpendienteNuevo);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function crearVideojuegoMain(indiceEmpresa) {
+    return __awaiter(this, void 0, void 0, function () {
+        var datosVideojuego, multijugador;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    console.log("Datos del videojuego a crear");
+                    return [4 /*yield*/, inquirer.prompt([
+                            {
+                                type: 'input',
+                                name: 'nombre',
+                                message: 'Ingrese el nombre del videojuego'
+                            },
+                            {
+                                type: 'input',
+                                name: 'fechaDeSalida',
+                                message: 'Ingrese la fecha de salida del videojuego'
+                            },
+                            {
+                                type: 'number',
+                                name: 'recaudacion',
+                                message: 'Ingrese la recuadación del juego'
+                            },
+                            {
+                                type: 'input',
+                                name: 'generoPrincipal ',
+                                message: 'Ingrese el genero principal del juego'
+                            },
+                            {
+                                type: 'list',
+                                name: 'multijugador',
+                                message: 'Tiene multijugador?',
+                                choices: ["Si", "No"]
+                            }
+                        ])];
+                case 1:
+                    datosVideojuego = _a.sent();
+                    multijugador = true;
+                    if (datosVideojuego.independiente === "No") {
+                        multijugador = false;
+                    }
+                    BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas[indiceEmpresa].agregarVideojuego(new Videojuego_1.Videojuego("111", datosVideojuego.nombre, datosVideojuego.recaudacion, datosVideojuego.fechaDeSalida, datosVideojuego.generoPrincipal, multijugador));
                     return [2 /*return*/];
             }
         });
@@ -88,21 +183,21 @@ function crearEmpresaMain() {
 }
 function mainAsync() {
     return __awaiter(this, void 0, void 0, function () {
-        var datos, banderaListaEmpresas, respuestaBanderaListaEmpresa, _a, indiceEmpresa, banderaSeleccionEmpresa, respuestabanderaSeleccionEmpresa, error_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var datos, banderaListaEmpresas, respuestaBanderaListaEmpresa, _a, indiceEmpresa, banderaSeleccionEmpresa, respuestabanderaSeleccionEmpresa, _b, banderaListaVideojuegos, respuestaBanderaListaVideojuego, _c, error_1;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
                 case 0:
-                    _b.trys.push([0, 14, , 15]);
+                    _d.trys.push([0, 29, , 30]);
                     return [4 /*yield*/, BaseDeDatosMemoria_1.BaseDeDatosMemoria.init()];
                 case 1:
-                    datos = _b.sent();
+                    datos = _d.sent();
                     if (typeof datos === "string") {
                         BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas = JSON.parse(datos);
                     }
                     banderaListaEmpresas = true;
-                    _b.label = 2;
+                    _d.label = 2;
                 case 2:
-                    if (!banderaListaEmpresas) return [3 /*break*/, 13];
+                    if (!banderaListaEmpresas) return [3 /*break*/, 28];
                     console.log("Operaciones CRUD empresa desarrolladora-videojuego");
                     console.log("Lista de empresas");
                     console.table(BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas, ["nombre", "fechaDeFundacion", "numeroTrabajadores", "pais", "independiente"]);
@@ -117,7 +212,7 @@ function mainAsync() {
                             }
                         ])];
                 case 3:
-                    respuestaBanderaListaEmpresa = _b.sent();
+                    respuestaBanderaListaEmpresa = _d.sent();
                     _a = respuestaBanderaListaEmpresa.seleccion;
                     switch (_a) {
                         case -2: return [3 /*break*/, 4];
@@ -126,20 +221,20 @@ function mainAsync() {
                     return [3 /*break*/, 7];
                 case 4:
                     banderaListaEmpresas = false;
-                    return [3 /*break*/, 12];
+                    return [3 /*break*/, 27];
                 case 5: return [4 /*yield*/, crearEmpresaMain()];
                 case 6:
-                    _b.sent();
-                    return [3 /*break*/, 12];
+                    _d.sent();
+                    return [3 /*break*/, 27];
                 case 7:
                     indiceEmpresa = respuestaBanderaListaEmpresa.seleccion;
                     banderaSeleccionEmpresa = true;
                     if (!(BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas.length > 0
                         && indiceEmpresa >= 0
-                        && indiceEmpresa < BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas.length)) return [3 /*break*/, 11];
-                    _b.label = 8;
+                        && indiceEmpresa < BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas.length)) return [3 /*break*/, 26];
+                    _d.label = 8;
                 case 8:
-                    if (!banderaSeleccionEmpresa) return [3 /*break*/, 10];
+                    if (!banderaSeleccionEmpresa) return [3 /*break*/, 25];
                     console.log("Empresa seleccionada");
                     console.table([BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas[indiceEmpresa],], ["nombre", "fechaDeFundacion", "numeroTrabajadores", "pais", "independiente"]);
                     return [4 /*yield*/, inquirer.prompt([
@@ -151,36 +246,78 @@ function mainAsync() {
                             }
                         ])];
                 case 9:
-                    respuestabanderaSeleccionEmpresa = _b.sent();
-                    switch (respuestabanderaSeleccionEmpresa.seleccion) {
-                        case "Eliminar Empresa":
-                            BaseDeDatosMemoria_1.BaseDeDatosMemoria.eliminarEmpresa(indiceEmpresa);
-                            banderaSeleccionEmpresa = false;
-                            console.log("Empresa eliminada");
-                            break;
-                        case "Editar Empresa":
-                            break;
-                        case "Ver videojuegos":
-                            break;
-                        case "Regresar":
-                            banderaSeleccionEmpresa = false;
-                            break;
-                        default:
-                            banderaSeleccionEmpresa = false;
-                            break;
+                    respuestabanderaSeleccionEmpresa = _d.sent();
+                    _b = respuestabanderaSeleccionEmpresa.seleccion;
+                    switch (_b) {
+                        case "Eliminar Empresa": return [3 /*break*/, 10];
+                        case "Editar Empresa": return [3 /*break*/, 11];
+                        case "Ver videojuegos": return [3 /*break*/, 13];
+                        case "Regresar": return [3 /*break*/, 22];
                     }
-                    return [3 /*break*/, 8];
-                case 10: return [3 /*break*/, 12];
-                case 11:
-                    console.log("Ingrese un número válido");
-                    return [3 /*break*/, 12];
-                case 12: return [3 /*break*/, 2];
-                case 13: return [3 /*break*/, 15];
+                    return [3 /*break*/, 23];
+                case 10:
+                    BaseDeDatosMemoria_1.BaseDeDatosMemoria.eliminarEmpresa(indiceEmpresa);
+                    banderaSeleccionEmpresa = false;
+                    console.log("Empresa eliminada");
+                    return [3 /*break*/, 24];
+                case 11: return [4 /*yield*/, editarEmpresaMain(indiceEmpresa)];
+                case 12:
+                    _d.sent();
+                    return [3 /*break*/, 24];
+                case 13:
+                    banderaListaVideojuegos = true;
+                    _d.label = 14;
                 case 14:
-                    error_1 = _b.sent();
+                    if (!banderaListaVideojuegos) return [3 /*break*/, 21];
+                    console.log("Lista de videojuegos de la empresa: " +
+                        BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas[indiceEmpresa].nombre);
+                    console.table(BaseDeDatosMemoria_1.BaseDeDatosMemoria.empresas[indiceEmpresa].arregloVideojuegos, ["nombre", "recaudacion", "fechaDeSalida", "generoPrincipal", "multijugador"]);
+                    return [4 /*yield*/, inquirer.prompt([
+                            {
+                                type: 'number',
+                                name: 'seleccion',
+                                message: "Opciones disponibles \n" +
+                                    "Para regresar ingrese: -2 \n" +
+                                    "Para crear una videojuego ingrese: -1 \n" +
+                                    "Para seleccionar una videojuego, ingrese el número de videojuego (index)"
+                            }
+                        ])];
+                case 15:
+                    respuestaBanderaListaVideojuego = _d.sent();
+                    _c = respuestaBanderaListaVideojuego.seleccion;
+                    switch (_c) {
+                        case -2: return [3 /*break*/, 16];
+                        case -1: return [3 /*break*/, 17];
+                    }
+                    return [3 /*break*/, 19];
+                case 16:
+                    banderaListaVideojuegos = false;
+                    return [3 /*break*/, 20];
+                case 17: return [4 /*yield*/, crearVideojuegoMain(indiceEmpresa)];
+                case 18:
+                    _d.sent();
+                    return [3 /*break*/, 20];
+                case 19: return [3 /*break*/, 20];
+                case 20: return [3 /*break*/, 14];
+                case 21: return [3 /*break*/, 24];
+                case 22:
+                    banderaSeleccionEmpresa = false;
+                    return [3 /*break*/, 24];
+                case 23:
+                    banderaSeleccionEmpresa = false;
+                    return [3 /*break*/, 24];
+                case 24: return [3 /*break*/, 8];
+                case 25: return [3 /*break*/, 27];
+                case 26:
+                    console.log("Ingrese un número válido");
+                    return [3 /*break*/, 27];
+                case 27: return [3 /*break*/, 2];
+                case 28: return [3 /*break*/, 30];
+                case 29:
+                    error_1 = _d.sent();
                     console.log(error_1);
-                    return [3 /*break*/, 15];
-                case 15: return [2 /*return*/];
+                    return [3 /*break*/, 30];
+                case 30: return [2 /*return*/];
             }
         });
     });
