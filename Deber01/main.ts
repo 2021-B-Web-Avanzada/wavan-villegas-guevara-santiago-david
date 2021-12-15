@@ -119,7 +119,7 @@ async function crearVideojuegoMain(indiceEmpresa: number) {
 
         {
             type: 'input',
-            name: 'generoPrincipal ',
+            name: 'generoPrincipal',
             message: 'Ingrese el genero principal del juego'
         },
         {
@@ -131,7 +131,7 @@ async function crearVideojuegoMain(indiceEmpresa: number) {
     ]);
     let multijugador = true;
     if (datosVideojuego.independiente === "No") {
-        multijugador = false
+        multijugador = false;
     }
 
     BaseDeDatosMemoria.empresas[indiceEmpresa].agregarVideojuego(new Videojuego(
@@ -146,13 +146,93 @@ async function crearVideojuegoMain(indiceEmpresa: number) {
 
 }
 
+async function cargarDatos() {
+    var datos = await BaseDeDatosMemoria.init();
+    if (typeof datos === "string") {
+        let empresasJson: Empresa[] = [];
+        empresasJson = JSON.parse(datos);
+
+        empresasJson.forEach(
+            function (empresaActual, indiceActual, arregloCompleto) {
+                let juegosInit: Videojuego[] = [];
+
+                empresaActual.arregloVideojuegos.forEach(
+                    function (juegoActual, indiceJuegoActual, arregloJuegoCompleto) {
+                        juegosInit.push(new Videojuego(
+                            juegoActual.id,
+                            juegoActual.nombre,
+                            juegoActual.recaudacion,
+                            juegoActual.fechaDeSalida,
+                            juegoActual.generoPrincipal,
+                            juegoActual.multijugador
+                        ))
+                    }
+                )
+                BaseDeDatosMemoria.agregarEmpresa(new Empresa(empresaActual.id,
+                    empresaActual.nombre,
+                    empresaActual.numeroTrabajadores,
+                    empresaActual.fechaDeFundacion,
+                    empresaActual.pais,
+                    empresaActual.independiente,
+                    juegosInit)
+                );
+            }
+        );
+
+    }
+}
+
+async function ActualizarVideojuegoMain(indiceEmpresa: number, indiceJuego: number) {
+    console.log("Datos del videojuego a editar");
+
+    const datosVideojuegoNuevo = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'nombre',
+            message: 'Ingrese el nombre nuevo del videojuego'
+        },
+        {
+            type: 'input',
+            name: 'fechaDeSalida',
+            message: 'Ingrese la fecha nueva de salida del videojuego'
+        },
+
+        {
+            type: 'number',
+            name: 'recaudacion',
+            message: 'Ingrese la recuadación nueva del juego'
+        },
+
+        {
+            type: 'input',
+            name: 'generoPrincipal',
+            message: 'Ingrese el genero nuevo principal del juego'
+        },
+        {
+            type: 'list',
+            name: 'multijugador',
+            message: 'Tiene multijugador?',
+            choices: ["Si", "No"]
+        }
+    ]);
+    let multijugadorNuevo = true;
+    if (datosVideojuegoNuevo.independiente === "No") {
+        multijugadorNuevo = false;
+    }
+
+    BaseDeDatosMemoria.empresas[indiceEmpresa].arregloVideojuegos[indiceJuego].actualizar(
+        datosVideojuegoNuevo.nombre,
+        datosVideojuegoNuevo.recaudacion,
+        datosVideojuegoNuevo.fechaDeSalida,
+        datosVideojuegoNuevo.generoPrincipal,
+        multijugadorNuevo
+    );
+}
+
 async function mainAsync(){
 
     try{
-       var datos=await BaseDeDatosMemoria.init();
-        if (typeof datos === "string") {
-            BaseDeDatosMemoria.empresas = JSON.parse(datos);
-        }
+        await cargarDatos();
         let banderaListaEmpresas=true;
 
         while (banderaListaEmpresas){
@@ -238,11 +318,59 @@ async function mainAsync(){
                                                 await crearVideojuegoMain(indiceEmpresa);
                                                 break;
                                             default:
+
+                                                const indiceJuego:number=respuestaBanderaListaVideojuego.seleccion;
+                                                let banderaSeleccionJuego=true
+                                                if(BaseDeDatosMemoria.empresas[indiceEmpresa].arregloVideojuegos.length>0
+                                                    && indiceJuego>=0
+                                                    && indiceJuego<BaseDeDatosMemoria.empresas[indiceEmpresa].arregloVideojuegos.length){
+                                                    while (banderaSeleccionJuego) {
+                                                        console.log("Videojuego seleccionada");
+                                                        console.table([BaseDeDatosMemoria.empresas[indiceEmpresa].arregloVideojuegos[indiceJuego],],
+                                                            ["nombre", "recaudacion", "fechaDeSalida", "generoPrincipal", "multijugador"]);
+                                                        const respuestabanderaSeleccionJuego = await inquirer.prompt([
+                                                            {
+                                                                type: 'list',
+                                                                name: 'seleccion',
+                                                                message: "Opciones disponibles: \n",
+                                                                choices: ["Eliminar Videojuego", "Editar Videojuego", "Regresar"]
+
+                                                            }
+                                                        ]);
+                                                        switch (respuestabanderaSeleccionJuego.seleccion) {
+                                                            case "Regresar":
+                                                                banderaSeleccionJuego=false;
+                                                                break;
+
+                                                            default:
+                                                                banderaSeleccionJuego=false;
+                                                                break;
+                                                            case "Eliminar Videojuego":
+                                                                BaseDeDatosMemoria.empresas[indiceEmpresa].eliminarVideojuego(indiceJuego);
+                                                                banderaSeleccionJuego=false;
+                                                                break
+
+                                                            case "Editar Videojuego":
+                                                                await ActualizarVideojuegoMain(indiceEmpresa, indiceJuego);
+                                                                break
+
+                                                        }
+                                                    }
+                                                }
+
+
+
+
+
                                                 break;
                                         }
                                     }
 
+
+
                                     break;
+
+
                                 case "Regresar":
                                     banderaSeleccionEmpresa=false;
                                     break;
@@ -255,7 +383,7 @@ async function mainAsync(){
                         break
 
                     } else {
-                        console.log("Ingrese un número válido");
+                        console.log("Ingrese un número de empresa válido");
                         break;
 
                     }
