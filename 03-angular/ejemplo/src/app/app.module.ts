@@ -12,6 +12,9 @@ import { RutaPostComponent } from './rutas/ruta-post/ruta-post.component';
 import { RutaAppComponent } from './rutas/ruta-app/ruta-app.component';
 import {AuthServices} from "./servicios/auth/auth.services";
 import {EstaLogeadoGuard} from "./servicios/auth/esta-logeado.guard";
+import {EsAdministradorGuard} from "./servicios/auth/es-administrador.guard";
+import { RutaReporteComponent } from './modulos/modulo-inventario/rutas/ruta-reporte/ruta-reporte.component';
+import { RutaBodegaComponent } from './modulos/modulo-inventario/rutas/ruta-bodega/ruta-bodega.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +25,17 @@ import {EstaLogeadoGuard} from "./servicios/auth/esta-logeado.guard";
     RutaInicioComponent,
     RutaUsuarioComponent,
     RutaPostComponent,
-    RutaAppComponent
+    RutaAppComponent,
+    RutaReporteComponent,
+    RutaBodegaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
   providers: [AuthServices,
-  EstaLogeadoGuard],
+  EstaLogeadoGuard,
+  EsAdministradorGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
