@@ -59,4 +59,10 @@ export class  BaseDeDatosMemoria {
         this.actualizarJson();
 
     }
+
+    static agregarEmpresa2(empresa:Empresa):void{
+        this.empresas.push(empresa);
+
+
+    }
 }

@@ -168,7 +168,7 @@ async function cargarDatos() {
                         ))
                     }
                 )
-                BaseDeDatosMemoria.agregarEmpresa(new Empresa(empresaActual.id,
+                BaseDeDatosMemoria.agregarEmpresa2(new Empresa(empresaActual.id,
                     empresaActual.nombre,
                     empresaActual.numeroTrabajadores,
                     empresaActual.fechaDeFundacion,
@@ -233,6 +233,7 @@ async function mainAsync(){
 
     try{
         await cargarDatos();
+        BaseDeDatosMemoria.actualizarJson();
         let banderaListaEmpresas=true;
 
         while (banderaListaEmpresas){
