@@ -49,14 +49,14 @@ export class  BaseDeDatosMemoria {
         return promesaEscritura
 
     }
-    static eliminarEmpresa(indice:number):void{
+    static async eliminarEmpresa(indice:number):Promise<void>{
         this.empresas.splice(indice,1);
-        this.actualizarJson();
+        await this.actualizarJson();
 
     }
-    static agregarEmpresa(empresa:Empresa):void{
+    static async agregarEmpresa(empresa:Empresa):Promise<void>{
         this.empresas.push(empresa);
-        this.actualizarJson();
+        await this.actualizarJson();
 
     }
 

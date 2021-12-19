@@ -23,18 +23,18 @@ export class  Videojuego{
         this.multijugador=multijugadorParametro;
 
     }
-    public  actualizar(
+    public async actualizar(
         nombreParametro:string,
         recaudacionParametro:number,
         fechaDeSalidaParametro:string,
         generoPrincipalParametro:string,
         multijugadorParametro:boolean,
-    ):void{
+    ):Promise<void>{
         this.nombre=nombreParametro;
         this.recaudacion=recaudacionParametro;
         this.fechaDeSalida=fechaDeSalidaParametro;
         this.generoPrincipal=generoPrincipalParametro;
         this.multijugador=multijugadorParametro;
-        BaseDeDatosMemoria.actualizarJson();
+        await BaseDeDatosMemoria.actualizarJson();
     }
 }

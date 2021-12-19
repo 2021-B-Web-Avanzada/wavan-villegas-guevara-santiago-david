@@ -40,7 +40,7 @@ async function crearEmpresaMain() {
     if (datosEmpresa.independiente === "No") {
         idenpendiente = false
     }
-    BaseDeDatosMemoria.agregarEmpresa(new Empresa(
+    await BaseDeDatosMemoria.agregarEmpresa(new Empresa(
             "111",
             datosEmpresa.nombre,
             datosEmpresa.numeroTrabajadores,
@@ -88,7 +88,7 @@ async function editarEmpresaMain(indiceEmpresa: number) {
     if (datosEmpresaNuevos.independiente === "No") {
         idenpendienteNuevo = false
     }
-    BaseDeDatosMemoria.empresas[indiceEmpresa].actualizar(
+    await BaseDeDatosMemoria.empresas[indiceEmpresa].actualizar(
         datosEmpresaNuevos.nombre,
         datosEmpresaNuevos.numeroTrabajadores,
         datosEmpresaNuevos.fechaDeFundacion,
@@ -134,7 +134,7 @@ async function crearVideojuegoMain(indiceEmpresa: number) {
         multijugador = false;
     }
 
-    BaseDeDatosMemoria.empresas[indiceEmpresa].agregarVideojuego(new Videojuego(
+    await BaseDeDatosMemoria.empresas[indiceEmpresa].agregarVideojuego(new Videojuego(
             "111",
             datosVideojuego.nombre,
             datosVideojuego.recaudacion,
@@ -153,7 +153,7 @@ async function cargarDatos() {
         empresasJson = JSON.parse(datos);
 
         empresasJson.forEach(
-            function (empresaActual, indiceActual, arregloCompleto) {
+            async function (empresaActual, indiceActual, arregloCompleto) {
                 let juegosInit: Videojuego[] = [];
 
                 empresaActual.arregloVideojuegos.forEach(
@@ -168,7 +168,7 @@ async function cargarDatos() {
                         ))
                     }
                 )
-                BaseDeDatosMemoria.agregarEmpresa(new Empresa(empresaActual.id,
+                await BaseDeDatosMemoria.agregarEmpresa(new Empresa(empresaActual.id,
                     empresaActual.nombre,
                     empresaActual.numeroTrabajadores,
                     empresaActual.fechaDeFundacion,
@@ -220,7 +220,7 @@ async function ActualizarVideojuegoMain(indiceEmpresa: number, indiceJuego: numb
         multijugadorNuevo = false;
     }
 
-    BaseDeDatosMemoria.empresas[indiceEmpresa].arregloVideojuegos[indiceJuego].actualizar(
+    await BaseDeDatosMemoria.empresas[indiceEmpresa].arregloVideojuegos[indiceJuego].actualizar(
         datosVideojuegoNuevo.nombre,
         datosVideojuegoNuevo.recaudacion,
         datosVideojuegoNuevo.fechaDeSalida,
@@ -233,7 +233,7 @@ async function mainAsync(){
 
     try{
         await cargarDatos();
-        BaseDeDatosMemoria.actualizarJson();
+
         let banderaListaEmpresas=true;
 
         while (banderaListaEmpresas){
@@ -283,7 +283,7 @@ async function mainAsync(){
                             ]);
                             switch(respuestabanderaSeleccionEmpresa.seleccion){
                                 case "Eliminar Empresa":
-                                    BaseDeDatosMemoria.eliminarEmpresa(indiceEmpresa);
+                                    await BaseDeDatosMemoria.eliminarEmpresa(indiceEmpresa);
                                     banderaSeleccionEmpresa=false;
                                     console.log("Empresa eliminada")
                                     break;
@@ -347,7 +347,7 @@ async function mainAsync(){
                                                                 banderaSeleccionJuego=false;
                                                                 break;
                                                             case "Eliminar Videojuego":
-                                                                BaseDeDatosMemoria.empresas[indiceEmpresa].eliminarVideojuego(indiceJuego);
+                                                                await BaseDeDatosMemoria.empresas[indiceEmpresa].eliminarVideojuego(indiceJuego);
                                                                 banderaSeleccionJuego=false;
                                                                 break
 

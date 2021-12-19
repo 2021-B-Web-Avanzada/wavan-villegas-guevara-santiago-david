@@ -28,29 +28,29 @@ export class  Empresa{
         this.arregloVideojuegos=arregloVideojuegosParametro;
 
     }
-    public  actualizar(
+    public  async actualizar(
         nombreParametro:string,
         numeroTrabajadoresParametro:number,
         fechaDeFundacionParametro:string,
         paisParametro:string,
         independienteParametro:boolean,
-    ):void{
+    ):Promise<void>{
         this.nombre=nombreParametro;
         this.numeroTrabajadores=numeroTrabajadoresParametro;
         this.fechaDeFundacion=fechaDeFundacionParametro;
         this.pais=paisParametro;
         this.independiente=independienteParametro;
-        BaseDeDatosMemoria.actualizarJson();
+        await BaseDeDatosMemoria.actualizarJson();
     }
-    public agregarVideojuego(videojuego:Videojuego):void{
+    public async agregarVideojuego(videojuego:Videojuego):Promise<void>{
         this.arregloVideojuegos.push(videojuego);
-        BaseDeDatosMemoria.actualizarJson();
+        await BaseDeDatosMemoria.actualizarJson();
 
     }
 
-    public eliminarVideojuego(indice:number):void{
+    public async eliminarVideojuego(indice:number):Promise<void>{
         this.arregloVideojuegos.splice(indice,1);
-        BaseDeDatosMemoria.actualizarJson();
+       await BaseDeDatosMemoria.actualizarJson();
 
     }
 }
