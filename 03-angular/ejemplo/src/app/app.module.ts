@@ -15,6 +15,8 @@ import {EstaLogeadoGuard} from "./servicios/auth/esta-logeado.guard";
 import {EsAdministradorGuard} from "./servicios/auth/es-administrador.guard";
 import { RutaReporteComponent } from './modulos/modulo-inventario/rutas/ruta-reporte/ruta-reporte.component';
 import { RutaBodegaComponent } from './modulos/modulo-inventario/rutas/ruta-bodega/ruta-bodega.component';
+import {BannerImagenesComponent} from "./componentes/banner-imagenes/banner-imagenes/banner-imagenes.component";
+import {BannerImagenesModule} from "./componentes/banner-imagenes/banner-imagenes.module";
 
 @NgModule({
   declarations: [
@@ -29,9 +31,11 @@ import { RutaBodegaComponent } from './modulos/modulo-inventario/rutas/ruta-bode
     RutaReporteComponent,
     RutaBodegaComponent
   ],
+  //app.module.ts
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BannerImagenesModule
   ],
   providers: [AuthServices,
   EstaLogeadoGuard,

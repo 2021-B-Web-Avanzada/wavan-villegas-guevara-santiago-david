@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class AuthServices{
-  estaLogeado=false;
+  estaLogeado=true;
   roles=[
     'admin',
     'supervisor',
