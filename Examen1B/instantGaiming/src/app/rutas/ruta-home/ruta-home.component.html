@@ -18,38 +18,34 @@
       </div>
     </div>
 
-
-    <app-catalogo-juegos>
-    </app-catalogo-juegos>
-    <app-catalogo-juegos>
-    </app-catalogo-juegos>
-    <app-catalogo-juegos>
-    </app-catalogo-juegos>
-    <app-catalogo-juegos>
-    </app-catalogo-juegos>
-    <app-catalogo-juegos>
-    </app-catalogo-juegos>
-    <app-catalogo-juegos>
-    </app-catalogo-juegos>
-    <app-catalogo-juegos>
-    </app-catalogo-juegos>
-    <app-catalogo-juegos>
-    </app-catalogo-juegos>
-    <app-catalogo-juegos>
-    </app-catalogo-juegos><app-catalogo-juegos>
-  </app-catalogo-juegos><app-catalogo-juegos>
-  </app-catalogo-juegos>
-    <app-catalogo-juegos>
-    </app-catalogo-juegos>
+    <a *ngFor="let juego of arregloJuegosFiltrado;let i=index">
 
 
+      <app-catalogo-juegos [id]="juego.id"
+                           [nombre]="juego.nombre"
+                           [precio]="juego.precio"
+                           [descuento]="juego.descuento"
+                           [plataforma]="juego.plataforma"
+                           [imagen]="juego.imagen"
+                           [tamanio]="juego.tamanio"
 
 
+      >
 
+
+      </app-catalogo-juegos>
+    </a>
+
+    <div id="indies-panel">
+      <a >
+        <img src="assets/imgs/campaign-banner-61c32e83ad462.jpg" alt="Monster Hunter Rise ES">
+      </a>
+    </div>
 
   </div>
 
 </div>
+
 </body>
 
 
