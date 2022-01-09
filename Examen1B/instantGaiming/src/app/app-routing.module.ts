@@ -10,7 +10,7 @@ const routes: Routes = [
     component:RutaNotFoundComponent
   },
   {
-    path:'home',
+    path:'home/:parametro',
     component:RutaHomeComponent
   },
   {

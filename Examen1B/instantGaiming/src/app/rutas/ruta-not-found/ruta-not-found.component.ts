@@ -16,8 +16,6 @@ export class RutaNotFoundComponent implements OnInit {
   ejecutarEventoClick(){
     this.router.navigate(["home"]);
 
-
-
   }
 
 }

@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { RutaNotFoundComponent } from './rutas/ruta-not-found/ruta-not-found.component';
 import { RutaHomeComponent } from './rutas/ruta-home/ruta-home.component';
 import {BarraOpcionesModule} from "./componentes/barra-opciones/barra-opciones.module";
-import {NgbAlertModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CatalogoJuegosModule} from "./componentes/catalogo-juegos/catalogo-juegos.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import {NgbAlertModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-b
     BrowserModule,
     AppRoutingModule,
     BarraOpcionesModule,
-    NgbModule,
+    CatalogoJuegosModule,
+    NgbModule
+
 
 
   ],
