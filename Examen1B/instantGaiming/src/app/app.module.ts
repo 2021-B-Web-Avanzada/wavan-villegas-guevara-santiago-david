@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { RutaNotFoundComponent } from './rutas/ruta-not-found/ruta-not-found.component';
 import { RutaHomeComponent } from './rutas/ruta-home/ruta-home.component';
 import {BarraOpcionesModule} from "./componentes/barra-opciones/barra-opciones.module";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     BarraOpcionesModule,
     NgbModule,
+
 
   ],
   providers: [],
