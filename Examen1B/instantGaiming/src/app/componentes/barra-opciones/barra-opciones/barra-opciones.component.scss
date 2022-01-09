@@ -1,0 +1,62 @@
+#barraInicio{
+  background-color: black;
+  height: 80px;
+  align-items: center;
+
+}
+#inputBusqueda {
+
+  height: 44px;
+  background: 0 0;
+  color: #ff5400;
+  border: none;
+  transition: .1s;
+  font-size: 17px;
+  border-radius: 0;
+  position: relative;
+  width: 400px;
+  padding-left: 20px;
+  outline: transparent;
+  font-family: proximanova,arial,sans-serif;
+
+}
+#divBusqueda{
+
+  background: rgba(255,84,0,.25);
+  height: 44px;
+  border-radius: 100px;
+  position: relative;
+  display: flex;
+
+}
+.opciones{
+  fill: #e05217;
+}
+
+#im-botonBusqueda{
+  width: 36px;
+  height: 36px;
+  background: #ff5400 url("img/im_busqueda.webp")  9px 8px no-repeat;
+  background-size: 19px;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 100px;
+  text-shadow: 1px 1px #bd3e00;
+  font-size: 10px;
+  vertical-align: bottom;
+  transition: .2s;
+  margin: 5px;
+  flex-shrink: 0;
+}
+
+.imgOpciones{
+  height: 36px;
+
+}
+input::placeholder {
+  color: #ce4c15;
+
+}
+
