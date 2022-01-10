@@ -14,7 +14,7 @@ export class RutaNotFoundComponent implements OnInit {
   ngOnInit(): void {
   }
   ejecutarEventoClick(){
-    this.router.navigate(["home"]);
+    this.router.navigate(["home/juegos"]);
 
   }
 

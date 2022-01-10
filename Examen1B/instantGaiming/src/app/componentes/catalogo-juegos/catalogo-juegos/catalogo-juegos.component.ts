@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-catalogo-juegos',
@@ -21,9 +22,12 @@ export class CatalogoJuegosComponent implements OnInit {
   @Input()
   tamanio="itemS"
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+  ejecutarEventoClick(){
+    window.location.href="comprar/"+this.id.toString();
   }
 
 }

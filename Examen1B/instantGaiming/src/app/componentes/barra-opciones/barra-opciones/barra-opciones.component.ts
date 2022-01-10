@@ -20,7 +20,7 @@ export class BarraOpcionesComponent implements OnInit {
     this.mostrarBarraOpciones=!this.mostrarBarraOpciones;
   }
   ejecutarEventoClick(){
-    this.router.navigate(["home"]);
+    this.router.navigate(["home/juegos"]);
 
   }
 

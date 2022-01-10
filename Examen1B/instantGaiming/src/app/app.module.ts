@@ -8,12 +8,14 @@ import { RutaHomeComponent } from './rutas/ruta-home/ruta-home.component';
 import {BarraOpcionesModule} from "./componentes/barra-opciones/barra-opciones.module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CatalogoJuegosModule} from "./componentes/catalogo-juegos/catalogo-juegos.module";
+import { RutaComprarComponent } from './rutas/ruta-comprar/ruta-comprar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RutaNotFoundComponent,
-    RutaHomeComponent
+    RutaHomeComponent,
+    RutaComprarComponent
   ],
   imports: [
     BrowserModule,

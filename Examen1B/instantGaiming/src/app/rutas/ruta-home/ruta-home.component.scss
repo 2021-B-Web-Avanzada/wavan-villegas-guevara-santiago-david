@@ -5,8 +5,9 @@
   height: 100%;
   top: 160px;
   left: 0;
+
 }
-body{background:  #213946;}
+
 
 #imgPromocional {
   width: 1036px;
@@ -89,4 +90,42 @@ body{background:  #213946;}
 #indies-panel:hover{
   transition: all 300ms;
   transform: scale(1.04);
+}
+.socials {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.socials a {
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  border-radius: 33px;
+  transition: .1s;
+  margin: 5px;
+}
+.socials a:hover {
+  transition: all 300ms;
+  transform: scale(1.2);
+}
+
+.socials a.youtube {
+  background: url(imgs/ig-socials5.webp) 0 100px;
+  background-size: 50px;
+}
+.socials a.twitter {
+  background: url(imgs/ig-socials5.webp) 0 150px;
+  background-size: 50px;
+}
+.socials a.facebook {
+  background: url(imgs/ig-socials5.webp) 0 0;
+  background-size: 50px;
+}
+.socials a.twitch {
+  background: url(imgs/ig-socials5.webp) 0 200px;
+  background-size: 50px;
+}
+.socials a.extension, .socials a.extension.firefox {
+  background: url(imgs/ig-socials5.webp) 0 50px;
+  background-size: 50px;
 }

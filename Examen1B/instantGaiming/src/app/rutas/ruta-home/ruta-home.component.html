@@ -5,7 +5,7 @@
    class=""></a>
 
 <div id="imgPromocional">
-  <div id="home-top-banner-wrapper">
+  <div id="home-top-banner-wrapper" (click)="ejecutarEventoClick(0)">
     <a  class="button_link" title="">
       <img class="campain" src="assets/imgs/kratos.jpg" alt="God of War ES">
     </a>
@@ -13,7 +13,7 @@
   <div class="ig-wrapper ">
     <div id="contenedor">
       <div class="title-block">
-        <div class="categoria">Juegos del momento</div>
+        <div class="categoria">{{path}}</div>
         <a class="etiqueta " href="/es/busquedas/" title="Juegos del momento">Ver todo</a>
       </div>
     </div>
@@ -36,16 +36,30 @@
       </app-catalogo-juegos>
     </a>
 
-    <div id="indies-panel">
+    <div id="indies-panel" (click)="ejecutarEventoClick(1)">
       <a >
         <img src="assets/imgs/campaign-banner-61c32e83ad462.jpg" alt="Monster Hunter Rise ES">
       </a>
     </div>
 
+
+
+
+
   </div>
 
-</div>
 
+
+</div>
+<div class="socials">
+
+  <a class="twitter" href="https://twitter.com/InstantGamingES" target="_blank" rel="noopener">.</a>
+  <a class="youtube" href="https://www.youtube.com/channel/UCdNKJbUfHrf3__BjoFVi8qw" target="_blank" rel="noopener"></a>
+  <a class="facebook" href="https://www.facebook.com/Instant.Gaming.es/?brand_redir=DISABLE" target="_blank" rel="noopener"></a>
+  <a class="twitch" href="https://twitch.tv/instantgaminges" target="_blank" rel="noopener"></a>
+  <a class="extension" href="https://chrome.google.com/webstore/detail/instant-gaming/lbnoedlobifdhbpjkcfhcbdcjhampmne" target="_blank" rel="noopener"></a>
+
+</div>
 </body>
 
 
