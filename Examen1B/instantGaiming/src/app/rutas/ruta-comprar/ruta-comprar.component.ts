@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-ruta-comprar',
@@ -7,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./ruta-comprar.component.scss']
 })
 export class RutaComprarComponent implements OnInit {
+  public safeURL: SafeResourceUrl;
   path=-1;
   private sub: any;
   juegoActual: { precio: number; estilo: string; tamanio: string; descuento: number; plataforma: string; imagen: string; id: number; video: string; nombre: string } | { precio: number; estilo: string; tamanio: string; descuento: number; plataforma: string; imagen: string; id: number; video: string; nombre: string } | { precio: number; estilo: string; tamanio: string; descuento: number; plataforma: string; imagen: string; id: number; video: string; nombre: string } | { precio: number; estilo: string; tamanio: string; descuento: number; plataforma: string; imagen: string; id: number; video: string; nombre: string } | { colorFondo: string; precio: number; estilo: string; tamanio: string; descuento: number; plataforma: string; imagen: string; id: number; video: string; nombre: string; fotoFondo: string } | { precio: number; estilo: string; tamanio: string; descuento: number; plataforma: string; imagen: string; id: number; video: string; nombre: string } | { precio: number; estilo: string; tamanio: string; descuento: number; plataforma: string; imagen: string; id: number; video: string; nombre: string } | { precio: number; estilo: string; tamanio: string; descuento: number; plataforma: string; imagen: string; id: number; video: string; nombre: string } ={
@@ -43,7 +45,7 @@ export class RutaComprarComponent implements OnInit {
       imagen: "assets/imgs/monster-hunter-rise-pc-juego-steam-cover.jpg",
       tamanio: "itemL",
       estilo: "background:  url(assets/imgs/capaing-kratos.jpg) center 0px no-repeat #213946;",
-      video:"url(https://www.youtube.com/embed/HqQMh_tij0c)"
+      video:"https://www.youtube.com/embed/ZMLk9-tZ-_A"
     },
     {
       id: 2,
@@ -54,7 +56,7 @@ export class RutaComprarComponent implements OnInit {
       imagen: "assets/imgs/dyin-light.jpg",
       tamanio: "itemL",
       estilo: "background:  url(assets/imgs/capaing-kratos.jpg) center 0px no-repeat #213946;",
-      video:"https://www.youtube.com/watch?v=d-diB65scQU&list=RDMMd-diB65scQU&start_radio=1"
+      video:"https://www.youtube.com/embed/68bZ1LKKh7Q"
     },
     {
       id: 3,
@@ -65,7 +67,7 @@ export class RutaComprarComponent implements OnInit {
       imagen: "assets/imgs/juego-playstation-zombie-army-4-dead-war-ps4-cover.jpg",
       tamanio: "itemL",
       estilo: "background:  url(assets/imgs/capaing-kratos.jpg) center 0px no-repeat #213946;",
-      video:"https://www.youtube.com/watch?v=d-diB65scQU&list=RDMMd-diB65scQU&start_radio=1"
+      video:"https://www.youtube.com/embed/MYcie-c3ZWc"
     },
 
     {
@@ -79,7 +81,7 @@ export class RutaComprarComponent implements OnInit {
       fotoFondo:"assets/imgs/2712.jpg",
       colorFondo:"#2F3339",
       estilo:"background:  url(assets/imgs/2712.jpg) center 0px no-repeat #2F3339;",
-      video:"https://www.youtube.com/watch?v=d-diB65scQU&list=RDMMd-diB65scQU&start_radio=1"
+      video:"https://www.youtube.com/embed/APqBWniRQbQ"
     },
     {
       id: 5,
@@ -90,7 +92,7 @@ export class RutaComprarComponent implements OnInit {
       imagen: "assets/imgs/halo-infinite-campana-pc-xbox-one-xbox-series-xs-pc-xbox-one-xbox-serie-x-s-juego-microsoft-store-cover.jpg",
       tamanio: "itemL",
       estilo: "background:  url(assets/imgs/capaing-kratos.jpg) center 0px no-repeat #213946;",
-      video:"https://www.youtube.com/watch?v=d-diB65scQU&list=RDMMd-diB65scQU&start_radio=1"
+      video:"https://www.youtube.com/embed/PyMlV5_HRWk"
     },
     {
       id: 6,
@@ -101,7 +103,7 @@ export class RutaComprarComponent implements OnInit {
       imagen: "assets/imgs/metroid-prime-4-switch-switch-juego-nintendo-eshop-cover.jpg",
       tamanio: "itemL",
       estilo: "background:  url(assets/imgs/capaing-kratos.jpg) center 0px no-repeat #213946;",
-      video:"https://www.youtube.com/watch?v=d-diB65scQU&list=RDMMd-diB65scQU&start_radio=1"
+      video:"https://www.youtube.com/embed/nFbDmTjS_MI"
     },
     {
       id: 7,
@@ -112,11 +114,13 @@ export class RutaComprarComponent implements OnInit {
       imagen: "assets/imgs/worms-wmd-switch-switch-juego-nintendo-eshop-cover.jpg",
       tamanio: "itemL",
       estilo: "background:  url(assets/imgs/capaing-kratos.jpg) center 0px no-repeat #213946;",
-      video:"https://www.youtube.com/watch?v=d-diB65scQU&list=RDMMd-diB65scQU&start_radio=1"
+      video:"https://www.youtube.com/embed/IS68T0R9vtI"
     },
   ]
 
-  constructor(private rutaActiva: ActivatedRoute, private router: Router) { }
+  constructor(private rutaActiva: ActivatedRoute, private router: Router,private _sanitizer: DomSanitizer) {
+    this.safeURL ="";
+  }
 
   ngOnInit(): void {
     this.sub = this.rutaActiva.params.subscribe(params => {
@@ -125,6 +129,7 @@ export class RutaComprarComponent implements OnInit {
     });
     if(this.path>=0&&this.path<=7) {
       this.juegoActual = this.arregloJuegos[this.path];
+      this.safeURL=this._sanitizer.bypassSecurityTrustResourceUrl(this.juegoActual.video)
     }else
     {
       this.router.navigate(["not-found"]);
