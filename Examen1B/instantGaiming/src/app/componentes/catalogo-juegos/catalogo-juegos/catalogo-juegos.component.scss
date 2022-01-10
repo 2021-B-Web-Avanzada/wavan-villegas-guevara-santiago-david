@@ -1,0 +1,118 @@
+.itemS {
+  width: calc(20% - 20px);
+
+}
+.item{
+
+  display: inline-block;
+  margin: 0 10px 20px;
+  position: relative;
+  border-radius: 8px;
+  vertical-align: top;
+
+}
+.item:hover{
+  transition: all 300ms;
+  transform: scale(1.05);
+
+}
+.itemL {
+  width: calc(25% - 25px);
+
+}
+.item .cover {
+  position: relative;
+  display: inline-block;
+  transition: .1s;
+  width: 100%;
+}
+a, a:hover {
+  text-decoration: none;
+}
+.badge.steam {
+  background-color: #000;
+  background-position: -7px -5px;
+}
+.item .badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+}
+.badge {
+  width: 31px;
+  height: 31px;
+  border-radius: 100%;
+  background: url(img/platform-icons18.png) no-repeat;
+  background-repeat: no-repeat;
+  background-size: 35px;
+  flex: none;
+}
+.badge.play {
+  background-color: #004eff;
+  background-position: -3px -298px;
+}
+.badge.nintendo {
+  background-color: #ff151f;
+  background-position: -2px -597px;
+}
+.badge.xbox{
+  background-color: #077d07;
+  background-position: -3px -330px;
+}
+.badge.origin {
+  background-color: #f50;
+  background-position: -6px -75px;
+}
+.item .cover img {
+  width: 100%;
+  border-radius: 8px;
+}
+.ig-sections-main-content, .mainshadow {
+  box-shadow: 0 0 8px 0 rgb(0 0 0 / 10%);
+}
+.item .shadow {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 80px;
+  box-shadow: inset 0 -60px 30px -30px rgb(0 0 0 / 40%);
+  border-radius: 8px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.item .discount {
+  background-color: #ff5400;
+  padding: 5px 7px;
+  font-size: 16px;
+  color: #fff;
+  bottom: -3px;
+  left: -3px;
+  position: absolute;
+  font-weight: 700;
+  border-radius: 5px;
+  margin-top: 3px;
+  margin-right: 1px;
+  display: inline-block;
+  vertical-align: top;
+}
+.item .price {
+  color: #fff;
+  bottom: 3px;
+  right: 9px;
+  position: relative;
+  font-size: 19px;
+  font-weight: 700;
+  text-shadow: 0 0 4px #000;
+  margin-left: auto;
+}
+.item .name {
+  color: white;
+  font-size: 13px;
+  margin-top: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}

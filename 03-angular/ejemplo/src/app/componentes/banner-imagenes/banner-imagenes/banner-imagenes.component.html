@@ -1,0 +1,46 @@
+<h1>Hola desde banner</h1>
+<h1 [ngStyle]="{
+
+'background-color':'#000',
+'color':color,
+'border':'solid 5px'+color
+}">
+  HOLA DESDE BANNER
+</h1>
+<!--Interpolacion {{}}->Texto muestra interfaz-->
+<h2>{{nombre}}-{{apellido}}</h2>
+<p>Mascota:{{mascotas.nora.edad}}</p>
+
+<!--Property binding []-->
+
+<div class="row">
+  <div class="col-sm-6">
+    <img [src]="urlImagen" class="img-fluid" alt="">
+  </div>
+  <div class="col-sm-6">
+    <img [src]="urlImagen" class="img-fluid" alt="">
+  </div>
+  <div class="col-sm-6">
+    <img [src]="urlImagen" class="img-fluid" alt="">
+  </div>
+</div>
+
+
+<a [href]='url'target="_blank">
+  Mas informacion
+</a>
+<!--Event binding-->
+
+<button (click)="ejecutarEventoClick()"
+        (blur)="ejecutarEventoBlur()"
+        >
+
+</button>
+
+<!--Pipes-->
+<!--Recibe algo y los transforma-->
+<p>{{fecha | date:'dd-MM-YYYY'}}</p>
+<p>{{sueldo | currency}}</p>
+<pre>
+  {{mascotas|json}}
+</pre>

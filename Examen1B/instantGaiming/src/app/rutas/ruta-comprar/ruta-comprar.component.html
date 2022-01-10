@@ -1,0 +1,131 @@
+<app-barra-opciones>
+</app-barra-opciones>
+<body>
+<a id="backgroundPromocional" [style]="juegoActual.estilo"
+   class=""></a>
+<div id="imgPromocional">
+
+  <div id="home-top-banner-wrapper" (click)="ejecutarEventoClick(0)">
+    <a  class="button_link" title="">
+      <img class="campain" src="assets/imgs/kratos.jpg" alt="God of War ES">
+    </a>
+  </div>
+
+
+
+  <div class="ig-wrapper ">
+
+
+    <div id="ig-product-main-panel">
+
+      <div class="product">
+        <div class="blur">
+
+          <div class="cover mainshadow">
+            <img class="picture"  [src]="juegoActual.imagen" [alt]="juegoActual.nombre" onload="lazyLoadImage(this)">
+          </div>
+        </div>
+        <div class="infos mainshadow">
+          <h1>{{juegoActual.nombre}}</h1>
+          <div class="subinfos" id="barraInfo">
+            <a class="platform " >
+              <div class="badge" [class]="juegoActual.plataforma"> .</div>
+
+            </a>
+            <div class="download">
+              <img src="assets/imgs/ticked2.webp">En stock
+            </div>
+            <div class="download">
+              <img src="assets/imgs/ticked2.webp">Descarga inmediata
+            </div>
+          </div>
+          <div class="languages">
+          </div>
+          <div class="tags">
+            <a class="tag tag6" itemprop="applicationSubCategory" content="Entrenamiento" >Entrenamiento</a>
+            <a class="tag tag11" itemprop="applicationSubCategory" content="RPG" >RPG</a>
+            <a  class="searchtag">Open World</a>
+            <a  class="searchtag">Multijugador</a>
+            <a  class="searchtag">Classic</a>
+            <
+          </div>
+          <div class="quick"><img src="assets/imgs/hot2.webp" > 51 usuarios en esta página<span></span>17 juegos a este precio</div>
+          <div class="buy">
+            <div class="prices ">
+              <div class="retail" data-retail="57.00">
+                Precio de venta al público:
+                <span>
+{{juegoActual.precio}}
+</span>
+              </div>
+              <div class="discount">-{{juegoActual.descuento}}%</div>
+              <div class="price">${{juegoActual.precio*(100-juegoActual.descuento)/100}}</div>
+            </div>
+            <div class="swap">
+              <a id="ig-product-main-panel-addwishlist"  class="button addwishlist hint--top hint--rounded " data-text-add="Añadir a mi wishlist" data-text-remove="Eliminar de mi wishlist" data-hint="Añadir a mi wishlist" data-signed=""></a>
+              <a  rel="nofollow" class="button buybutton">Comprar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="title-block "id="contenedoriframe">
+      <div class="categoria">Video</div>
+
+    </div>
+
+
+  <div id="contenedorVideo">
+    <iframe width="996.8" height="560.7" [src]="safeURL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+    <div id="contenedor">
+      <div class="title-block">
+        <div class="categoria">También podría gustarte...</div>
+        <a class="etiqueta " href="/es/busquedas/" title="Juegos del momento">Ver todo</a>
+      </div>
+    </div>
+
+    <a *ngFor="let juego of arregloJuegos;let i=index">
+
+
+      <app-catalogo-juegos [id]="juego.id"
+                           [nombre]="juego.nombre"
+                           [precio]="juego.precio"
+                           [descuento]="juego.descuento"
+                           [plataforma]="juego.plataforma"
+                           [imagen]="juego.imagen"
+                           [tamanio]="juego.tamanio"
+
+
+      >
+
+
+      </app-catalogo-juegos>
+    </a>
+    <div id="indies-panel" (click)="ejecutarEventoClick(1)">
+      <a >
+        <img src="assets/imgs/campaign-banner-61c32e83ad462.jpg" alt="Monster Hunter Rise ES">
+      </a>
+    </div>
+
+
+
+  </div>
+
+
+</div>
+
+<div class="socials">
+
+  <a class="twitter" href="https://twitter.com/InstantGamingES" target="_blank" rel="noopener">.</a>
+  <a class="youtube" href="https://www.youtube.com/channel/UCdNKJbUfHrf3__BjoFVi8qw" target="_blank" rel="noopener"></a>
+  <a class="facebook" href="https://www.facebook.com/Instant.Gaming.es/?brand_redir=DISABLE" target="_blank" rel="noopener"></a>
+  <a class="twitch" href="https://twitch.tv/instantgaminges" target="_blank" rel="noopener"></a>
+  <a class="extension" href="https://chrome.google.com/webstore/detail/instant-gaming/lbnoedlobifdhbpjkcfhcbdcjhampmne" target="_blank" rel="noopener"></a>
+
+</div>
+
+</body>
+

@@ -1,0 +1,63 @@
+<div  class="row" id="barraInicio" >
+
+  <div class="col-xs-10 col-sm-1 col-md-1 offset-md-2  offset-xs-0">
+    <img class="img-fluid " style="max-width: 150%;"  src="assets/imgs/logo.png"  (click)="ejecutarEventoClick()" alt="logo ">
+  </div>
+  <div class="col-xs-8 col-sm-4 col-md-3 offset-md-2  offset-xs-1 " id="divBusqueda">
+    <input id="inputBusqueda" accesskey="s" type="text" name="q" autocomplete="off" spellcheck="false" autocapitalize="off" itemprop="query-input" placeholder="Minecraft, rpg, multiplayer...">
+    <input id="im-botonBusqueda" type="submit" value="" title="Busqueda avanzada">
+  </div>
+
+  <div class="col-xs-2 col-sm-1 col-md-1 offset-md-2  offset-xs-1">
+
+    <div class="btn-group dropleft">
+      <img src="assets/imgs/opciones.png" alt="opciones" (click)="cambiarOcultarOpciones()" id="imgOpciones" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+      <div class="dropdown-menu show " id="menu" aria-labelledby="dropdownMenuButton"  *ngIf="mostrarBarraOpciones">
+        <a class="dropdown-item itemOp"  id="cuenta">Mi cuenta</a>
+        <a class="dropdown-item itemOp" id="help">Soporte 24/7</a>
+        <a class="dropdown-item itemOp " id="dark">DarkMode</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+  <div class="row" id="barraFiltro">
+    <div class="col-xs-2 col-sm-2 col-md-1 offset-md-2  offset-xs-0" >
+      <img src="assets/imgs/pcgaming.svg" alt="pc " style="max-width: 20%;" >
+      <a class="itemPlataforma" href="home/pc"  >PC</a>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-1 ">
+      <img src="assets/imgs/playstation.svg" alt="ps" style="max-width: 20%;">
+      <a class="itemPlataforma"   href="home/playStation">Play</a>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <img src="assets/imgs/xbox.svg" alt="xbox" style="max-width: 20%;">
+      <a class="itemPlataforma" href="home/xbox" >Xbox</a>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-1 ">
+      <img src="assets/imgs/nintendo.svg" alt="nintendo" style="max-width: 20%;">
+
+      <a class="itemPlataforma"  href="home/nintendo">Switch</a>
+    </div>
+
+    <div class="col-xs-2 col-sm-2 col-md-2 offset-md-1  offset-xs-0">
+      <a class="itemLetra"   href="home/juegos">Juegos del momento</a>
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1 ">
+      <a class="itemLetra" href="home/juegos" >Top reservas</a>
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-2 ">
+      <a class="itemLetra" href="home/juegos" >Más vendidos</a>
+    </div>
+
+  </div>
+
+
+
+
+
+
+

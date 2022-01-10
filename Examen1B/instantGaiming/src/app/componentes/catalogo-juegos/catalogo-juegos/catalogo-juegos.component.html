@@ -1,0 +1,13 @@
+<div class="force-badge item" [class]="tamanio" (click)="ejecutarEventoClick()" >
+  <a class="cover" >
+    <div class="badge " [class]="plataforma"> .</div>
+    <img class="picture mainshadow" [src]="imagen" [alt]="nombre" onload="lazyLoadImage(this)">
+    <div class="shadow">
+      <div class="discount">
+        -{{descuento}}%
+      </div>
+      <div class="price">${{precio*(100-descuento)/100}}</div>
+    </div>
+  </a>
+  <div class="name">{{nombre}} Human</div>
+</div>
