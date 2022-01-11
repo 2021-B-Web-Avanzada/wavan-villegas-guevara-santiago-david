@@ -17,6 +17,7 @@ import { RutaReporteComponent } from './modulos/modulo-inventario/rutas/ruta-rep
 import { RutaBodegaComponent } from './modulos/modulo-inventario/rutas/ruta-bodega/ruta-bodega.component';
 import {BannerImagenesComponent} from "./componentes/banner-imagenes/banner-imagenes/banner-imagenes.component";
 import {BannerImagenesModule} from "./componentes/banner-imagenes/banner-imagenes.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {BannerImagenesModule} from "./componentes/banner-imagenes/banner-imagene
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BannerImagenesModule
+    BannerImagenesModule,
+    HttpClientModule
   ],
   providers: [AuthServices,
   EstaLogeadoGuard,
