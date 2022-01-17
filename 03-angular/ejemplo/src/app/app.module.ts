@@ -18,6 +18,8 @@ import { RutaBodegaComponent } from './modulos/modulo-inventario/rutas/ruta-bode
 import {BannerImagenesComponent} from "./componentes/banner-imagenes/banner-imagenes/banner-imagenes.component";
 import {BannerImagenesModule} from "./componentes/banner-imagenes/banner-imagenes.module";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
+import { RutaUsuarioPerfilComponent } from './rutas/ruta-usuario-perfil/ruta-usuario-perfil.component';
 
 @NgModule({
   declarations: [
@@ -30,14 +32,16 @@ import {HttpClientModule} from "@angular/common/http";
     RutaPostComponent,
     RutaAppComponent,
     RutaReporteComponent,
-    RutaBodegaComponent
+    RutaBodegaComponent,
+    RutaUsuarioPerfilComponent
   ],
   //app.module.ts
   imports: [
     BrowserModule,
     AppRoutingModule,
     BannerImagenesModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [AuthServices,
   EstaLogeadoGuard,
