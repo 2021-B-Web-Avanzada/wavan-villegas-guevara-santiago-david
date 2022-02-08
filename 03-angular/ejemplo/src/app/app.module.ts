@@ -20,6 +20,16 @@ import {BannerImagenesModule} from "./componentes/banner-imagenes/banner-imagene
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RutaUsuarioPerfilComponent } from './rutas/ruta-usuario-perfil/ruta-usuario-perfil.component';
+import {InputSwitchModule} from "primeng/inputswitch";
+import {KnobModule} from "primeng/knob";
+import {SplitButtonModule} from "primeng/splitbutton";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatButtonModule} from "@angular/material/button";
+import { RutaEjemploComponent } from './rutas/ruta-ejemplo/ruta-ejemplo.component';
+import { ModalEjemploComponent } from './componentes/modales/modal-ejemplo/modal-ejemplo.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {SocketIoModule} from "ngx-socket-io";
+import {NgbButtonsModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -33,7 +43,9 @@ import { RutaUsuarioPerfilComponent } from './rutas/ruta-usuario-perfil/ruta-usu
     RutaAppComponent,
     RutaReporteComponent,
     RutaBodegaComponent,
-    RutaUsuarioPerfilComponent
+    RutaUsuarioPerfilComponent,
+    RutaEjemploComponent,
+    ModalEjemploComponent
   ],
   //app.module.ts
   imports: [
@@ -43,6 +55,22 @@ import { RutaUsuarioPerfilComponent } from './rutas/ruta-usuario-perfil/ruta-usu
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    InputSwitchModule,
+    KnobModule,
+    KnobModule,
+    SplitButtonModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule,
+    NgbModule,
+    NgbButtonsModule,
+    SocketIoModule.forRoot({
+      url:'ws:http://localhost:8080',
+      options:{
+
+      }
+    })
+
   ],
   providers: [AuthServices,
   EstaLogeadoGuard,

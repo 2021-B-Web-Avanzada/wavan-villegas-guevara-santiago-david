@@ -1,3 +1,5 @@
+import {Observable} from "rxjs";
+
 export interface UserJphInterface {
   id: number;
   name: string;
@@ -19,5 +21,9 @@ export interface UserJphInterface {
     name: string;
     catchPhrase: string;
     bs: string;
-  }
+  },
+
+
+
+
 }

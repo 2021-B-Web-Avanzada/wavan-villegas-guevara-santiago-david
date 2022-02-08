@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {WebsocketsService} from "./servicios/websockets/websockets.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ejemplo';
+  constructor(
+    private readonly  ws:WebsocketsService
+  ) {
+  }
+
+  eventoHola(){
+    this.ws.ejecutarEventoHola()
+  }
 }
