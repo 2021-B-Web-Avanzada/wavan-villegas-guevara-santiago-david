@@ -10,7 +10,6 @@ import {RutaPostComponent} from './rutas/ruta-post/ruta-post.component';
 import {EstaLogeadoGuard} from './servicios/auth/esta-logeado.guard';
 import {EsAdministradorGuard} from './servicios/auth/es-administrador.guard';
 import {RutaUsuarioPerfilComponent} from './rutas/ruta-usuario-perfil/ruta-usuario-perfil.component';
-import {RutaEjemploComponent} from "./rutas/ruta-ejemplo/ruta-ejemplo.component";
 
 
 // login
@@ -49,7 +48,6 @@ const routes: Routes = [
         path: 'usuario/:idUsuario',
         component: RutaUsuarioPerfilComponent,
       },
-
       {
         path: 'post',
         component: RutaPostComponent,
@@ -73,10 +71,6 @@ const routes: Routes = [
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
-  },
-  {
-    path: 'ejemplo',
-    component: RutaEjemploComponent,
   },
   {
     path: '**',

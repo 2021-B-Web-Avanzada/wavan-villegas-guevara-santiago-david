@@ -1,20 +1,16 @@
 <div *ngIf="usuarioActual">
   <p>{{usuarioActual.name}}</p>
 </div>
-<p-knob [(ngModel)]="valorKnob" [min]="0" [max]="70">
 
-</p-knob>
-<p-splitButton label="Save" icon="pi pi=check"
-                (onClick)="gurardar()"
-                [model]="items">
-</p-splitButton>
-
+<p-knob [(ngModel)]="valorKnob" [min]="0" [max]="60"></p-knob>
+<p-splitButton label="Save" icon="pi pi-check"
+               (onClick)="guardar()"
+               [model]="items"></p-splitButton>
 <button id="basic" type="button"
-                    color="accent"
-                    mat-raised-button
-                    (click)="abrirDialogo()" >
+        color="accent"
+        mat-raised-button
+        (click)="abrirDialogo()">
   Basic button
-
 </button>
 
 <div class="btn-group btn-group-toggle">
@@ -61,24 +57,20 @@
         </div>
       </div>
     </div>
-
     <div class="mb-3">
       <label for="email"
-              class="form-label">
+             class="form-label">
         Es administrador
-
       </label>
-      <p-inputSwitch formControlName="esAdministrador">
-
-      </p-inputSwitch>
-      <div class='form-text'>
-        Seleccione si es administrador
-
+      <p-inputSwitch formControlName="esAdministrador"></p-inputSwitch>
+      <div class="form-text">
+        Seleccione si es administrador.
       </div>
     </div>
     <button class="btn btn-primary"
             [disabled]="formGroup.invalid"
-            (click)="actualizarUsuario()" >
+            (click)="actualizarUsuario()"
+    >
       GUARDAR
     </button>
     <!--    name -->

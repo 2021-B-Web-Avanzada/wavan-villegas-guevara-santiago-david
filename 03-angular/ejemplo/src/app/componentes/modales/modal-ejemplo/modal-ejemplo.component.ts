@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {RutaUsuarioPerfilComponent} from "../../../rutas/ruta-usuario-perfil/ruta-usuario-perfil.component";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {RutaUsuarioPerfilComponent} from '../../../rutas/ruta-usuario-perfil/ruta-usuario-perfil.component';
 
 @Component({
   selector: 'app-modal-ejemplo',
@@ -12,11 +12,11 @@ export class ModalEjemploComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: any,
-    public dialogRef:MatDialogRef<RutaUsuarioPerfilComponent>,
-
-  ) { }
-  cerrarDialogo(){
-    this.dialogRef.close({nombre:'Santiago'})
+    public dialogRef: MatDialogRef<RutaUsuarioPerfilComponent>,
+  ) {
+  }
+  cerrarDialogo() {
+    this.dialogRef.close({nombre: 'Adrian'});
   }
 
   ngOnInit(): void {

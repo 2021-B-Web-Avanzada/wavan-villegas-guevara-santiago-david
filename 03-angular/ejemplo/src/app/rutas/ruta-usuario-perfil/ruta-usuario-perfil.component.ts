@@ -3,12 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserJPHService} from '../../servicios/http/user-jph.service';
 import {UserJphInterface} from '../../servicios/http/interfaces/user-jph.interface';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from "@angular/material/dialog";
-import {ModalEjemploComponent} from "../../componentes/modales/modal-ejemplo/modal-ejemplo.component";
+import {MatDialog} from '@angular/material/dialog';
+import {ModalEjemploComponent} from '../../componentes/modales/modal-ejemplo/modal-ejemplo.component';
 
-
-
-;
 @Component({
   selector: 'app-ruta-usuario-perfil',
   templateUrl: './ruta-usuario-perfil.component.html',
@@ -19,32 +16,28 @@ export class RutaUsuarioPerfilComponent implements OnInit {
   idUsuario = 0;
   usuarioActual?: UserJphInterface;
   formGroup?: FormGroup;
-  valorKnob=50;
-  items=[
+  valorKnob = 30;
+  items = [
     {
-      label:'Update', icon:'pi pi-refresh', command:()=>
-        console.log("Hola")
-
+      label: 'Update', icon: 'pi pi-refresh', command: () => {
+        console.log('Hola')
+      }
     },
-    {
-      label:'Setup', icon:'pi pi-cog', routerLink:['/setup']
-
-    }
-
+    {label: 'Setup', icon: 'pi pi-cog', routerLink: ['/setup']}
   ];
-  model={
-    left:true,
-    middle:false,
-    right:false
-  }
+
+  model = {
+    left: true,
+    middle: false,
+    right: false
+  };
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly userJPHService: UserJPHService,
     private readonly formBuilder: FormBuilder,
-    private readonly router:Router,
-    public dialog:MatDialog,
-
+    private readonly router: Router,
+    public dialog: MatDialog
   ) {
   }
 
@@ -67,9 +60,11 @@ export class RutaUsuarioPerfilComponent implements OnInit {
       );
   }
 
+  guardar() {
+    console.log('GUARDAR')
+  }
 
   ngOnInit(): void {
-    this.prepararFormulario();
     const parametroRuta$ = this.activatedRoute.params
     parametroRuta$
       .subscribe({
@@ -80,18 +75,30 @@ export class RutaUsuarioPerfilComponent implements OnInit {
         }
       })
   }
-  gurardar(){
-    console.log("Guardar");
 
+  buscarUsuario(id: number) {
+    const buscarUsuarioPorId$ = this.userJPHService.buscarUno(id);
+    buscarUsuarioPorId$
+      .subscribe(
+        {
+          next: (data) => {
+            this.usuarioActual = data;
+            this.prepararFormulario();
+          },
+          error: (error) => {
+            console.error(error)
+          }
+        }
+      )
   }
 
-  private prepararFormulario() {
+  prepararFormulario() {
     this.formGroup = this.formBuilder
       .group(
         {
           email: new FormControl( // [''], [Validors.required]
             {
-              value: this.usuarioActual?this.usuarioActual.email:'',
+              value: this.usuarioActual ? this.usuarioActual.email : '',
               disabled: false
             },
             [
@@ -99,7 +106,7 @@ export class RutaUsuarioPerfilComponent implements OnInit {
               Validators.minLength(3),
             ]
           ),
-          esAdministrador:new  FormControl(true),
+          esAdministrador: new FormControl(true)
         }
       );
     const cambio$ = this.formGroup.valueChanges;
@@ -117,59 +124,39 @@ export class RutaUsuarioPerfilComponent implements OnInit {
     })
   }
 
-  buscarUsuario(id: number) {
-    const buscarUsuarioPorId$ = this.userJPHService.buscarUno(id);
-    buscarUsuarioPorId$
-      .subscribe(
-        {
-          next: (data) => {
-            this.usuarioActual = data;
-            this.prepararFormulario();
-
-          },
-          error: (error) => {
-            console.error(error)
-          }
-        }
-      )
-  }
-
-  actualizarUsuario(){
-    if(this.usuarioActual){
-      const valoresAActualizar=this.prepararObjeto();
-      const actualizar$ = this.userJPHService
-        .actualizarPorID(
-          this.usuarioActual.id,
-          valoresAActualizar
-        );
-      actualizar$
-        .subscribe({
-          next:(datos:UserJphInterface)=>{
-            console.log({datos});
-            const url=['/app','usuario'];
-            this.router.navigate(url);
-          },
-          error:(error)=>{
-            console.error({error})
-          }
-          }
-
-
-        )
-    }
-  }
-
-  prepararObjeto(){
-    if(this.formGroup){
-      const email= this.formGroup.get('email');
-      if(email){
-        return{
-          email:email.value
+  prepararObjeto() {
+    if (this.formGroup) {
+      const email = this.formGroup.get('email')
+      if (email) {
+        return {
+          email: email.value,
         }
       }
     }
     return {
       email: '',
+    }
+  }
+
+  actualizarUsuario() {
+    if (this.usuarioActual) {
+      const valoresAActualizar = this.prepararObjeto();
+      const actualizar$ = this.userJPHService
+        .actualizarPorId(
+          this.usuarioActual.id,
+          valoresAActualizar
+        );
+      actualizar$
+        .subscribe({
+          next: (datos) => {
+            console.log({datos});
+            const url = ['/app', 'usuario'];
+            this.router.navigate(url);
+          },
+          error: (error) => {
+            console.error({error})
+          }
+        });
     }
   }
 

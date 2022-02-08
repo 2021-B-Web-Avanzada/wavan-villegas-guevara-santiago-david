@@ -1,36 +1,43 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-
 @Component({
   selector: 'app-banner-imagenes',
   templateUrl: './banner-imagenes.component.html',
   styleUrls: ['./banner-imagenes.component.scss']
 })
 export class BannerImagenesComponent implements OnInit {
-  nombre='Santiago';
-  apellido="Villegas"
-  mascotas={
-    nora:{
-      edad:0
+  nombre = 'Adrian';
+  apellido = 'Eguez'
+  mascotas = {
+    cachetes: {
+      edad: 7
     }
   }
-  fecha=new Date();
-  sueldo=1000;
+  fecha = new Date();
+  sueldo = 1000;
+  // banner-imagenes.component.ts
   @Input()
-  url= 'https://www.google.com';
+  url = 'https://www.google.com';
+
   @Input()
-  urlImagen='https://1.bp.blogspot.com/-79DdxzZkDog/T76QV6v5IuI/AAAAAAAAAEY/6DzpGZzsmfA/s320/homerocatolico_456_336.jpg';
+  urlImagen = 'https://1.bp.blogspot.com/-79DdxzZkDog/T76QV6v5IuI/AAAAAAAAAEY/6DzpGZzsmfA/s320/homerocatolico_456_336.jpg'
+
   @Input()
-  color='yellow';
-  constructor() { }
+  color = 'yellow';
+
+
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
+
   ejecutarEventoClick(){
-    console.log({mensaje:'click'})
+    console.log({mensaje:'click'});
   }
   ejecutarEventoBlur(){
-    console.log({mensaje:'blur'})
+    console.log({mensaje:'blur'});
   }
 
 }

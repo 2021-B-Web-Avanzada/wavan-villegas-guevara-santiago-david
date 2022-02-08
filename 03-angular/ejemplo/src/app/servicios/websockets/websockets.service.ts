@@ -1,19 +1,27 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import  {Socket} from "ngx-socket-io";
+import {Injectable} from '@angular/core';
+import {Socket} from 'ngx-socket-io';
+import {Observable} from 'rxjs';
 
-@Injectable(
-  {
-    providedIn:'root'
-  }
-)
+@Injectable({
+  providedIn: 'root'
+})
 export class WebsocketsService {
   constructor(private socket: Socket) {
   }
 
-  ejecutarEventoHola(): Observable<any> {
-    return this.socket.emit('hola', {
+  ejecutarEventoHola() {
+    // Emitimos un evento
+    const resp = this.socket.
+    emit(
+      'hola', {
       nombre: 'Adrian'
     });
+    console.log(resp);
   }
+
+  escucharEventoHola(){
+    return this.socket
+      .fromEvent('escucharEventoHola');
+  }
+
 }
