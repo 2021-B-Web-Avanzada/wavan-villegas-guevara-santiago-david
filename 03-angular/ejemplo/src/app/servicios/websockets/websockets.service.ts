@@ -24,4 +24,33 @@ export class WebsocketsService {
       .fromEvent('escucharEventoHola');
   }
 
+  ejecutarEventoUnirseSala(salaID:number,nombre:string) {
+    // Emitimos un evento
+    const resp = this.socket.
+    emit(
+      'unirseSala', {
+        nombre,
+        salaID
+      });
+  }
+  escucharEventoUnirseSala(){
+    return this.socket.fromEvent('escucharEventoUnirseSala')
+
+  }
+
+  ejecutarEventoEnviarMensaje(salaID:number,nombre:string, mensaje:string) {
+    // Emitimos un evento
+    const resp = this.socket.
+    emit(
+      'enviarMensaja', {
+        nombre,
+        salaID,
+        mensaje
+      });
+  }
+  escucharEventoMensajeSala(){
+    return this.socket.fromEvent('escucharEventoMensajeSala')
+
+  }
+
 }
