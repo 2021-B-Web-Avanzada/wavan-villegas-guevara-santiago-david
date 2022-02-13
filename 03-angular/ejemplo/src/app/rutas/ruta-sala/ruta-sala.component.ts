@@ -25,6 +25,15 @@ export class RutaSalaComponent implements OnInit, OnDestroy {
     public readonly  websocketsService:WebsocketsService
   ) { }
   enviarMensaje(){
+
+    this.arregloMensajes.push({
+      mensaje:this.mensaje,
+      salaId: +this.salaId,
+      nombre: this.nombre,
+      posicion: 'izq'
+    })
+
+
     this.websocketsService.ejecutarEventoEnviarMensaje(
       +this.salaId,this.nombre,this.mensaje
     );
