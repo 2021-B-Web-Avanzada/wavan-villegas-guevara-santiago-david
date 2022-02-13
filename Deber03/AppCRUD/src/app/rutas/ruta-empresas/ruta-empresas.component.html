@@ -1,10 +1,16 @@
 
-
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <button id="btnNuevo" type="button" class="btn btn-success">Nueva empresa</button>
+      <h1>Lista de empresas</h1>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <button id="btnNuevo" type="button" class="btn btn-success" (click)="agregarEmpresa()">Nueva empresa </button>
     </div>
   </div>
 </div>
@@ -33,9 +39,9 @@
             <td>{{empresa.numeroTrabajadores}}</td>
             <td>{{empresa.independiente}}</td>
             <td>
-              <button class="btn btn-primary m-1" (click)="editarEmpresa(empresa.id)">Editar</button>
-              <button class="btn btn-primary m-1" (click)="eliminarEmpresa(empresa.id)">Eliminar</button>
-              <button class="btn btn-primary m-1" (click)="verJuegos(empresa.id)">Ver juegos</button>
+              <button id="editar" class="btn btn-success m-1 fas fa-pen" (click)="editarEmpresa(empresa.id)"></button>
+              <button id="eliminar" class="btn btn-danger m-1 fas fa-trash" (click)="eliminarEmpresa(empresa.id)"></button>
+              <button class="btn btn-primary m-1 " (click)="verJuegos(empresa.id)">Ver juegos</button>
             </td>
           </tr>
           </tbody>

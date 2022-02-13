@@ -1,1 +1,120 @@
-<p>ruta-empresa-crear works!</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Crear empresa</h1>
+    </div>
+  </div>
+</div>
+
+
+<div id="contenedor-formulario" class="col-lg-11 col-md-11 col-sm-12 col-xs-12 contact texto">
+
+
+  <form >
+    <div class="row">
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="nombre"
+               class="form-label">
+          Nombre:
+        </label>
+        <input type="text"
+               class="form-control"
+               formControlName="nombre"
+               id="nombre"
+               aria-describedby="nombreHelp" >
+        <div id="nombreHelp"
+             class="form-text">
+          Ingrese el nombre de la empresa.
+        </div>
+      </div>
+
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="pais"
+               class="form-label">
+          País:
+        </label>
+        <input type="text"
+               class="form-control"
+               formControlName="pais"
+               id="pais"
+               aria-describedby="paisHelp"  >
+        <div id="paisHelp"
+             class="form-text">
+          Ingrese el país fundación.
+        </div>
+      </div>
+
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="trabajadores"
+               class="form-label">
+          Número de trabajadores:
+        </label>
+        <input type="text"
+               class="form-control"
+               formControlName="trabajadores"
+               id="trabajadores"
+               aria-describedby="trabajadoresHelp" >
+        <div id="trabajadoresHelp"
+             class="form-text">
+          Ingrese el número de trabajadores de la empresa.
+        </div>
+      </div>
+
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="independiente"
+               class="form-label">
+          Independiente:
+        </label>
+
+        <select class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+                class="form-control"
+                formControlName="independiente"
+                id="independiente"
+                aria-describedby="independienteciudadHelp">
+          <option value="1">Falso</option>
+          <option value="0">Verdadero</option>
+
+        </select>
+
+
+
+        <div id="independienteciudadHelp"
+             class="form-text">
+          Seleccione si la empresa es independiente.
+        </div>
+      </div>
+
+
+      <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <label for="fecha"
+               class="form-label">
+          Fecha de fundación:
+        </label>
+
+        <input matInput [matDatepicker]="picker" class="form-control"
+               formControlName="fecha"
+               id="fecha"
+               aria-describedby="fechaHelp" >
+        <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+
+        <div id="fechaHelp"
+             class="form-text">
+          Seleccione la fecha de fundación.
+        </div>
+      </div>
+      <div class="center">
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+
+  </form >
+
+
+
+
+</div>

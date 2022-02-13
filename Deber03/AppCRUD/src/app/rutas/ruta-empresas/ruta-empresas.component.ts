@@ -37,6 +37,11 @@ export class RutaEmpresasComponent implements OnInit {
 
 
   }
+  agregarEmpresa(){
+    const ruta = ['/empresa' , 'crear' ];
+    this.router.navigate(ruta);
+
+  }
 
   buscarEmpresas() {
     this.empresaVieojuegoService

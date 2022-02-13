@@ -12,9 +12,10 @@ import { RutaEmpresasComponent } from './rutas/ruta-empresas/ruta-empresas.compo
 import { RutaVideojuegosComponent } from './rutas/ruta-videojuegos/ruta-videojuegos.component';
 import { RutaNotFoundComponent } from './rutas/ruta-not-found/ruta-not-found.component';
 import {HttpClientModule} from "@angular/common/http";
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule} from "@angular/material/table";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+
 
 @NgModule({
   declarations: [
@@ -32,9 +33,11 @@ import {MatTableModule} from "@angular/material/table";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MatTableModule,
 
-    BrowserAnimationsModule
+    MatDatepickerModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
