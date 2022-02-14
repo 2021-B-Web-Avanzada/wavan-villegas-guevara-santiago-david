@@ -1,5 +1,4 @@
-export interface videojuegoJphInterface{
-  id:string;
+export interface videojuegoCrearJphInterface{
   nombre:string;
   recaudacion:number,
   fechaDeSalida:string;

@@ -17,23 +17,43 @@ export class RutaEmpresasComponent implements OnInit {
   constructor(
     private readonly empresaVieojuegoService: EmpresaVieojuegoService,
     private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute
+
   ) { }
 
   ngOnInit(): void {
     this.buscarEmpresas()
-  }
-  editarEmpresa(id:string){
-    console.log(id);
 
   }
-  eliminarEmpresa(id:string){
-    console.log(id);
+  editarEmpresa(id:string){
+    const ruta = ['/empresa' , 'editar',id ];
+    this.router.navigate(ruta);
+
+  }
+  eliminarEmpresa(posicion:number,id:string, empresa:string){
+    var confirmacion=confirm("¿Está seguro de que desea eliminar la empresa: "+empresa+'?')
+    if (confirmacion==true){
+      this.arregloEmpresas.splice(posicion, 1);
+      const eliminar$ = this.empresaVieojuegoService
+        .eliminarEmpresaPorId(id);
+      eliminar$
+        .subscribe({
+          next: (datos) => {
+            console.log({datos});
+
+          },
+          error: (error) => {
+            console.error({error});
+          }
+        });
+    }
+
 
 
   }
   verJuegos(id:string){
-    console.log(id);
+    const ruta = ['/empresa' ,id,'videojuegos'];
+    this.router.navigate(ruta);
+
 
 
   }
@@ -59,6 +79,7 @@ export class RutaEmpresasComponent implements OnInit {
           },
         }
       )
+
   }
 
 

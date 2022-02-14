@@ -1,1 +1,72 @@
-<p>ruta-videojuegos works!</p>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1  *ngIf="idEmpresa">Lista de videojuegos de la empresa: {{idEmpresa}}</h1>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <button id="btnRegresar" type="button" class="btn btn-danger" (click)="regresar()">Lista de empresas </button>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <button id="btnNuevo" type="button" class="btn btn-success" (click)="agregarJuego()">Nuevo videojuego </button>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="table-responsive">
+        <table id="tablaJuegos" class="table table-striped table-bordered table-condensedng  mat-table" *ngIf="arregloVideojuegos">
+          <thead class="text-center">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Género principal</th>
+            <th scope="col">Fecha de salida</th>
+            <th scope="col">Recaudación</th>
+            <th scope="col">Multijugador</th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let juego of arregloVideojuegos, let i = index">
+
+            <td>{{juego.nombre}}</td>
+            <td>{{juego.generoPrincipal}}</td>
+            <td>{{juego.fechaDeSalida}}</td>
+            <td>{{juego.recaudacion}}</td>
+            <td>{{juego.multijugador}}</td>
+            <td>
+              <button id="editar" class="btn btn-success m-1 fas fa-pen" (click)="editarJuego(juego.id)"></button>
+              <button id="eliminar" class="btn btn-danger m-1 fas fa-trash" (click)="eliminarJuego(i,juego.id,juego.nombre)"></button>
+
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

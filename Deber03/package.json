@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@angular/material-moment-adapter": "^13.2.2",
+    "moment": "^2.29.1"
+  }
+}

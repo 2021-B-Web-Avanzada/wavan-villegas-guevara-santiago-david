@@ -40,7 +40,7 @@
             <td>{{empresa.independiente}}</td>
             <td>
               <button id="editar" class="btn btn-success m-1 fas fa-pen" (click)="editarEmpresa(empresa.id)"></button>
-              <button id="eliminar" class="btn btn-danger m-1 fas fa-trash" (click)="eliminarEmpresa(empresa.id)"></button>
+              <button id="eliminar" class="btn btn-danger m-1 fas fa-trash" (click)="eliminarEmpresa(i,empresa.id,empresa.nombre)"></button>
               <button class="btn btn-primary m-1 " (click)="verJuegos(empresa.id)">Ver juegos</button>
             </td>
           </tr>

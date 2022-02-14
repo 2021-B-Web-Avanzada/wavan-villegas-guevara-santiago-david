@@ -6,12 +6,23 @@
     </div>
   </div>
 </div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <button id="btnRegresar" type="button" class="btn btn-danger" (click)="regresar()">Lista de empresas </button>
+    </div>
+  </div>
+</div>
 
 
-<div id="contenedor-formulario" class="col-lg-11 col-md-11 col-sm-12 col-xs-12 contact texto">
+
+<div
+  id="contenedor-formulario"
+  class="col-lg-11 col-md-11 col-sm-12 col-xs-12 contact texto"
+  *ngIf="formGroup">
 
 
-  <form >
+  <form [formGroup]="formGroup">
     <div class="row">
       <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <label for="nombre"
@@ -26,6 +37,22 @@
         <div id="nombreHelp"
              class="form-text">
           Ingrese el nombre de la empresa.
+        </div>
+
+        <div *ngIf="formGroup.get('nombre')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('nombre')?.invalid &&
+             formGroup.get('nombre')?.touched &&
+             formGroup.get('nombre')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('nombre')?.hasError('required')">
+            Nombre requerido
+          </span>
+            <span *ngIf="formGroup.get('nombre')?.hasError('minlength')">
+            Mínimo 3 caracteres
+          </span>
+          </div>
         </div>
       </div>
 
@@ -43,6 +70,22 @@
              class="form-text">
           Ingrese el país fundación.
         </div>
+
+        <div *ngIf="formGroup.get('pais')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('pais')?.invalid &&
+             formGroup.get('pais')?.touched &&
+             formGroup.get('pais')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('pais')?.hasError('required')">
+            País requerido
+          </span>
+            <span *ngIf="formGroup.get('pais')?.hasError('minlength')">
+            Mínimo 2 caracteres
+          </span>
+          </div>
+        </div>
       </div>
 
       <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -59,6 +102,25 @@
              class="form-text">
           Ingrese el número de trabajadores de la empresa.
         </div>
+
+        <div *ngIf="formGroup.get('trabajadores')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('trabajadores')?.invalid &&
+             formGroup.get('trabajadores')?.touched &&
+             formGroup.get('trabajadores')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('trabajadores')?.hasError('required')">
+            Número de trabajadores requerido
+          </span>
+            <span *ngIf="formGroup.get('trabajadores')?.hasError('pattern')">
+            Sólo números
+          </span>
+            <span *ngIf="formGroup.get('trabajadores')?.hasError('minlength')">
+            Mínimo 1 carácter
+          </span>
+          </div>
+        </div>
       </div>
 
       <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -72,31 +134,48 @@
                 class="form-control"
                 formControlName="independiente"
                 id="independiente"
-                aria-describedby="independienteciudadHelp">
-          <option value="1">Falso</option>
-          <option value="0">Verdadero</option>
+                aria-describedby="independienteHelp"
+
+                >
+
+          <option value="Falso">Falso</option>
+          <option value="Verdadero">Verdadero</option>
 
         </select>
 
 
 
-        <div id="independienteciudadHelp"
+        <div id="independienteHelp"
              class="form-text">
           Seleccione si la empresa es independiente.
+        </div>
+        <div *ngIf="formGroup.get('independiente')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('independiente')?.invalid &&
+             formGroup.get('independiente')?.touched &&
+             formGroup.get('independiente')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('independiente')?.hasError('required')">
+            Independiente requerido
+          </span>
+
+          </div>
         </div>
       </div>
 
 
-      <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <label for="fecha"
                class="form-label">
           Fecha de fundación:
         </label>
 
-        <input matInput [matDatepicker]="picker" class="form-control"
+        <input id="fecha "matInput [matDatepicker]="picker" class="form-control"
                formControlName="fecha"
                id="fecha"
-               aria-describedby="fechaHelp" >
+               aria-describedby="fechaHelp"
+               readonly>
         <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
 
@@ -105,10 +184,30 @@
              class="form-text">
           Seleccione la fecha de fundación.
         </div>
+        <div *ngIf="formGroup.get('fecha')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('fecha')?.invalid &&
+             formGroup.get('fecha')?.touched &&
+             formGroup.get('fecha')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('fecha')?.hasError('required')">
+            Fecha de funación requerida
+          </span>
+
+          </div>
+        </div>
+
+
+
       </div>
       <div class="center">
 
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-success"
+                [disabled]="formGroup.invalid"
+                (click)="crearEmpresa()"
+
+        >Crear</button>
       </div>
     </div>
 
@@ -118,3 +217,5 @@
 
 
 </div>
+
+

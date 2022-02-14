@@ -15,6 +15,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -33,6 +35,9 @@ import {MatNativeDateModule} from "@angular/material/core";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatMomentDateModule,
+    ReactiveFormsModule,
+    FormsModule,
 
     MatDatepickerModule,
     MatNativeDateModule,
