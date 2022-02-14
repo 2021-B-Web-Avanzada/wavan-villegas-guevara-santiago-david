@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {UserJPHService} from "../../servicios/http/user-jph.service";
-import {UserJphInterface} from "../../servicios/http/interfaces/user-jph.interface";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-
-
+import {Component, OnInit} from '@angular/core';
+import {UserJPHService} from '../../servicios/http/user-jph.service';
+import {UserJphInterface} from '../../servicios/http/interfaces/user-jph.interface';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-ruta-usuario',
@@ -11,66 +9,58 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
   styleUrls: ['./ruta-usuario.component.scss']
 })
 export class RutaUsuarioComponent implements OnInit {
-  arreglo: UserJphInterface[]=[];
-  buscarUsuario="";
+  arreglo: UserJphInterface[] = [];
+  buscarUsuario = '';
 
   constructor(
-    private readonly userJphService:UserJPHService,
+    private readonly userJphService: UserJPHService,
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-
-    const parametrosConsulta$=  this.activatedRoute
+    const parametrosConsulta$ = this.activatedRoute
       .queryParams;
-
-
+    // ?nombre=Adrian&apellido=Eguez
     parametrosConsulta$
-      .subscribe(// ACA EMPIEZA A EJECUTARSE EL OBSERVABLE
+      .subscribe(// AQUI EMPIEZA A EJECUTARSE EL OBSERVABLE
         {
-          next:(queryParams:Params)=>{//Try
+          next: (queryParams) => { // TRY
             console.log(queryParams);
-            this.buscarUsuario=queryParams['name'];
+            this.buscarUsuario = queryParams['name'];
             this.buscarUsuarios();
+          },
+          error: () => { // Catch
 
           },
-          error:()=>{},
-          complete:()=>{},
-        }
+          complete: () => { // Finally
 
-
-      )
-
-    // this.router.navigate(['/app','usuario'], {queryParams:{
-    //     name:'asdasd'
-    //   }})
-    // this.buscarUsuarios();
-
-  }
-  acttualizarParametrosDeConsulta(){
-    this.router
-      .navigate(
-        ['/app','usuario'],//armamos la URL
-        {
-          queryParams:{
-            name:this.buscarUsuario
           }
         }
       );
-
   }
 
-   buscarUsuarios() {
+  actualizarParametrosDeConsulta() {
+    this.router
+      .navigate(
+        ['/app', 'usuario'], // armamos la URL /app/usuario
+        {
+          queryParams: {
+            name: this.buscarUsuario // ?name=Adrian
+          }
+        });
+  }
+
+  buscarUsuarios() {
     this.userJphService
       .buscarTodos({
-       name:this.buscarUsuario
+        name: this.buscarUsuario
       })
       .subscribe({
           next: (datos) => { // try then
             this.arreglo = datos;
-            this.buscarUsuario='';
-            console.log({datos});
+            this.buscarUsuario = '';
           },
           error: (error) => { // catch
             console.error({error});
@@ -79,8 +69,8 @@ export class RutaUsuarioComponent implements OnInit {
       )
   }
 
-  gestionarUsuario(idUsuarion:number){
-
+  gestionarUsuario(idUsuario: number) {
+    const ruta = ['/app' , 'usuario' , idUsuario]; // /app/usuario/1
+    this.router.navigate(ruta);
   }
-
 }

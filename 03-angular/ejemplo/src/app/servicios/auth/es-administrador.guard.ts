@@ -1,26 +1,26 @@
-import {Injectable} from "@angular/core";
-import {AuthServices} from "./auth.services";
-import {ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {Observable} from 'rxjs';
+import {AuthService} from './auth.service';
 
 @Injectable()
-export  class EsAdministradorGuard{
-//Inyeccion de dependencias
+export class EsAdministradorGuard implements CanActivate{
+
+  // Inyeccion de dependencias
   constructor(
-    private  readonly  _authService:AuthServices,
-    private readonly  _router:Router,
+    private readonly _authService: AuthService,
+    private readonly _router: Router,
   ) {
   }
+
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot):Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree{
-    const  esAdministrador=this._authService.roles.some((permiso:string)=>permiso==='admin');
-    if(!this._authService.estaLogeado){
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    const esAdministrador = this._authService.roles.some((permiso)=> permiso === 'admin');
+    if(!esAdministrador){
       this._router.navigate(['/forbidden'])
     }
-
-    return  this._authService.estaLogeado
+    return esAdministrador;
   }
-
 
 }
