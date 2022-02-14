@@ -1,1 +1,223 @@
-<p>ruta-videojuego-crear works!</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1  *ngIf="empresaActual">Crear videojuego de la Empresa: {{empresaActual.nombre}}</h1>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <button id="btnRegresar" type="button" class="btn btn-danger" (click)="regresar()">Lista de videojuegos </button>
+    </div>
+  </div>
+</div>
+
+
+
+<div
+  id="contenedor-formulario"
+  class="col-lg-11 col-md-11 col-sm-12 col-xs-12 contact texto"
+  *ngIf="formGroup">
+
+
+  <form [formGroup]="formGroup">
+    <div class="row">
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="nombre"
+               class="form-label">
+          Nombre:
+        </label>
+        <input type="text"
+               class="form-control"
+               formControlName="nombre"
+               id="nombre"
+               aria-describedby="nombreHelp" >
+        <div id="nombreHelp"
+             class="form-text">
+          Ingrese el nombre del videojuego.
+        </div>
+
+        <div *ngIf="formGroup.get('nombre')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('nombre')?.invalid &&
+             formGroup.get('nombre')?.touched &&
+             formGroup.get('nombre')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('nombre')?.hasError('required')">
+            Nombre requerido
+          </span>
+            <span *ngIf="formGroup.get('nombre')?.hasError('minlength')">
+            Mínimo 3 caracteres
+          </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="genero"
+               class="form-label">
+          Género principal:
+        </label>
+        <input type="text"
+               class="form-control"
+               formControlName="genero"
+               id="genero"
+               aria-describedby="generoHelp"  >
+        <div id="generoHelp"
+             class="form-text">
+          Ingrese el género principal del videojuego.
+        </div>
+
+        <div *ngIf="formGroup.get('genero')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('genero')?.invalid &&
+             formGroup.get('genero')?.touched &&
+             formGroup.get('genero')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('genero')?.hasError('required')">
+            Género requerido
+          </span>
+            <span *ngIf="formGroup.get('genero')?.hasError('minlength')">
+            Mínimo 2 caracteres
+          </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="recaudacion"
+               class="form-label">
+          Recaudación del videojuego:
+        </label>
+        <input type="text"
+               class="form-control"
+               formControlName="recaudacion"
+               id="recaudacion"
+               aria-describedby="recaudacionHelp" >
+        <div id="recaudacionHelp"
+             class="form-text">
+          Ingrese la cantidad recudada por el videojuego.
+        </div>
+
+        <div *ngIf="formGroup.get('recaudacion')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('recaudacion')?.invalid &&
+             formGroup.get('recaudacion')?.touched &&
+             formGroup.get('recaudacion')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('recaudacion')?.hasError('required')">
+            Valor de recaudación requerida
+          </span>
+            <span *ngIf="formGroup.get('recaudacion')?.hasError('pattern')">
+            Sólo números
+          </span>
+            <span *ngIf="formGroup.get('recaudacion')?.hasError('minlength')">
+            Mínimo 1 carácter
+          </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="multijugador"
+               class="form-label">
+          Multijugador:
+        </label>
+
+        <select class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+                class="form-control"
+                formControlName="multijugador"
+                id="multijugador"
+                aria-describedby="multijugadorHelp"
+
+        >
+
+          <option value="Falso">Falso</option>
+          <option value="Verdadero">Verdadero</option>
+
+        </select>
+
+
+
+        <div id="multijugadorHelp"
+             class="form-text">
+          Seleccione si el videojuego cuenta con multijugador.
+        </div>
+        <div *ngIf="formGroup.get('multijugador')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('multijugador')?.invalid &&
+             formGroup.get('multijugador')?.touched &&
+             formGroup.get('multijugador')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('multijugador')?.hasError('required')">
+            Multijugador requerido
+          </span>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="mb-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="fecha"
+               class="form-label">
+          Fecha de salida:
+        </label>
+
+        <input id="fecha "matInput [matDatepicker]="picker" class="form-control"
+               formControlName="fecha"
+               id="fecha"
+               aria-describedby="fechaHelp"
+               readonly>
+        <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+
+        <div id="fechaHelp"
+             class="form-text">
+          Seleccione la fecha de salida del juego.
+        </div>
+        <div *ngIf="formGroup.get('fecha')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('fecha')?.invalid &&
+             formGroup.get('fecha')?.touched &&
+             formGroup.get('fecha')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('fecha')?.hasError('required')">
+            Fecha de salida requerida
+          </span>
+
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="center">
+
+        <button type="submit" class="btn btn-success"
+                [disabled]="formGroup.invalid"
+                (click)="crearJuego()"
+
+        >Crear</button>
+      </div>
+    </div>
+
+  </form >
+
+
+
+
+</div>
+
+
+
+
