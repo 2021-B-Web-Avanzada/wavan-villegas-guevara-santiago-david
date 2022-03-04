@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {WebsocketsService} from "../servicios/websockets/websockets.service";
 import {ActivatedRoute} from "@angular/router";
+import {recuadroInterface} from "./recuadro.interface";
+
 
 
 @Component({
@@ -8,19 +10,36 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './ruta-sala-juego.component.html',
   styleUrls: ['./ruta-sala-juego.component.scss']
 })
-export class RutaSalaJuegoComponent implements OnInit,AfterViewInit  {
-  @ViewChild('gridPropio') gridPropio!: ElementRef;
-  @ViewChild('gridAjeno') gridAjeno!: ElementRef;
-  @ViewChild('destroyer') destroyer!: ElementRef;
-  @ViewChild('submarine') submarine!: ElementRef;
-  @ViewChild('cruiser') cruiser!: ElementRef;
-  @ViewChild('battleship') battleship!: ElementRef;
-  @ViewChild('carrier') carrier!: ElementRef;
-
+export class RutaSalaJuegoComponent implements OnInit  {
 
   salaId='';
-  ancho=10;
-  esHorizontal=true;
+  numeroJugador=0;
+  mensaje="Ubica tus (5) barcos restantes dando clic en un cuadro de la izquierda"
+
+  gridJugador:recuadroInterface[]=[];
+  grindEnemigo:recuadroInterface[]=[];
+  atacadosJugador:number[]=[];
+  atacadosOponente:number[]=[];
+  posicionBarcosEnemigos:number[]=[];
+  barco1:number[]=[];
+  barco2:number[]=[];
+  barco3:number[]=[];
+  barco4:number[]=[];
+  barco5:number[]=[];
+  perdedor=false;
+  barcosPorColocar=5;
+  visible1=false;
+  visible2=true;
+  visible3=true;
+  visible4=true;
+  visible5=true;
+  listo=false;
+  enemigoListo=false;
+
+
+
+
+
 
   constructor(
     public readonly  activatedRoute:ActivatedRoute,
@@ -32,12 +51,20 @@ export class RutaSalaJuegoComponent implements OnInit,AfterViewInit  {
 
   }
 
-  ngAfterViewInit(): void {
-    this.formarGrid(this.gridPropio);
-    this.formarGrid(this.gridAjeno);
-    }
+
 
   ngOnInit(): void {
+    for (let i=0;i<100;i++){
+      let cuadro: recuadroInterface;
+      cuadro={id:i.toString(),atacado:false,clases:"",habilitado:false};
+      this.gridJugador.push(cuadro);
+
+      let cuadro2: recuadroInterface;
+      cuadro={id:(i+100).toString(),atacado:false,clases:"",habilitado:false};
+      this.grindEnemigo.push(cuadro);
+    }
+
+
 
 
     this.activatedRoute
@@ -50,50 +77,11 @@ export class RutaSalaJuegoComponent implements OnInit,AfterViewInit  {
         }
       });
 
-
-
-  }
-  rotar(){
-    if(this.esHorizontal){
-      this.render2.addClass(this.destroyer.nativeElement,"destroyer-container-vertical");
-      this.render2.addClass(this.submarine.nativeElement,"submarine-container-vertical");
-      this.render2.addClass(this.cruiser.nativeElement,"cruiser-container-vertical");
-      this.render2.addClass(this.battleship.nativeElement,"battleship-container-vertical");
-      this.render2.addClass(this.carrier.nativeElement,"carrier-container-vertical");
-
-    } else {
-      this.render2.removeClass(this.destroyer.nativeElement,"destroyer-container-vertical");
-      this.render2.removeClass(this.submarine.nativeElement,"submarine-container-vertical");
-      this.render2.removeClass(this.cruiser.nativeElement,"cruiser-container-vertical");
-      this.render2.removeClass(this.battleship.nativeElement,"battleship-container-vertical");
-      this.render2.removeClass(this.carrier.nativeElement,"carrier-container-vertical");
-
-    }
-    this.esHorizontal=!this.esHorizontal;
-
-
   }
 
 
-  formarGrid(grid:ElementRef){
-    var gridActual=grid.nativeElement;
-
-    for (let i = 0; i < this.ancho*this.ancho; i++) {
-      const div = this.render2.createElement('button');
-      if (grid===this.gridAjeno){
-        this.render2.setAttribute(div,"id",(100+i).toString())
-        this.render2.appendChild(gridActual,div)
-      }else {
-        this.render2.setAttribute(div,"id",i.toString())
-        this.render2.appendChild(gridActual,div)
-
-      }
 
 
-    }
-
-
-  }
 
 
 
@@ -113,6 +101,14 @@ export class RutaSalaJuegoComponent implements OnInit,AfterViewInit  {
     this.websocketsService.ejecutarEventoUnirseSala(+this.salaId,"ddffddf");
 
   }
+  ubicarBarco(id:string){
+    console.log("hola"+id);
+
+  }
+  atacar(id:string){
+
+  }
+
 
 
 }
