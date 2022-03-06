@@ -1,8 +1,8 @@
-import {ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway} from '@nestjs/websockets';
+import {ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer} from '@nestjs/websockets';
 import {Server, Socket} from 'socket.io';
 
 
-
+var rooms={};
 @WebSocketGateway(
     8080,
     {
@@ -13,20 +13,28 @@ import {Server, Socket} from 'socket.io';
 export class EventosGateway {
 
 
+
+
     @SubscribeMessage('unirseSala')
     unirseSala(
         @MessageBody()
-            message: { salaID:string,nombre:string},
+            message: {salaID:string},
         @ConnectedSocket()
             socket: Socket
     ) {
+        if (rooms[message.salaID] == undefined) {
+            rooms[message.salaID]  = 1;
+        } else {
+            rooms[message.salaID] ++;
+        }
+        
         socket.join(message.salaID);
+
+
         const mensajeAEnviar: any={
-            mensaje:'Bienvenido'+message.nombre
+            mensaje:rooms[message.salaID]
         };
-        socket.broadcast
-            .to(message.salaID)
-            .emit(
+        socket.emit(
                 'escucharEventoUnirseSala',
                 mensajeAEnviar
 

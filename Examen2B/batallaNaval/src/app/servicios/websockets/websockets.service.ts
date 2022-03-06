@@ -10,17 +10,16 @@ export class WebsocketsService {
   }
 
 
-  ejecutarEventoUnirseSala(salaID:number,nombre:string) {
+  ejecutarEventoUnirseSala(salaID:number) {
     // Emitimos un evento
     const resp = this.socket.
     emit(
       'unirseSala', {
-        nombre,
         salaID
       });
   }
   escucharEventoUnirseSala(){
-    return this.socket.fromEvent('escucharEventoUnirseSala')
+    return this.socket.fromEvent('escucharEventoUnirseSala');
 
   }
 
