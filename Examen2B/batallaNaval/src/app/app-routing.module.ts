@@ -6,7 +6,7 @@ import {RutaNotFoundComponent} from "./ruta-not-found/ruta-not-found.component";
 
 const routes: Routes = [
   {
-    path:'juego/:idSala',
+    path:'juego',
     component:RutaSalaJuegoComponent
 
   },

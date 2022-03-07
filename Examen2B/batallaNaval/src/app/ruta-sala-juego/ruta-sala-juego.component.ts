@@ -11,21 +11,19 @@ import {Subscription} from 'rxjs';
   templateUrl: './ruta-sala-juego.component.html',
   styleUrls: ['./ruta-sala-juego.component.scss']
 })
-export class RutaSalaJuegoComponent implements OnInit, OnDestroy, AfterViewInit  {
+export class RutaSalaJuegoComponent implements OnInit {
 
   arregloSubscripciones: Subscription[]=[];
-  salaId='';
+  salaId="";
   numeroJugador=0;
   mensaje="Ubica tus (5) barcos restantes dando clic en un cuadro de la izquierda";
   mensajeListoEnemegio="No listo";
   mensajeListo="No listo";
   mensajeEstadoEnemigo="No conectado";
-
-
   gridJugador:recuadroInterface[]=[];
   grindEnemigo:recuadroInterface[]=[];
-  atacadosJugador:number[]=[];
-  atacadosOponente:number[]=[];
+  ataquePropio:number[]=[];
+  ataqueEnemigo:number[]=[];
   posicionBarcosEnemigos:number[]=[];
   posicionBarcosPropios:number[]=[];
   barco1:number[]=[];
@@ -34,6 +32,7 @@ export class RutaSalaJuegoComponent implements OnInit, OnDestroy, AfterViewInit 
   barco4:number[]=[];
   barco5:number[]=[];
   perdedor=false;
+  ganador=false;
   barcosPorColocar=5;
   visible1=false;
   visible2=true;
@@ -43,30 +42,25 @@ export class RutaSalaJuegoComponent implements OnInit, OnDestroy, AfterViewInit 
   listo=false;
   enemigoListo=false;
   enemigoConectado=false;
-
+  tuTurno=false;
 
 
 
 
 
   constructor(
-    public readonly  activatedRoute:ActivatedRoute,
+
     public readonly  websocketsService:WebsocketsService,
-    private render2: Renderer2
+
   ) {
 
 
 
   }
 
-  ngAfterViewInit(): void {
-    this.logicaSalas(this.salaId);
 
-    }
 
-  ngOnDestroy(): void {
-    this.desSuscribirse();
-    }
+
 
 
 
@@ -81,37 +75,173 @@ export class RutaSalaJuegoComponent implements OnInit, OnDestroy, AfterViewInit 
       this.grindEnemigo.push(cuadro);
     }
 
-    this.activatedRoute
-      .params
-      .subscribe({
-        next:(parametrosDeRuta)=>{
-          const salaId= parametrosDeRuta['idSala'];
-          this.salaId=salaId;
-
-        }
-      });
+    this.logicaSalas();
 
   }
 
 
-  logicaSalas(salaId:string){
+  logicaSalas(){
     this.desSuscribirse();
     const respEscucharEventoUnirseSala=this.websocketsService.escucharEventoUnirseSala()
       .subscribe(
         {
           next:(data)=>{
-            console.log('Alguien entro',data);
+            const informacion=data as {jugador:number,sala:string};
+
+
+            if(this.numeroJugador===0){
+              this.numeroJugador=informacion.jugador;
+              this.salaId=informacion.sala;
+            }
+            if(informacion.jugador===2){
+              this.enemigoConectado=true;
+              this.mensajeEstadoEnemigo="Conectado";
+              if(this.numeroJugador===1){
+                this.tuTurno=true;
+              }
+            }
+
           },
           error:(error)=>{
             console.error({error});
           }
         }
       );
-    this.websocketsService.ejecutarEventoUnirseSala(+this.salaId);
+
+    const respEscucharEventoEnviarListo=this.websocketsService.escucharEnviarListo()
+      .subscribe(
+        {
+          next:(data)=>{
+            const informacion=data as {posicionBarcosEnemigos:number[]};
+            this.posicionBarcosEnemigos=informacion.posicionBarcosEnemigos;
+            this.enemigoListo=true;
+            this.mensajeListoEnemegio="Listo";
+
+
+          },
+          error:(error)=>{
+            console.error({error});
+          }
+        }
+      );
+
+    const respEscucharRecibirAtaque=this.websocketsService.recibirAtaque()
+      .subscribe(
+        {
+          next:(data)=>{
+
+            const informacion=data as {posicion:number};
+            this.ataquePropio.push(informacion.posicion);
+            this.mensaje="Tu turno.";
+            this.revisarCondiciones(informacion.posicion);
+            this.tuTurno=true;
+
+
+
+          },
+          error:(error)=>{
+            console.error({error});
+          }
+        }
+      );
+
+    const respEscucharRecibirDerrota=this.websocketsService.escucharRecibirDerrota()
+      .subscribe(
+        {
+          next:(data)=>{
+            this.ganador=true;
+            this.mensaje="Ganaste";
+            
+          },
+          error:(error)=>{
+            console.error({error});
+          }
+        }
+      );
+    this.arregloSubscripciones.push(respEscucharEventoUnirseSala);
+    this.arregloSubscripciones.push(respEscucharEventoEnviarListo);
+    this.arregloSubscripciones.push(respEscucharRecibirAtaque);
+    this.arregloSubscripciones.push(respEscucharRecibirDerrota);
+    this.websocketsService.ejecutarEventoUnirseSala();
 
   }
+  revisarCondiciones(id:number){
+    this.ataquePropio.push(id);
+    let acerto=false;
+    this.posicionBarcosPropios.forEach((valorActual)=>{
+      if(valorActual===id){
+        acerto=true;
+      }
+    });
+    if(acerto){
+      this.gridJugador[id].clases+= " boom";
+    }else{
+      this.gridJugador[id].clases+= " miss";
+
+    }
+    let atacados=[false,false,false,false,false];
+
+    this.barco1.forEach((valorActual)=>{
+      this.ataquePropio.forEach((atacado)=>{
+        if (valorActual===atacado){
+          atacados[0]=true;
+        }
+
+      });
+    });
+
+    this.barco2.forEach((valorActual)=>{
+      this.ataquePropio.forEach((atacado)=>{
+        if (valorActual===atacado){
+          atacados[1]=true;
+        }
+
+      });
+    });
+
+    this.barco3.forEach((valorActual)=>{
+      this.ataquePropio.forEach((atacado)=>{
+        if (valorActual===atacado){
+          atacados[2]=true;
+        }
+
+      });
+    });
+
+    this.barco4.forEach((valorActual)=>{
+      this.ataquePropio.forEach((atacado)=>{
+        if (valorActual===atacado){
+          atacados[3]=true;
+        }
+
+      });
+    });
+    this.barco5.forEach((valorActual)=>{
+      this.ataquePropio.forEach((atacado)=>{
+        if (valorActual===atacado){
+          atacados[4]=true;
+        }
+
+      });
+    });
+    let contador=0;
+    atacados.forEach((valorActual)=> {
+      if(valorActual===true){
+        contador+=1;
+      }
+
+    });
+    if(contador===5){
+      this.mensaje="Perdiste";
+      this.perdedor=true;
+      this.websocketsService.ejecutarEventoEnviarDerrota(this.salaId.toString())
+    }
+
+
+  }
+
   ubicarBarco(id:number){
-    if(!this.listo && !this.enemigoListo && this.barcosPorColocar!=0){
+    if(!this.listo && this.barcosPorColocar!=0){
       switch(this.barcosPorColocar) {
         case 5: {
 
@@ -284,12 +414,12 @@ export class RutaSalaJuegoComponent implements OnInit, OnDestroy, AfterViewInit 
             this.barcosPorColocar-=1;
 
             this.visible5=!this.visible5;
-            this.mensaje="Haga clic en emepezar juego";
+            this.mensaje="Espere que otro jugador se conectade y haga clic en emepezar juego.";
 
 
 
           }else{
-            this.mensaje="Ubicación no válida";
+            this.mensaje="Ubicación no válida.";
           }
 
           break;
@@ -302,6 +432,52 @@ export class RutaSalaJuegoComponent implements OnInit, OnDestroy, AfterViewInit 
 
   }
   atacar(id:number){
+    if(this.listo && this.enemigoListo && this.tuTurno && !this.ganador && !this.perdedor){
+      let verificador=true;
+      this.ataqueEnemigo.forEach((valorActual)=>{
+        if(valorActual===id){
+          verificador=false;
+          this.mensaje="Lugar ya atacado";
+        }
+      });
+      if(verificador){
+        this.ataqueEnemigo.push(id);
+        let acerto=false;
+        this.posicionBarcosEnemigos.forEach((valorActual)=>{
+          if(valorActual===id){
+            acerto=true;
+          }
+        });
+        if(acerto){
+          this.grindEnemigo[id].clases+= " boom";
+        }else{
+          this.grindEnemigo[id].clases+= " miss";
+
+        }
+
+        this.websocketsService.ejecutarEventoEnviarAtaque(this.salaId.toString(),id);
+        this.mensaje="Turno enemigo";
+
+        this.tuTurno=false;
+
+      }
+
+
+    }
+
+  }
+  enviarListo(){
+    if(this.barcosPorColocar===0 && this.enemigoConectado && !this.listo){
+      this.listo=true;
+      this.websocketsService.ejecutarEventoEnviarListo(this.salaId.toString(),this.posicionBarcosPropios);
+      this.mensajeListo="Listo";
+      if(this.numeroJugador===1){
+        this.mensaje="Vas primero, da clic en un recuadro de la derecha para atacar. Pero espera a que tu enemigo esté listo.";
+      }else{
+        this.mensaje="Vas Segundo, espera a que tu enemigo te ataque.";
+
+      }
+    }
 
   }
   desSuscribirse(){
