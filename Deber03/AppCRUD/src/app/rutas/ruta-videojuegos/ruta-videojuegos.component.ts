@@ -11,6 +11,7 @@ import {videojuegoJphInterface} from "../../servicios/http/interfaces/videojuego
 })
 export class RutaVideojuegosComponent implements OnInit {
   idEmpresa = "0";
+  empresaActual?: EmpresaJphInterface;
   arregloVideojuegos: videojuegoJphInterface[]=[];
 
   constructor(private readonly empresaVieojuegoService: EmpresaVieojuegoService,
@@ -24,22 +25,64 @@ export class RutaVideojuegosComponent implements OnInit {
         next: (parametrosRuta) => {
           console.log(parametrosRuta);
           this.idEmpresa = parametrosRuta['id'];
-          this.buscarVideojuegos();
+          this.buscarEmpresa(this.idEmpresa);
+
         }
       })
   }
+
+  buscarEmpresa(id: string) {
+    const buscarUsuarioPorId$ = this.empresaVieojuegoService.buscarEmpresaPorId(id);
+    buscarUsuarioPorId$
+      .subscribe(
+        {
+          next: (data) => {
+            this.empresaActual = data;
+            this.buscarVideojuegos();
+
+
+          },
+          error: (error) => {
+            console.error(error);
+            const ruta = ['/empresas'];
+            this.router.navigate(ruta);
+          }
+        }
+      )
+  }
+
   regresar(){
     const ruta = ['/empresas'];
     this.router.navigate(ruta);
 
   }
   agregarJuego(){
+    const ruta = ['/empresa',this.idEmpresa,'videojuego','crear'];
+    this.router.navigate(ruta);
 
   }
   editarJuego(id:string){
+    const ruta = ['/empresa' , this.idEmpresa,'videojuego','editar',id];
+    this.router.navigate(ruta);
 
   }
   eliminarJuego(indice:number,id:string,nombre:string){
+    var confirmacion=confirm("¿Está seguro de que desea eliminar el videojuego: "+nombre+'?')
+    if (confirmacion==true){
+      this.arregloVideojuegos.splice(indice, 1);
+      const eliminar$ = this.empresaVieojuegoService
+        .eliminarJuegoPorId(this.idEmpresa,id);
+      eliminar$
+        .subscribe({
+          next: (datos) => {
+            console.log({datos});
+
+          },
+          error: (error) => {
+            console.error({error});
+          }
+        });
+    }
 
   }
   buscarVideojuegos() {
@@ -48,6 +91,12 @@ export class RutaVideojuegosComponent implements OnInit {
       .subscribe({
           next: (datos) => { // try then
             this.arregloVideojuegos = datos;
+            this.arregloVideojuegos.forEach(
+              juego=>{
+                juego.fechaDeSalida=juego.fechaDeSalida.substring(0,10);
+              }
+
+            );
 
 
           },

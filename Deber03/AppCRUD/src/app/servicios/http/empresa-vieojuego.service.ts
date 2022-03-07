@@ -8,6 +8,7 @@ import {EmpresaJphInterface} from "./interfaces/empresa-jph.interface";
 
 import {EmpresaCrearJphInterface} from "./interfaces/EmpresaCrearJphInterface";
 import {videojuegoJphInterface} from "./interfaces/videojuego-jph.interface";
+import {videojuegoCrearJphInterface} from "./interfaces/videojuegoCrearJphInterface";
 
 
 
@@ -80,6 +81,38 @@ export class EmpresaVieojuegoService {
       .pipe(
         map(
           (resultadoEnData) => resultadoEnData as videojuegoJphInterface[]
+        )
+      );
+  }
+
+  crearVideojuegos(datosACrear:videojuegoCrearJphInterface,idEmpresa:string): Observable<any> {
+    const url = environment.urlEmpresaVideojuego+'/empresa/'+idEmpresa+'/juego';
+    return this.httpCliente
+      .post(url, datosACrear);
+
+  }
+
+  editarJuegoPorId(datosAActualizar:videojuegoCrearJphInterface,idEmpresa:string,idJuego:string): Observable<any> {
+    const url = environment.urlEmpresaVideojuego + '/empresa/'+idEmpresa+'/juego/'+idJuego;
+    return this.httpCliente
+      .put(url, datosAActualizar);
+
+  }
+
+  eliminarJuegoPorId(idEmpresa:string,idJuego:string): Observable<any> {
+    const url = environment.urlEmpresaVideojuego + '/empresa/'+idEmpresa+'/juego/'+idJuego;
+    return this.httpCliente
+      .delete(url);
+
+  }
+
+  buscarJuegoPorId(idEmpresa:string,idJuego:string):Observable<videojuegoJphInterface>{
+    const url = environment.urlEmpresaVideojuego + '/empresa/' +idEmpresa+'/juego/'+idJuego;
+    return this.httpCliente
+      .get(url)
+      .pipe(
+        map(
+          (resultadoEnData) => resultadoEnData as videojuegoJphInterface
         )
       );
   }

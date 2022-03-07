@@ -69,7 +69,12 @@ export class RutaEmpresasComponent implements OnInit {
       .subscribe({
           next: (datos) => { // try then
             this.arregloEmpresas = datos;
-            console.log({datos});
+            this.arregloEmpresas.forEach(
+              empresa=>{
+                empresa.fechaDeFundacion=empresa.fechaDeFundacion.substring(0,10);
+              }
+
+            );
 
 
           },
