@@ -151,7 +151,7 @@ export class RutaSalaJuegoComponent implements OnInit {
           next:(data)=>{
             this.ganador=true;
             this.mensaje="Ganaste";
-            
+
           },
           error:(error)=>{
             console.error({error});
