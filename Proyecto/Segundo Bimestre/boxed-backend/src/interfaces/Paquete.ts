@@ -1,10 +1,10 @@
 export interface Paquete {
-  id: string;
+  id?: string;
   peso?: number;
-  precio?: number;
-  idAlmacen: string;
+  precio: number;
+  idAlmacen?: string;
   nombre: string;
-  recibo: {
+  recibo?: {
     idRecibo: string;
     costoTotal: number;
     estado: 'pagado' | 'no pagado';
