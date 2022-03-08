@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  urlBoxed:'http://localhost:3000',
   firebase: {
     projectId: 'wavan-munoz-villegas-proyecto',
     appId: '1:816645783023:web:649b716b921d9694bd4a1a',

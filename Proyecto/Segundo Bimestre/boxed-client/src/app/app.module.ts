@@ -12,6 +12,7 @@ import {AngularFireModule} from "@angular/fire/compat";
 import { RutaRegistroComponent } from './rutas/ruta-registro/ruta-registro.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
     ReactiveFormsModule,
     FormsModule,
     AngularFireAuthModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
