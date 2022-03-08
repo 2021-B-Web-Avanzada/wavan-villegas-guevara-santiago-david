@@ -8,16 +8,13 @@
 }
 .img-responsive{
 
-
-
-
 }
 h1{
- color: #FFC350;
+  color: #FFC350;
   margin-bottom: 30px;
 
 }
-#bonton-enviar{
+#boton-registro{
   background-color: #FFC350;
   border-color: #FFD164;
   float: right;
@@ -44,8 +41,8 @@ input:focus {
   color: rgba(255, 209, 100, 0.75);
 
 }
-#contenedor-inicio{
-  width: 30%;
+#contenedor-registro{
+  width: 60%;
   margin: auto;
 }
 @media (max-width:767px) {

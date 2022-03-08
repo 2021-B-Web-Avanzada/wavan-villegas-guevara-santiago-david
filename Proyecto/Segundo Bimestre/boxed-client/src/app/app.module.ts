@@ -9,11 +9,15 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { RutaInicioComponent } from './rutas/ruta-inicio/ruta-inicio.component';
 import {AngularFireModule} from "@angular/fire/compat";
+import { RutaRegistroComponent } from './rutas/ruta-registro/ruta-registro.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 @NgModule({
   declarations: [
     AppComponent,
-    RutaInicioComponent
+    RutaInicioComponent,
+    RutaRegistroComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,10 @@ import {AngularFireModule} from "@angular/fire/compat";
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     AngularFireModule.initializeApp(environment.firebase),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    ReactiveFormsModule,
+    FormsModule,
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
