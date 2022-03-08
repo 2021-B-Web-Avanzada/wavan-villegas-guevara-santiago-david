@@ -2,7 +2,7 @@ export interface Paquete {
   id?: string;
   peso?: number;
   precio: number;
-  idAlmacen?: string;
+  idAlmacen: string;
   nombre: string;
   recibo?: {
     idRecibo: string;

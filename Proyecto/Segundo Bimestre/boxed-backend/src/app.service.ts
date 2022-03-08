@@ -33,9 +33,12 @@ export class AppService {
     return await this.db.collection('almacen').doc(identificador).get();
   }
 
+  async listarAlamecenes() {
+    return await this.db.collection('almacen').get();
+  }
+
   async registrarPaquete(paquete: Paquete, identificadorUsuario: string) {
     //solicita un identificador autogenerado y luego guarda el documento paquete
-    //todo asignar un almacen al paquete
     const identificadorGenerado = this.db
       .collection('usuario')
       .doc(identificadorUsuario)
@@ -127,7 +130,7 @@ export class AppService {
     return { idRecibo, costoTotal, estado: 'no-pagado' as const };
   }
 
-  actualizarPago(idUsuario: string, idPaquete: string) {
+  async actualizarPago(idUsuario: string, idPaquete: string) {
     const paqueteRef = this.db
       .collection('usuario')
       .doc(idUsuario)
@@ -145,5 +148,12 @@ export class AppService {
         reject(e);
       });
     }
+  }
+
+  async listarPaquetesPorAlmacen(idAlmacen: string) {
+    return await this.db
+      .collectionGroup('paquete')
+      .where('idAlmacen', '==', idAlmacen)
+      .get();
   }
 }

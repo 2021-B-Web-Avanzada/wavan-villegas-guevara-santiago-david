@@ -13,6 +13,7 @@ import { AppService } from './app.service';
 import { Response } from 'express';
 import { Paquete } from './interfaces/Paquete';
 import { Estado } from './interfaces/Estado';
+import { Almacen } from './interfaces/Almacen';
 
 @Controller()
 export class AppController {
@@ -63,6 +64,22 @@ export class AppController {
       })
       .catch((err) => {
         response.status(501).send(err);
+      });
+  }
+
+  @Get('almacenes')
+  listarAlmacenes(@Res() response: Response) {
+    this.appService
+      .listarAlamecenes()
+      .then((data) => {
+        const listaAlmacenes: Almacen[] = [];
+        data.forEach((doc) => {
+          listaAlmacenes.push(doc.data() as Almacen);
+        });
+        response.status(HttpStatus.OK).send(listaAlmacenes);
+      })
+      .catch((err) => {
+        response.status(501).send();
       });
   }
 
@@ -152,6 +169,25 @@ export class AppController {
       })
       .catch((err) => {
         response.status(501).send();
+      });
+  }
+
+  @Get('almacen/:id/paquetes')
+  listarPaquetesAlmacen(
+    @Param('id') idAlmacen: string,
+    @Res() response: Response,
+  ) {
+    this.appService
+      .listarPaquetesPorAlmacen(idAlmacen)
+      .then((data) => {
+        const listaPaquetes: Paquete[] = [];
+        data.forEach((doc) => {
+          listaPaquetes.push(doc.data() as Paquete);
+        });
+        response.status(HttpStatus.OK).send(listaPaquetes);
+      })
+      .catch((err) => {
+        response.status(501).send(err);
       });
   }
 }
