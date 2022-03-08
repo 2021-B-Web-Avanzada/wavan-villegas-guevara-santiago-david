@@ -7,6 +7,7 @@ import { Estado } from './interfaces/Estado';
 @Injectable()
 export class AppService {
   private db = getFirestore();
+  precioPorKilo = 30;
   async registrarUsuario(usuario: Usuario) {
     //Genera un numeor de casillero y registra al usuario en la base
     usuario.numCasillero = [...Array(5)]
@@ -34,6 +35,7 @@ export class AppService {
 
   async registrarPaquete(paquete: Paquete, identificadorUsuario: string) {
     //solicita un identificador autogenerado y luego guarda el documento paquete
+    //todo asignar un almacen al paquete
     const identificadorGenerado = this.db
       .collection('usuario')
       .doc(identificadorUsuario)
@@ -49,12 +51,22 @@ export class AppService {
     return resultadoEscritura;
   }
 
-  async leerPaquetesDeUsuario(identificadorUsuario: string) {
-    return await this.db
+  async leerPaquetesDeUsuario(
+    identificadorUsuario: string,
+    listarPorPagos = false,
+  ) {
+    const referenciaColeccion = this.db
       .collection('usuario')
       .doc(identificadorUsuario)
-      .collection('paquete')
-      .get();
+      .collection('paquete');
+
+    if (listarPorPagos) {
+      return await referenciaColeccion
+        .where('recibo.estado', '==', 'no-pagado')
+        .get();
+    } else {
+      return await referenciaColeccion.get();
+    }
   }
 
   async registrarEstado(
@@ -81,5 +93,57 @@ export class AppService {
       .doc(idPaquete)
       .collection('estado')
       .get();
+  }
+
+  async actualizarPesoPaquete(
+    idUsuario: string,
+    idPaquete: string,
+    peso: number,
+  ) {
+    const paqueteRef = this.db
+      .collection('usuario')
+      .doc(idUsuario)
+      .collection('paquete')
+      .doc(idPaquete);
+    try {
+      return await this.db.runTransaction(async (tran) => {
+        const document = await tran.get(paqueteRef);
+        const paquete = document.data() as Paquete;
+        paquete.peso = peso;
+        //calculo del recibo
+        paquete.recibo = this.calcularRecibo(paquete);
+        tran.update(paqueteRef, paquete);
+      });
+    } catch (e) {
+      return new Promise((resolve, reject) => {
+        reject(e);
+      });
+    }
+  }
+
+  private calcularRecibo(paquete: Paquete) {
+    const idRecibo = paquete.id;
+    const costoTotal = this.precioPorKilo * paquete.peso;
+    return { idRecibo, costoTotal, estado: 'no-pagado' as const };
+  }
+
+  actualizarPago(idUsuario: string, idPaquete: string) {
+    const paqueteRef = this.db
+      .collection('usuario')
+      .doc(idUsuario)
+      .collection('paquete')
+      .doc(idPaquete);
+    try {
+      return this.db.runTransaction(async (tran) => {
+        const document = await tran.get(paqueteRef);
+        const paquete = document.data() as Paquete;
+        paquete.recibo.estado = 'pagado';
+        tran.update(paqueteRef, paquete);
+      });
+    } catch (e) {
+      return new Promise((resolve, reject) => {
+        reject(e);
+      });
+    }
   }
 }

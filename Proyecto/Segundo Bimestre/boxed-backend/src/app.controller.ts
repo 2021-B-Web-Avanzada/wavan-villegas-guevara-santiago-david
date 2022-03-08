@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Query,
+  Res,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { Response } from 'express';
 import { Paquete } from './interfaces/Paquete';
@@ -76,9 +86,10 @@ export class AppController {
   listarPaquetesUsuario(
     @Param('email') email: string,
     @Res() response: Response,
+    @Query('filter') filtrar = false,
   ) {
     this.appService
-      .leerPaquetesDeUsuario(email)
+      .leerPaquetesDeUsuario(email, filtrar)
       .then((data) => {
         const listaPaquetes: Paquete[] = [];
         data.forEach((documento) => {
@@ -108,6 +119,39 @@ export class AppController {
       })
       .catch((err) => {
         response.status(501).send(err);
+      });
+  }
+
+  @Put('usuario/:email/paquete/:idPaquete/peso')
+  registrarPesoPaquete(
+    @Body() body,
+    @Param('email') idUsuario: string,
+    @Param('idPaquete') idPaquete: string,
+    @Res() response: Response,
+  ) {
+    this.appService
+      .actualizarPesoPaquete(idUsuario, idPaquete, body.peso)
+      .then((data) => {
+        response.status(200).send();
+      })
+      .catch((err) => {
+        response.status(501).send(err);
+      });
+  }
+
+  @Put('usuario/:email/paquete/:idPaquete/pago')
+  actualizarPagoPaquete(
+    @Param('email') idUsuario: string,
+    @Param('idPaquete') idPaquete: string,
+    @Res() response: Response,
+  ) {
+    this.appService
+      .actualizarPago(idUsuario, idPaquete)
+      .then((data) => {
+        response.status(HttpStatus.OK).send();
+      })
+      .catch((err) => {
+        response.status(501).send();
       });
   }
 }

@@ -7,6 +7,6 @@ export interface Paquete {
   recibo?: {
     idRecibo: string;
     costoTotal: number;
-    estado: 'pagado' | 'no pagado';
+    estado: 'pagado' | 'no-pagado';
   };
 }
