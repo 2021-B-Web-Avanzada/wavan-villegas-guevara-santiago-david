@@ -89,10 +89,7 @@ export class RutaInicioComponent implements OnInit {
         this.mensaje="El correo o contraseña son incorrectos";
       });
 
-
-
-
-
   }
+
 
 }
