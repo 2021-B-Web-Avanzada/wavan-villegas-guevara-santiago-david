@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
-
+<div *ngIf="autenticado">
 <div class="contenedor">
   <a  class="logo"><img src="assets/img/logo.png" alt="Logo boxed"></a>
   <i class="toggle-btn fas fa-bars" (click)="jquerry()"></i>
 
   <nav class="nav-menus">
     <ul>
-      <li class="sub-menus corto" ><div class="circle ">S</div>
+      <li class="sub-menus corto" ><div class="circle ">{{letra}}</div>
         <div (click)="cerrarSesion()">
         <ul >
           <li ><a><i class="fab"></i> Cerrar Sesión</a></li>
@@ -29,7 +29,7 @@
 </div>
 
 
-<div>
-  <router-outlet></router-outlet>
-</div>
 
+<router-outlet></router-outlet>
+
+</div>

@@ -23,7 +23,6 @@ const routes: Routes = [
   {
     path:'usuario',
     component:RutaUsuarioComponent,
-    canActivate:[estaLogeadoGuard],
     children:[
       {
         path:'paquetes',

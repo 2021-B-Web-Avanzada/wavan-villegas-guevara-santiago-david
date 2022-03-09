@@ -20,11 +20,17 @@ export class estaLogeadoGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.afAuth.currentUser !== null){
-      return true
-    }
+    this.afAuth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        return true
 
-    return false; // boolean
+        // ...
+      } else {
+        return false
+      }
+    });
+    return true;
   }
 
 

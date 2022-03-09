@@ -100,20 +100,16 @@ export class RutaInicioComponent implements OnInit {
         // Signed in
         const user = userCredential.user;
         var usuario:crearUsuarioInterface;
-        console.log("hola1")
+
         const buscarUsuarioPorEmail$ = this.boxedService.buscarUsuarioPorEmail(user?.email!!);
         buscarUsuarioPorEmail$
           .subscribe(
             {
               next: (data) => {
-                console.log("hola2");
+
                 usuario = data;
                 const ruta = ['/usuario','paquetes'];
                 this.router.navigate(ruta);
-                this.authService.estaLogeado=true;
-                this.authService.usuario=true;
-
-
 
               },
               error: (error) => {
