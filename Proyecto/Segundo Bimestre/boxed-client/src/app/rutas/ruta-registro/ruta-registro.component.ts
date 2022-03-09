@@ -20,6 +20,14 @@ export class RutaRegistroComponent implements OnInit {
   ngOnInit(): void {
     this.prepararFormulario();
 
+    this.afAuth.onAuthStateChanged((user)=>{
+      if(user){
+        console.log(user.email);
+      }else{
+        console.log("no autenticado");
+      }
+    })
+
   }
   prepararFormulario(){
     this.formGroup = this.formBuilder

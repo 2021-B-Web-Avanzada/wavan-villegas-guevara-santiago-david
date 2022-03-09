@@ -13,12 +13,20 @@ import { RutaRegistroComponent } from './rutas/ruta-registro/ruta-registro.compo
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {HttpClientModule} from "@angular/common/http";
+import { RutaUsuarioComponent } from './rutas/ruta-usuario/ruta-usuario.component';
+import { RutaPaquetesComponent } from './rutas/ruta-paquetes/ruta-paquetes.component';
+import { RutaAlertaPaquetesComponent } from './rutas/ruta-alerta-paquetes/ruta-alerta-paquetes.component';
+import { RutaPagosComponent } from './rutas/ruta-pagos/ruta-pagos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RutaInicioComponent,
-    RutaRegistroComponent
+    RutaRegistroComponent,
+    RutaUsuarioComponent,
+    RutaPaquetesComponent,
+    RutaAlertaPaquetesComponent,
+    RutaPagosComponent
   ],
   imports: [
     BrowserModule,

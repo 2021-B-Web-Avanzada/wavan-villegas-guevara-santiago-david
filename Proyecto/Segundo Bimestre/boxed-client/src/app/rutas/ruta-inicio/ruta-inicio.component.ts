@@ -19,6 +19,13 @@ export class RutaInicioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.afAuth.onAuthStateChanged((user)=>{
+      if(user){
+        console.log(user.email);
+      }else{
+        console.log("no autenticado");
+      }
+    })
 
 
 
@@ -78,12 +85,13 @@ export class RutaInicioComponent implements OnInit {
   }
 
   iniciarSesion(){
+
     const datosUsuario = this.prepararInicio();
     this.afAuth.signInWithEmailAndPassword(datosUsuario.correo, datosUsuario.contrasena)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user?.email,user?.uid);
+
       })
       .catch((error) => {
         this.mensaje="El correo o contraseña son incorrectos";
