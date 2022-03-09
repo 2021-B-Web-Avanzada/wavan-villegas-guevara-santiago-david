@@ -4,6 +4,7 @@ export interface Paquete {
   precio: number;
   idAlmacen: string;
   nombre: string;
+  ultimoEstado?:string;
   recibo?: {
     idRecibo: string;
     costoTotal: number;

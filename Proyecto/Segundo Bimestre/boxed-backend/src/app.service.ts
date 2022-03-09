@@ -85,7 +85,36 @@ export class AppService {
       .collection('estado')
       .doc();
     infoEstado.id = identificadorGenerado.id;
+    await this.actualizarRefEstadoPaquete(
+      idPaquete,
+      idusuairo,
+      identificadorGenerado.id,
+    );
     return await identificadorGenerado.set(infoEstado);
+  }
+
+  private async actualizarRefEstadoPaquete(
+    idPaquete: string,
+    idUsuario: string,
+    idEstado: string,
+  ) {
+    const referenciaPaquete = this.db
+      .collection('usuario')
+      .doc(idUsuario)
+      .collection('paquete')
+      .doc(idPaquete);
+    try {
+      return await this.db.runTransaction(async (tran) => {
+        const document = await tran.get(referenciaPaquete);
+        const paquete = document.data() as Paquete;
+        paquete.ultimoEstado = idEstado;
+        tran.update(referenciaPaquete, paquete);
+      });
+    } catch (e) {
+      return new Promise((resolve, reject) => {
+        reject(e);
+      });
+    }
   }
 
   async consultarEstadosPaquete(idPaquete: string, idUsuario: string) {
@@ -155,5 +184,56 @@ export class AppService {
       .collectionGroup('paquete')
       .where('idAlmacen', '==', idAlmacen)
       .get();
+  }
+
+  async listarEstadosyPaquetesEnAlmacen(
+    resultadoConsulta: FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>,
+  ) {
+    const listaPromesas: Promise<{
+      paquete: Paquete;
+      ultimoEstado: Estado;
+    }>[] = [];
+    resultadoConsulta.forEach((document) => {
+      const paquete = document.data() as Paquete;
+      const peticionEstado = document.ref
+        .collection('estado')
+        .doc(paquete.ultimoEstado)
+        .get()
+        .then((doc) => {
+          const ultimoEstado = doc.data() as Estado;
+          return { paquete, ultimoEstado };
+        });
+      listaPromesas.push(peticionEstado);
+    });
+    return Promise.all(listaPromesas);
+  }
+
+  async anadirComentarioEstado(idEstado: string, comentario: string) {
+    let promesaActualizacion: Promise<unknown>;
+    const referenciaEstado = await this.db
+      .collectionGroup('estado')
+      .where('id', '==', idEstado)
+      .get();
+    referenciaEstado.forEach((doc) => {
+      const estado = doc.data() as Estado;
+      estado.comentario = comentario;
+      promesaActualizacion = this.actualizarEstado(doc.ref, estado);
+    });
+    return promesaActualizacion;
+  }
+
+  private async actualizarEstado(
+    referenciaEstado: FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData>,
+    nuevaInfoEstado: Estado,
+  ) {
+    try {
+      return this.db.runTransaction(async (tran) => {
+        tran.update(referenciaEstado, nuevaInfoEstado);
+      });
+    } catch (e) {
+      return new Promise((resolve, reject) => {
+        reject(e);
+      });
+    }
   }
 }

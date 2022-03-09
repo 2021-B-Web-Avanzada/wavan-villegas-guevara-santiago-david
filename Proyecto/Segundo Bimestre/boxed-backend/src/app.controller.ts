@@ -180,14 +180,28 @@ export class AppController {
     this.appService
       .listarPaquetesPorAlmacen(idAlmacen)
       .then((data) => {
-        const listaPaquetes: Paquete[] = [];
-        data.forEach((doc) => {
-          listaPaquetes.push(doc.data() as Paquete);
-        });
-        response.status(HttpStatus.OK).send(listaPaquetes);
+        return this.appService.listarEstadosyPaquetesEnAlmacen(data);
+      })
+      .then((listaPaquetesyEstado) => {
+        response.status(HttpStatus.OK).send(listaPaquetesyEstado);
       })
       .catch((err) => {
+        console.log(err);
         response.status(501).send(err);
       });
+  }
+
+  @Put('estado/:idEstado/comentario/nuevo')
+  actualizarComentario(
+    @Param('idEstado') idEstado: string,
+    @Res() response: Response,
+    @Body() comentario,
+  ) {
+    this.appService
+      .anadirComentarioEstado(idEstado, comentario.comentario)
+      .then((data) => {
+        response.status(HttpStatus.OK).send();
+      })
+      .catch((err) => response.status(501).send(err));
   }
 }
