@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+
+<div class="contenedor">
+  <a  class="logo"><img src="assets/img/logo.png" alt="Logo boxed"></a>
+  <i class="toggle-btn fas fa-bars" (click)="jquerry()"></i>
+
+  <nav class="nav-menus">
+    <ul>
+      <li class="sub-menus corto" ><div class="circle ">S</div>
+        <div (click)="cerrarSesion()">
+        <ul >
+          <li ><a><i class="fab"></i> Cerrar Sesión</a></li>
+        </ul>
+        </div>
+
+      </li>
+    </ul>
+    <ul>
+      <li><a href="usuario/paquetes"><i class="fas fa-solid fa-box"></i> Paquetes</a></li>
+    </ul>
+    <ul>
+      <li><a href="usuario/alertarPaquete"><i class="fas fa-solid fa-box-open"></i> Alertar paquete</a></li>
+    </ul>
+    <ul>
+      <li><a href="usuario/pagos"><i class="fas fa-solid fa-cash-register"></i> Pagos</a></li>
+    </ul>
+  </nav>
+
+</div>
+
+
+<div>
+  <router-outlet></router-outlet>
+</div>
+

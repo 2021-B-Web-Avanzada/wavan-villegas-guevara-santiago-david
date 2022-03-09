@@ -4,6 +4,11 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "@angular/fire/auth";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {BoxedService} from "../../servicios/http/boxed.service";
+import {crearUsuarioInterface} from "../../servicios/http/interfaces/crear-usuario-interface";
+import {Router} from "@angular/router";
+import {AuthService} from "../../servicios/Auth/auth.service";
+
 
 @Component({
   selector: 'app-ruta-inicio',
@@ -14,11 +19,18 @@ export class RutaInicioComponent implements OnInit {
   formGroup?: FormGroup;
   mensaje='';
 
-  constructor(private readonly formBuilder: FormBuilder,public afAuth: AngularFireAuth) {
+  constructor(private readonly formBuilder: FormBuilder,
+              public afAuth: AngularFireAuth,
+              private readonly boxedService:BoxedService,
+              private readonly router: Router,
+              private readonly authService: AuthService
+
+             ) {
 
   }
 
   ngOnInit(): void {
+
 
 
 
@@ -68,6 +80,7 @@ export class RutaInicioComponent implements OnInit {
         return {
           correo: correo.value,
           contrasena:contrasena.value,
+
         }
       }
     }
@@ -78,18 +91,49 @@ export class RutaInicioComponent implements OnInit {
   }
 
   iniciarSesion(){
+
     const datosUsuario = this.prepararInicio();
+
     this.afAuth.signInWithEmailAndPassword(datosUsuario.correo, datosUsuario.contrasena)
       .then((userCredential) => {
+
         // Signed in
         const user = userCredential.user;
-        console.log(user?.email,user?.uid);
+        var usuario:crearUsuarioInterface;
+        console.log("hola1")
+        const buscarUsuarioPorEmail$ = this.boxedService.buscarUsuarioPorEmail(user?.email!!);
+        buscarUsuarioPorEmail$
+          .subscribe(
+            {
+              next: (data) => {
+                console.log("hola2");
+                usuario = data;
+                const ruta = ['/usuario','paquetes'];
+                this.router.navigate(ruta);
+                this.authService.estaLogeado=true;
+                this.authService.usuario=true;
+
+
+
+              },
+              error: (error) => {
+                console.log("hola")
+
+
+
+              }
+
+
+            })
       })
+
       .catch((error) => {
         this.mensaje="El correo o contraseña son incorrectos";
       });
 
   }
+
+
 
 
 }
