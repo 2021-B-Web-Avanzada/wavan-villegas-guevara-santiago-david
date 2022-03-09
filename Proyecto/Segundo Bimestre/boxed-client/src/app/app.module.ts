@@ -17,6 +17,11 @@ import { RutaUsuarioComponent } from './rutas/ruta-usuario/ruta-usuario.componen
 import { RutaPaquetesComponent } from './rutas/ruta-paquetes/ruta-paquetes.component';
 import { RutaAlertaPaquetesComponent } from './rutas/ruta-alerta-paquetes/ruta-alerta-paquetes.component';
 import { RutaPagosComponent } from './rutas/ruta-pagos/ruta-pagos.component';
+import { RutaNotFoundComponent } from './rutas/ruta-not-found/ruta-not-found.component';
+
+import {estaLogeadoGuard} from "./servicios/Auth/estaLogeado.guard";
+import {esOperadorGuard} from "./servicios/Auth/esOperador.guard";
+import {AuthService} from "./servicios/Auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -26,7 +31,8 @@ import { RutaPagosComponent } from './rutas/ruta-pagos/ruta-pagos.component';
     RutaUsuarioComponent,
     RutaPaquetesComponent,
     RutaAlertaPaquetesComponent,
-    RutaPagosComponent
+    RutaPagosComponent,
+    RutaNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,7 @@ import { RutaPagosComponent } from './rutas/ruta-pagos/ruta-pagos.component';
     AngularFireAuthModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ estaLogeadoGuard,esOperadorGuard,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

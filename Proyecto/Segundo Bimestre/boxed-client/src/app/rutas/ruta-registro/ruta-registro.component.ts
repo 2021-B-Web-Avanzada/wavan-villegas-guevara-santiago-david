@@ -3,6 +3,9 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {validadorCedula} from "../../validadores"
 import {BoxedService} from "../../servicios/http/boxed.service";
+import {Router} from "@angular/router";
+import {AuthService} from "../../servicios/Auth/auth.service";
+
 
 @Component({
   selector: 'app-ruta-registro',
@@ -15,7 +18,10 @@ export class RutaRegistroComponent implements OnInit {
 
   constructor(private readonly formBuilder: FormBuilder,
               public afAuth: AngularFireAuth,
-              private readonly boxedService:BoxedService) { }
+              private readonly boxedService:BoxedService,
+              private readonly router: Router,
+              private readonly authService: AuthService
+          ) { }
 
   ngOnInit(): void {
     this.prepararFormulario();
@@ -150,6 +156,12 @@ export class RutaRegistroComponent implements OnInit {
           crear$
             .subscribe({
               next: (datos) => {
+
+
+
+                const ruta = ['/usuario','paquetes'];
+                this.router.navigate(ruta);
+
 
 
               },

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../servicios/Auth/auth.service";
 
 @Component({
   selector: 'app-ruta-paquetes',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RutaPaquetesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly authService: AuthService) { }
 
   ngOnInit(): void {
+
   }
 
 }
