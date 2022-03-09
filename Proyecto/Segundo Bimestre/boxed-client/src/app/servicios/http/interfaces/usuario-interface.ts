@@ -1,4 +1,4 @@
-export  interface crearUsuarioInterface{
+export  interface usuarioInterface {
   correoElectronico: string;
   uid: string;
   nombre: string;

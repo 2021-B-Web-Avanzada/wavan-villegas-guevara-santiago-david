@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 
 import {BoxedService} from "../../servicios/http/boxed.service";
 import {AuthService} from "../../servicios/Auth/auth.service";
-import {crearUsuarioInterface} from "../../servicios/http/interfaces/crear-usuario-interface";
+import {usuarioInterface} from "../../servicios/http/interfaces/usuario-interface";
 
 declare var $:any;
 
@@ -31,7 +31,7 @@ export class RutaUsuarioComponent implements OnInit {
 
         if(user.email){
           this.userEmail=user.email;
-          var usuario:crearUsuarioInterface;
+          var usuario:usuarioInterface;
 
           const buscarUsuarioPorEmail$ = this.boxedService.buscarUsuarioPorEmail(user?.email!!);
           buscarUsuarioPorEmail$

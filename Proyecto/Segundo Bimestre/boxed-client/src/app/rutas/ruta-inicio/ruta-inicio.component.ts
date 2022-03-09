@@ -5,7 +5,7 @@ import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} fro
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {BoxedService} from "../../servicios/http/boxed.service";
-import {crearUsuarioInterface} from "../../servicios/http/interfaces/crear-usuario-interface";
+import {usuarioInterface} from "../../servicios/http/interfaces/usuario-interface";
 import {Router} from "@angular/router";
 import {AuthService} from "../../servicios/Auth/auth.service";
 
@@ -99,7 +99,7 @@ export class RutaInicioComponent implements OnInit {
 
         // Signed in
         const user = userCredential.user;
-        var usuario:crearUsuarioInterface;
+        var usuario:usuarioInterface;
 
         const buscarUsuarioPorEmail$ = this.boxedService.buscarUsuarioPorEmail(user?.email!!);
         buscarUsuarioPorEmail$
