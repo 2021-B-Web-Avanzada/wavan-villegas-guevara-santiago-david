@@ -10,9 +10,9 @@ export class estaLogeadoGuard implements CanActivate {
 
   // Inyeccion de dependencias
   constructor(
-    private readonly authService: AuthService,
+
     private readonly router: Router,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
   ) {
   }
 
@@ -20,10 +20,11 @@ export class estaLogeadoGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (!this.authService.estaLogeado||!this.authService.usuario) {
-      this.router.navigate(['/inicio'])
+    if (this.afAuth.currentUser !== null){
+      return true
     }
-    return this.authService.estaLogeado; // boolean
+
+    return false; // boolean
   }
 
 
