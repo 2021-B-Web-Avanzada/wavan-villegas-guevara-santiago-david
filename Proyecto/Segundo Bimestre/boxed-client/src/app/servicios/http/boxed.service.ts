@@ -100,6 +100,12 @@ export class BoxedService {
         {peso}
         );
   }
+
+  listarUltimoEstadoPaqueteUsuario(emailUsuario:string, idPaquete:string){
+    const url = environment.urlBoxed + '/usuario/' + emailUsuario + '/paquete/' + idPaquete + '/ultimoEstado';
+    return this.httpCliente
+      .get<Estado>(url);
+  }
 }
 
 
