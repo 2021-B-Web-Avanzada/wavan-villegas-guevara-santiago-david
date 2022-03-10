@@ -166,6 +166,9 @@ export class RutaInicioComponent implements OnInit {
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
+    dialogConfig.closeOnNavigation=true;
+
+
 
     this.dialog.open(DialogoAlmacenComponent, dialogConfig);
   }

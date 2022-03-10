@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Almacen} from "../../../servicios/http/interfaces/almacen";
 import {BoxedService} from "../../../servicios/http/boxed.service";
 import {Router} from "@angular/router";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dialogo-almacen',
@@ -15,7 +16,8 @@ export class DialogoAlmacenComponent implements OnInit {
 
   constructor(private readonly boxedService:BoxedService,
               readonly formBuilder: FormBuilder,
-              private readonly router: Router) { }
+              private readonly router: Router,
+              public dialogRef: MatDialogRef<DialogoAlmacenComponent>) { }
 
   ngOnInit(): void {
     this.listarAlmacenes();
@@ -37,6 +39,14 @@ export class DialogoAlmacenComponent implements OnInit {
 
   }
   acceder(){
+    var idAlmacen=this.prepararBodega().idAlmacen
+    const ruta = ['/operador',idAlmacen,'paquetesSalida'];
+    this.dialogRef.close();
+
+
+    this.router.navigate(ruta);
+
+
 
   }
 
