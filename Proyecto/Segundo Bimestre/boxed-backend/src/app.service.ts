@@ -3,6 +3,8 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { Usuario } from './interfaces/Usuario';
 import { Paquete } from './interfaces/Paquete';
 import { Estado } from './interfaces/Estado';
+import { FirebaseFirestoreError } from 'firebase-admin/lib/utils/error';
+import { doc } from 'prettier';
 
 @Injectable()
 export class AppService {
@@ -145,6 +147,39 @@ export class AppService {
         //calculo del recibo
         paquete.recibo = this.calcularRecibo(paquete);
         tran.update(paqueteRef, paquete);
+      });
+    } catch (e) {
+      return new Promise((resolve, reject) => {
+        reject(e);
+      });
+    }
+  }
+
+  async actualizarPesoPaqueteEnAlmacen(
+    idPaquete: string,
+    idAlmacen: string,
+    peso: number,
+  ) {
+    const listaPaquetesRef = await this.db
+      .collectionGroup('paquete')
+      .where('idAlmacen', '==', idAlmacen)
+      .get();
+    let referenciaPaquete: FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData> =
+      undefined;
+    listaPaquetesRef.forEach((document) => {
+      const paquete = document.data() as Paquete;
+      if (paquete.id == idPaquete) {
+        referenciaPaquete = document.ref;
+      }
+    });
+    try {
+      return await this.db.runTransaction(async (tran) => {
+        const document = await tran.get(referenciaPaquete);
+        const paquete = document.data() as Paquete;
+        paquete.peso = peso;
+        //calculo del recibo
+        paquete.recibo = this.calcularRecibo(paquete);
+        tran.update(referenciaPaquete, paquete);
       });
     } catch (e) {
       return new Promise((resolve, reject) => {

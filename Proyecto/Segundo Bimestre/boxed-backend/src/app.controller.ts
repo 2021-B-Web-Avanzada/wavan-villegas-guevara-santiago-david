@@ -156,6 +156,23 @@ export class AppController {
       });
   }
 
+  @Put('almacen/:idAlmacen/paquete/:idPaquete/peso')
+  actualizarPesoPaqueteAlmacen(
+    @Body() body,
+    @Param('idAlmacen') idAlmacen: string,
+    @Param('idPaquete') idPaquete: string,
+    @Res() response: Response,
+  ) {
+    this.appService
+      .actualizarPesoPaqueteEnAlmacen(idPaquete, idAlmacen, body.peso)
+      .then((data) => {
+        response.status(200).send();
+      })
+      .catch((err) => {
+        response.status(501).send(err);
+      });
+  }
+
   @Put('usuario/:email/paquete/:idPaquete/pago')
   actualizarPagoPaquete(
     @Param('email') idUsuario: string,

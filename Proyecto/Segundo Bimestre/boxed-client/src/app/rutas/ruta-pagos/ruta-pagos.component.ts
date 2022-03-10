@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {paqueteInterface} from "../../servicios/http/interfaces/paquete.interface";
 import {BoxedService} from "../../servicios/http/boxed.service";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  DialogoRegistroPagoComponent
+} from "../../componentes/dialogos/dialogo-registro-pago/dialogo-registro-pago.component";
 
 @Component({
   selector: 'app-ruta-pagos',
@@ -14,7 +18,8 @@ export class RutaPagosComponent implements OnInit {
   userEmail?:string;
 
   constructor(public afAuth: AngularFireAuth,
-              private readonly boxedService:BoxedService,) { }
+              private readonly boxedService:BoxedService,
+              public dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.afAuth.onAuthStateChanged((user) => {
@@ -33,10 +38,6 @@ export class RutaPagosComponent implements OnInit {
       .subscribe({
           next: (datos) => { // try then
             this.arregloPaquetes = datos;
-
-
-
-
           },
           error: (error) => { // catch
             console.error({error});
@@ -47,7 +48,14 @@ export class RutaPagosComponent implements OnInit {
 
   }
   pagarPaquete(posicion:number){
-    console.log(posicion);
+    this.dialog.open(DialogoRegistroPagoComponent,{
+      height: "50vh",
+      width: "55vw",
+      data: {
+        emailUsuario: this.userEmail,
+        paquete: this.arregloPaquetes[posicion]
+      }
+    })
 
   }
 

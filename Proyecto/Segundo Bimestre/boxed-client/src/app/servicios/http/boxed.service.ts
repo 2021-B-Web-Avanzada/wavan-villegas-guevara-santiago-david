@@ -115,8 +115,8 @@ export class BoxedService {
       .get<{paquete:paqueteInterface, ultimoEstado:Estado}[]>(url);
   }
 
-  registrarPesoPaquete(emailUsuario:string, idPaquete:string, peso:number){
-    const url = environment.urlBoxed + '/usuario/' + emailUsuario + '/paquete/' + idPaquete + '/peso';
+  registrarPesoPaquete(idAlmacen:string, idPaquete:string, peso:number){
+    const url = environment.urlBoxed + '/almacen/' + idAlmacen + '/paquete/' + idPaquete + '/peso';
     return this.httpCliente
       .put(url,
         {peso}

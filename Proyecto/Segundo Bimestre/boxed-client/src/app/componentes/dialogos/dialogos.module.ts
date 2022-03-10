@@ -8,6 +8,7 @@ import { DialogoPesarComponent } from './dialogo-pesar/dialogo-pesar.component';
 import {MatDialogActions, MatDialogModule} from "@angular/material/dialog";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import { DialogoRegistroPagoComponent } from './dialogo-registro-pago/dialogo-registro-pago.component';
 
 
 
@@ -16,7 +17,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
   declarations: [
     DialogoAlmacenComponent,
     DialogoEstadosPaqueteComponent,
-    DialogoPesarComponent
+    DialogoPesarComponent,
+    DialogoRegistroPagoComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     DialogoAlmacenComponent,
     DialogoEstadosPaqueteComponent,
     DialogoPesarComponent,
+    DialogoRegistroPagoComponent
   ]
 })
 export class DialogosModule { }
