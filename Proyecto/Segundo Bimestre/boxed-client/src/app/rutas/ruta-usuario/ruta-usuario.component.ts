@@ -40,6 +40,8 @@ export class RutaUsuarioComponent implements OnInit {
 
       }
     });
+    console.log(localStorage.getItem('logeado'));
+    console.log(localStorage.getItem('admin'));
 
 
   }

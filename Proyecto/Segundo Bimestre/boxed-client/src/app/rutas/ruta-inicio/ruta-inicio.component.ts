@@ -21,6 +21,7 @@ import {DialogoAlmacenComponent} from "../../componentes/dialogos/dialogo-almace
 export class RutaInicioComponent implements OnInit {
   formGroup?: FormGroup;
   mensaje='';
+  pasoUsuario=false;
 
   constructor(private readonly formBuilder: FormBuilder,
               public afAuth: AngularFireAuth,
@@ -34,6 +35,7 @@ export class RutaInicioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
 
 
 
@@ -96,10 +98,12 @@ export class RutaInicioComponent implements OnInit {
 
   iniciarSesion(){
 
+
     const datosUsuario = this.prepararInicio();
 
     this.afAuth.signInWithEmailAndPassword(datosUsuario.correo, datosUsuario.contrasena)
       .then((userCredential) => {
+
 
         // Signed in
         const user = userCredential.user;
@@ -115,19 +119,24 @@ export class RutaInicioComponent implements OnInit {
               next: (data) => {
 
                 usuario = data;
+                this.pasoUsuario=true;
+
                 localStorage.setItem('admin', 'no');
                 localStorage.setItem('nombre', usuario.nombre);
                 const ruta = ['/usuario','paquetes'];
                 this.router.navigate(ruta);
+
+
 
               },
               error: (error) => {
 
               }
 
+            }
 
-            });
-        if(usuario===undefined){
+            );
+        if(this.pasoUsuario===false){
           const buscarOperadorPorEmail$ = this.boxedService.buscarOperadorPorEmail(user?.email!!);
           buscarOperadorPorEmail$
             .subscribe(
@@ -136,7 +145,6 @@ export class RutaInicioComponent implements OnInit {
 
                   var operador:operadorInterface;
                   operador = data;
-                  localStorage.setItem('admin', 'si');
                   localStorage.setItem('nombre', operador.nombreUsuario);
                   this.abriDialogo();
 
