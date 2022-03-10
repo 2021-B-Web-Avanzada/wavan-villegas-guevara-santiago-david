@@ -4,7 +4,7 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {validadorCedula} from "../../validadores"
 import {BoxedService} from "../../servicios/http/boxed.service";
 import {Router} from "@angular/router";
-import {AuthService} from "../../servicios/Auth/auth.service";
+
 
 
 @Component({
@@ -20,19 +20,12 @@ export class RutaRegistroComponent implements OnInit {
               public afAuth: AngularFireAuth,
               private readonly boxedService:BoxedService,
               private readonly router: Router,
-              private readonly authService: AuthService
+
           ) { }
 
   ngOnInit(): void {
     this.prepararFormulario();
 
-    this.afAuth.onAuthStateChanged((user)=>{
-      if(user){
-        console.log(user.email);
-      }else{
-        console.log("no autenticado");
-      }
-    })
 
   }
   prepararFormulario(){
@@ -139,7 +132,7 @@ export class RutaRegistroComponent implements OnInit {
     const datosUsuario=this.prepararRegistro();
     this.afAuth.createUserWithEmailAndPassword(datosUsuario.correo,datosUsuario.contrasena)
       .then((userCredential) => {
-        // Signed in
+        localStorage.setItem('logeado', 'si');
         const user = userCredential.user;
         if (user?.email&&user.uid){
           const crear$ = this.boxedService
@@ -156,9 +149,8 @@ export class RutaRegistroComponent implements OnInit {
           crear$
             .subscribe({
               next: (datos) => {
-
-
-
+                localStorage.setItem('nombre', datosUsuario.nombre);
+                localStorage.setItem('admin', 'no');
                 const ruta = ['/usuario','paquetes'];
                 this.router.navigate(ruta);
 

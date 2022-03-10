@@ -5,7 +5,7 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 
 @Injectable()
-export class esUsuario implements CanActivate {
+export class esOperador implements CanActivate {
 
   // Inyeccion de dependencias
   constructor(
@@ -20,7 +20,7 @@ export class esUsuario implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
 
-    if(localStorage.getItem("logeado")==='si' && localStorage.getItem("admin")==='no'){
+    if(localStorage.getItem("logeado")==='si' && localStorage.getItem("admin")==='si'){
       return true
     }else{
       const ruta = ['/inicio'];

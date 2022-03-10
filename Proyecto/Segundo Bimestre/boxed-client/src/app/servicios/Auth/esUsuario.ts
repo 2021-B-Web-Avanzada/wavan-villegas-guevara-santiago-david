@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from "./auth.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 
 @Injectable()
-export class estaLogeadoGuard implements CanActivate {
+export class esUsuario implements CanActivate {
 
   // Inyeccion de dependencias
   constructor(

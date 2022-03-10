@@ -3,8 +3,6 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 
 import {BoxedService} from "../../servicios/http/boxed.service";
-import {AuthService} from "../../servicios/Auth/auth.service";
-import {usuarioInterface} from "../../servicios/http/interfaces/usuario-interface";
 
 declare var $:any;
 
@@ -14,15 +12,14 @@ declare var $:any;
   styleUrls: ['./ruta-usuario.component.scss']
 })
 export class RutaUsuarioComponent implements OnInit {
-  userEmail?:string;
+
   userName?:string;
-  autenticado=false;
+
   letra="";
 
   constructor(public afAuth: AngularFireAuth,
               private readonly router: Router,
-              private readonly authService: AuthService,
-              private readonly boxedService:BoxedService) { }
+  ) { }
 
   ngOnInit(): void {
     this.afAuth.onAuthStateChanged((user) => {
@@ -30,27 +27,10 @@ export class RutaUsuarioComponent implements OnInit {
         const uid = user.uid;
 
         if(user.email){
-          this.userEmail=user.email;
-          var usuario:usuarioInterface;
 
-          const buscarUsuarioPorEmail$ = this.boxedService.buscarUsuarioPorEmail(user?.email!!);
-          buscarUsuarioPorEmail$
-            .subscribe(
-              {
-                next: (data) => {
-                  usuario = data;
-                  this.userName=usuario.nombre;
-                  this.autenticado=true;
-                  this.letra=this.userName.charAt(0);
-                },
-                error: (error) => {
-                  const ruta = ['/inicio'];
-                  this.router.navigate(ruta);
+          this.letra=localStorage.getItem('nombre')!!.charAt(0);
 
 
-                }
-
-              })
         }
 
 
@@ -68,10 +48,14 @@ export class RutaUsuarioComponent implements OnInit {
     $(".nav-menus").toggleClass("active");
   }
   cerrarSesion(){
+
     this.afAuth.signOut();
+    localStorage.removeItem('logeado');
+    localStorage.removeItem('admin');
+    localStorage.removeItem('nombre');
+
     const ruta = ['/inicio'];
     this.router.navigate(ruta);
-
 
   }
 

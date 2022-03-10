@@ -19,11 +19,16 @@ import { RutaAlertaPaquetesComponent } from './rutas/ruta-alerta-paquetes/ruta-a
 import { RutaPagosComponent } from './rutas/ruta-pagos/ruta-pagos.component';
 import { RutaNotFoundComponent } from './rutas/ruta-not-found/ruta-not-found.component';
 
-import {estaLogeadoGuard} from "./servicios/Auth/estaLogeado.guard";
-import {esOperadorGuard} from "./servicios/Auth/esOperador.guard";
-import {AuthService} from "./servicios/Auth/auth.service";
+import {esUsuario} from "./servicios/Auth/esUsuario";
+
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {esOperador} from "./servicios/Auth/esOperador";
+import { RutaOperadorComponent } from './rutas/operador/ruta-operador/ruta-operador.component';
+import { RutaPaquetesSalidaComponent } from './rutas/operador/ruta-paquetes-salida/ruta-paquetes-salida.component';
+import { RutaPesarPaqueteComponent } from './rutas/operador/ruta-pesar-paquete/ruta-pesar-paquete.component';
+import { RutaEmpacarComponent } from './rutas/operador/ruta-empacar/ruta-empacar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,11 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     RutaPaquetesComponent,
     RutaAlertaPaquetesComponent,
     RutaPagosComponent,
-    RutaNotFoundComponent
+    RutaNotFoundComponent,
+    RutaOperadorComponent,
+    RutaPaquetesSalidaComponent,
+    RutaPesarPaqueteComponent,
+    RutaEmpacarComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +59,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     BrowserAnimationsModule,
     MatToolbarModule
   ],
-  providers: [ estaLogeadoGuard,esOperadorGuard,AuthService],
+  providers: [ esUsuario,esOperador],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,7 +7,8 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {BoxedService} from "../../servicios/http/boxed.service";
 import {usuarioInterface} from "../../servicios/http/interfaces/usuario-interface";
 import {Router} from "@angular/router";
-import {AuthService} from "../../servicios/Auth/auth.service";
+import {operadorInterface} from "../../servicios/http/interfaces/operador.interface";
+
 
 
 @Component({
@@ -23,7 +24,7 @@ export class RutaInicioComponent implements OnInit {
               public afAuth: AngularFireAuth,
               private readonly boxedService:BoxedService,
               private readonly router: Router,
-              private readonly authService: AuthService
+
 
              ) {
 
@@ -99,7 +100,10 @@ export class RutaInicioComponent implements OnInit {
 
         // Signed in
         const user = userCredential.user;
-        var usuario:usuarioInterface;
+
+        localStorage.setItem('logeado', 'si');
+        var usuario!:usuarioInterface;
+
 
         const buscarUsuarioPorEmail$ = this.boxedService.buscarUsuarioPorEmail(user?.email!!);
         buscarUsuarioPorEmail$
@@ -108,19 +112,45 @@ export class RutaInicioComponent implements OnInit {
               next: (data) => {
 
                 usuario = data;
+                localStorage.setItem('admin', 'no');
+                localStorage.setItem('nombre', usuario.nombre);
                 const ruta = ['/usuario','paquetes'];
                 this.router.navigate(ruta);
 
               },
               error: (error) => {
-                console.log("hola")
-
-
 
               }
 
 
-            })
+            });
+        if(usuario===undefined){
+          const buscarOperadorPorEmail$ = this.boxedService.buscarOperadorPorEmail(user?.email!!);
+          buscarOperadorPorEmail$
+            .subscribe(
+              {
+                next: (data) => {
+
+                  var operador:operadorInterface;
+                  operador = data;
+                  localStorage.setItem('admin', 'si');
+                  localStorage.setItem('nombre', operador.nombreUsuario);
+                  const ruta = ['/operador','W7MX3jRc2ZjowOf0bReZ','paquetesSalida'];
+                  this.router.navigate(ruta);
+
+                },
+                error: (error) => {
+
+
+
+
+                }
+
+
+              });
+
+
+        }
       })
 
       .catch((error) => {

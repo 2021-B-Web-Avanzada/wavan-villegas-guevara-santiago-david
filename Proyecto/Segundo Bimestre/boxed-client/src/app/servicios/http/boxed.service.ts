@@ -8,6 +8,7 @@ import {usuarioInterface} from "./interfaces/usuario-interface";
 import {paqueteInterface} from "./interfaces/paquete.interface";
 import {Estado} from "./interfaces/estado";
 import {Almacen} from "./interfaces/almacen";
+import {operadorInterface} from "./interfaces/operador.interface";
 
 
 @Injectable({
@@ -32,6 +33,17 @@ export class BoxedService {
       .pipe(
         map(
           (resultadoEnData) => resultadoEnData as usuarioInterface
+        )
+      );
+  }
+
+  buscarOperadorPorEmail(mail: string): Observable<operadorInterface> {
+    const url = environment.urlBoxed + '/operador/' + mail;
+    return this.httpCliente
+      .get(url)
+      .pipe(
+        map(
+          (resultadoEnData) => resultadoEnData as operadorInterface
         )
       );
   }
@@ -75,6 +87,17 @@ export class BoxedService {
     const url = environment.urlBoxed + '/almacenes';
     return this.httpCliente
       .get<Almacen[]>(url);
+  }
+
+  buscarAlmacenPorId(id: string): Observable<Almacen> {
+    const url = environment.urlBoxed + '/almacen/' + id;
+    return this.httpCliente
+      .get(url)
+      .pipe(
+        map(
+          (resultadoEnData) => resultadoEnData as Almacen
+        )
+      );
   }
 
   registrarPagoPaquete(emailUsuario: string, idPaquete: string){
