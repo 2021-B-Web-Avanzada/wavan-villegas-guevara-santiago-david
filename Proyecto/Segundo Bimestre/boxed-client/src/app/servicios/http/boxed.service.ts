@@ -5,7 +5,6 @@ import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {usuarioInterface} from "./interfaces/usuario-interface";
-import {EmpresaJphInterface} from "../../../../../../../Deber03/AppCRUD/src/app/servicios/http/interfaces/empresa-jph.interface";
 import {paqueteInterface} from "./interfaces/paquete.interface";
 import {Estado} from "./interfaces/estado";
 import {Almacen} from "./interfaces/almacen";

@@ -22,6 +22,8 @@ import { RutaNotFoundComponent } from './rutas/ruta-not-found/ruta-not-found.com
 import {estaLogeadoGuard} from "./servicios/Auth/estaLogeado.guard";
 import {esOperadorGuard} from "./servicios/Auth/esOperador.guard";
 import {AuthService} from "./servicios/Auth/auth.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import {AuthService} from "./servicios/Auth/auth.service";
     ReactiveFormsModule,
     FormsModule,
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatToolbarModule
   ],
   providers: [ estaLogeadoGuard,esOperadorGuard,AuthService],
   bootstrap: [AppComponent]
