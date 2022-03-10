@@ -29,6 +29,9 @@ import { RutaOperadorComponent } from './rutas/operador/ruta-operador/ruta-opera
 import { RutaPaquetesSalidaComponent } from './rutas/operador/ruta-paquetes-salida/ruta-paquetes-salida.component';
 import { RutaPesarPaqueteComponent } from './rutas/operador/ruta-pesar-paquete/ruta-pesar-paquete.component';
 import { RutaEmpacarComponent } from './rutas/operador/ruta-empacar/ruta-empacar.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {DialogoAlmacenComponent} from "./componentes/dialogos/dialogo-almacen/dialogo-almacen.component";
+import {DialogosModule} from "./componentes/dialogos/dialogos.module";
 
 @NgModule({
   declarations: [
@@ -43,7 +46,9 @@ import { RutaEmpacarComponent } from './rutas/operador/ruta-empacar/ruta-empacar
     RutaOperadorComponent,
     RutaPaquetesSalidaComponent,
     RutaPesarPaqueteComponent,
-    RutaEmpacarComponent
+    RutaEmpacarComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -57,9 +62,14 @@ import { RutaEmpacarComponent } from './rutas/operador/ruta-empacar/ruta-empacar
     AngularFireAuthModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule,
+    DialogosModule
   ],
   providers: [ esUsuario,esOperador],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[
+    DialogoAlmacenComponent,
+  ]
 })
 export class AppModule { }

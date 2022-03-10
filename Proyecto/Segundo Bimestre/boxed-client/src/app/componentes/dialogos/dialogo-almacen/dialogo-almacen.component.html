@@ -1,0 +1,63 @@
+<div
+  id="contenedor-inicio"
+  *ngIf="formGroup"
+>
+<form [formGroup]="formGroup"  (ngSubmit)="acceder()">
+    <div class="row">
+      <!-- Bodega -->
+
+      <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <label for="bodega"
+               class="form-label">
+          Almacen:
+        </label>
+
+        <select class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+                class="form-control"
+                formControlName="bodega"
+                id="bodega"
+                aria-describedby="bodegaHelp"
+
+        >
+
+          <option *ngFor="let alamcen of arregloAlmacenes, let i = index" value="{{alamcen.id}}">{{alamcen.direccion}}-
+            {{alamcen.ciudad}}</option>
+
+
+        </select>
+
+
+
+        <div  *ngIf="arregloAlmacenes" id="bodegaHelp"
+              class="form-text">
+          Seleccione el almacen que quiere administrar.
+        </div>
+        <div *ngIf="formGroup.get('bodega')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+               formGroup.get('bodega')?.invalid &&
+               formGroup.get('bodega')?.touched &&
+               formGroup.get('bodega')?.dirty
+                      ">
+            <span *ngIf="formGroup.get('bodega')?.hasError('required')">
+              Almacen requerido
+            </span>
+
+          </div>
+        </div>
+      </div>
+      <!-- Boton -->
+      <div >
+
+        <button type="submit" class="btn btn-success " id="bonton-enviar"
+                [disabled]="formGroup.invalid"
+        >
+          Continuar</button>
+      </div>
+
+
+    </div>
+  </form>
+</div>
+

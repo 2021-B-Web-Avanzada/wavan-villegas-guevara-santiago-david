@@ -8,6 +8,8 @@ import {BoxedService} from "../../servicios/http/boxed.service";
 import {usuarioInterface} from "../../servicios/http/interfaces/usuario-interface";
 import {Router} from "@angular/router";
 import {operadorInterface} from "../../servicios/http/interfaces/operador.interface";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {DialogoAlmacenComponent} from "../../componentes/dialogos/dialogo-almacen/dialogo-almacen.component";
 
 
 
@@ -24,6 +26,7 @@ export class RutaInicioComponent implements OnInit {
               public afAuth: AngularFireAuth,
               private readonly boxedService:BoxedService,
               private readonly router: Router,
+              private dialog: MatDialog
 
 
              ) {
@@ -135,8 +138,9 @@ export class RutaInicioComponent implements OnInit {
                   operador = data;
                   localStorage.setItem('admin', 'si');
                   localStorage.setItem('nombre', operador.nombreUsuario);
-                  const ruta = ['/operador','W7MX3jRc2ZjowOf0bReZ','paquetesSalida'];
-                  this.router.navigate(ruta);
+                  this.abriDialogo();
+
+
 
                 },
                 error: (error) => {
@@ -157,6 +161,13 @@ export class RutaInicioComponent implements OnInit {
         this.mensaje="El correo o contraseña son incorrectos";
       });
 
+  }
+  abriDialogo() {
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+
+    this.dialog.open(DialogoAlmacenComponent, dialogConfig);
   }
 
 
