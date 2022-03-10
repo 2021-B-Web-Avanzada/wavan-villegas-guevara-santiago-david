@@ -106,6 +106,14 @@ export class BoxedService {
     return this.httpCliente
       .get<Estado>(url);
   }
+
+  registrarComentarioEnEstado(idEstado:string, comentario:string){
+    const url = environment.urlBoxed + '/estado/' + idEstado + '/comentario/nuevo';
+    return this.httpCliente
+      .put(url,
+        {comentario}
+        )
+  }
 }
 
 
