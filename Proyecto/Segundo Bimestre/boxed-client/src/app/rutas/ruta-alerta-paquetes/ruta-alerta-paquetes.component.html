@@ -5,7 +5,7 @@
   *ngIf="formGroup"
 >
 
-  <form [formGroup]="formGroup">
+  <form [formGroup]="formGroup" (ngSubmit)="crearPaquete()">
     <div class="row">
       <!-- Nombre -->
       <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -47,7 +47,7 @@
       <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <label for="precio"
                class="form-label">
-          Precio de la compra::
+          Precio de la compra:
         </label>
         <input type="text"
                class="form-control"
@@ -84,7 +84,7 @@
       <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <label for="bodega"
                class="form-label">
-          Multijugador:
+          Almacen receptor:
         </label>
 
         <select class="form-select form-select-sm"
@@ -96,14 +96,15 @@
 
         >
 
-          <option value="Falso">Falso</option>
-          <option value="Verdadero">Verdadero</option>
+          <option *ngFor="let alamcen of arregloAlmacenes, let i = index" value="{{alamcen.id}}">{{alamcen.direccion}}-
+          {{alamcen.ciudad}}</option>
+
 
         </select>
 
 
 
-        <div id="bodegaHelp"
+        <div  *ngIf="arregloAlmacenes" id="bodegaHelp"
              class="form-text">
           Seleccione si el videojuego cuenta con multijugador.
         </div>
@@ -115,7 +116,7 @@
              formGroup.get('bodega')?.dirty
                     ">
           <span *ngIf="formGroup.get('bodega')?.hasError('required')">
-            Multijugador requerido
+            Almacen requerido
           </span>
 
           </div>
@@ -127,8 +128,9 @@
       <div >
 
         <button type="submit" class="btn btn-success " id="bonton-enviar"
-                [disabled]="formGroup.invalid">
-          Iniciar Sesión</button>
+                [disabled]="formGroup.invalid"
+        >
+          Alertar</button>
       </div>
 
     </div>

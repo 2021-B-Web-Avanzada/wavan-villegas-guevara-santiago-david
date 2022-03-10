@@ -11,7 +11,7 @@ import {paqueteInterface} from "../../servicios/http/interfaces/paquete.interfac
 })
 export class RutaPaquetesComponent implements OnInit {
   arregloPaquetes:paqueteInterface[]=[];
-  arregloPrueba:number[]=[0,1,2,3,4,5];
+
   userEmail?:string;
 
   constructor(
