@@ -86,6 +86,12 @@ export class BoxedService {
         {}
       )
   }
+
+  listarPaquetesPorAlmacen(idAlmacen:string){
+    const url = environment.urlBoxed + '/almacen/' + idAlmacen + '/paquetes';
+    return this.httpCliente
+      .get<{paquete:paqueteInterface, ultimoEstado:Estado}[]>(url);
+  }
 }
 
 
