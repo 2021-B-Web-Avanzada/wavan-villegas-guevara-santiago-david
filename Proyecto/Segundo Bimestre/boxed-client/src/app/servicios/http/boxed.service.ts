@@ -77,6 +77,15 @@ export class BoxedService {
     return this.httpCliente
       .get<Almacen[]>(url);
   }
+
+  registrarPagoPaquete(emailUsuario: string, idPaquete: string){
+    const url = environment.urlBoxed + '/usuario/' + emailUsuario + '/paquete/' + idPaquete + '/pago';
+    return this.httpCliente
+      .put(
+        url,
+        {}
+      )
+  }
 }
 
 
