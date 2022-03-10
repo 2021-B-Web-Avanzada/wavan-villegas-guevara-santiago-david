@@ -204,4 +204,21 @@ export class AppController {
       })
       .catch((err) => response.status(501).send(err));
   }
+
+  @Get('usuario/:email/paquete/:idPaquete/ultimoEstado')
+  consultarUltimoEstado(
+    @Param('email') emailUsuario: string,
+    @Param('idPaquete') idPaquete: string,
+    @Res() response: Response,
+  ) {
+    this.appService
+      .consultarUltimoEstadoPaquetePorUsuario(emailUsuario, idPaquete)
+      .then((data) => {
+        const ultimoEstado = data.data() as Estado;
+        response.status(HttpStatus.OK).send(ultimoEstado);
+      })
+      .catch((err) => {
+        response.status(501).send(err);
+      });
+  }
 }

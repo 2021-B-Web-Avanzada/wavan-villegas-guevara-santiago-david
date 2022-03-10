@@ -236,4 +236,21 @@ export class AppService {
       });
     }
   }
+
+  async consultarUltimoEstadoPaquetePorUsuario(
+    idUsuario: string,
+    idPaquete: string,
+  ) {
+    const paqueteRef = this.db
+      .collection('usuario')
+      .doc(idUsuario)
+      .collection('paquete')
+      .doc(idPaquete);
+    const infoPaquete = await paqueteRef.get();
+    const paquete = infoPaquete.data() as Paquete;
+    return await paqueteRef
+      .collection('estado')
+      .doc(paquete.ultimoEstado)
+      .get();
+  }
 }
