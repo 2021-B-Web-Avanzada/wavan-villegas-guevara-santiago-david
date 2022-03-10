@@ -7,12 +7,14 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "../../app-routing.module";
+import { DialogoPesarComponent } from './dialogo-pesar/dialogo-pesar.component';
 
 
 
 @NgModule({
   declarations: [
-    DialogoAlmacenComponent
+    DialogoAlmacenComponent,
+    DialogoPesarComponent
   ],
   imports: [
     CommonModule,
