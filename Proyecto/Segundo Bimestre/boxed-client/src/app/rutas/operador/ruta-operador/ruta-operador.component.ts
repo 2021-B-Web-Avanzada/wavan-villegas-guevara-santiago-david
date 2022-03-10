@@ -37,6 +37,7 @@ export class RutaOperadorComponent implements OnInit {
             .subscribe({
               next: (parametrosRuta) => {
 
+
                 this.almacenId=parametrosRuta['idAlmacen'];
 
                 const buscarAlmacenPorId$ = this.boxedService.buscarAlmacenPorId(this.almacenId);
