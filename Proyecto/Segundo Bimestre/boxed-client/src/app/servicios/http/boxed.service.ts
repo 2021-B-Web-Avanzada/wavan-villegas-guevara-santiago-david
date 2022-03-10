@@ -50,10 +50,20 @@ export class BoxedService {
       );
   }
 
-  listarEstadosPaquetesPorUsuario(emailUsuario:string, idPaquete:string){
+  listarEstadosPaquetesPorUsuario(emailUsuario: string, idPaquete: string) {
     const url = environment.urlBoxed + '/usuario/' + emailUsuario + '/paquete/' + idPaquete + '/estados';
     return this.httpCliente
       .get<Estado>(url);
   }
+
+  crearPaquete(emailUsuario:string, paqueteACrear:paqueteInterface){
+    const url = environment.urlBoxed + '/usuario/' + emailUsuario + '/paquete/nuevo';
+    return this.httpCliente
+      .post<paqueteInterface>(
+        url,
+        paqueteACrear
+        );
+  }
 }
+
 
