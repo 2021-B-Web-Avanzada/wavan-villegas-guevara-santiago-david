@@ -1,0 +1,13 @@
+<article>
+<h1>{{data.paquete.nombre}}</h1>
+  <mat-stepper orientation="vertical">
+    <mat-step
+      *ngFor="let estado of estadosPaquete"
+      [label]="estado.nombre.toUpperCase() +' | ' + estado.fecha"
+    >
+      <p *ngIf="estado.comentario">
+        {{estado.comentario}}
+      </p>
+    </mat-step>
+  </mat-stepper>
+</article>
