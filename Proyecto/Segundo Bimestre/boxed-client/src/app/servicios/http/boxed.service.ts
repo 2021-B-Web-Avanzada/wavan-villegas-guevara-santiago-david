@@ -64,6 +64,12 @@ export class BoxedService {
         paqueteACrear
         );
   }
+
+  listarPaquetesConPagosPendientesPorUsuario(emailUsuario:string){
+    const url = environment.urlBoxed + '/usuario/'+ emailUsuario + '/paquetes?filter=true';
+    return this.httpCliente
+      .get<paqueteInterface>(url)
+  }
 }
 
 
