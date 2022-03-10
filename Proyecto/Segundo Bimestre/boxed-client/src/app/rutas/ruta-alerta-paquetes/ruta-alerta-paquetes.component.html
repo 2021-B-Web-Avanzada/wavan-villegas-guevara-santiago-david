@@ -1,1 +1,137 @@
 <h1>Alertar paquete</h1>
+
+<div
+  id="contenedor-inicio"
+  *ngIf="formGroup"
+>
+
+  <form [formGroup]="formGroup">
+    <div class="row">
+      <!-- Nombre -->
+      <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <label for="nombre"
+               class="form-label">
+          Nombre del paquete (descripción breve):
+        </label>
+        <input type="text"
+               class="form-control"
+               formControlName="nombre"
+               id="nombre"
+               aria-describedby="nombreHelp" >
+        <div id="nombreHelp"
+             class="form-text">
+          Ingrese la descipción del paquete.
+        </div>
+
+        <div *ngIf="formGroup.get('nombre')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('nombre')?.invalid &&
+             formGroup.get('nombre')?.touched &&
+             formGroup.get('nombre')?.dirty
+                    ">
+            <span *ngIf="formGroup.get('nombre')?.hasError('required')">
+              Nombre requerido
+            </span>
+            <span *ngIf="formGroup.get('nombre')?.hasError('maxlength')">
+              Máximo 30 caracteres
+            </span>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Precio -->
+      <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <label for="precio"
+               class="form-label">
+          Precio de la compra::
+        </label>
+        <input type="text"
+               class="form-control"
+               formControlName="precio"
+               id="precio"
+               aria-describedby="precioHelp" >
+        <div id="precioHelp"
+             class="form-text">
+          Ingrese el precio de compra del paquete.
+        </div>
+
+        <div *ngIf="formGroup.get('precio')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('precio')?.invalid &&
+             formGroup.get('precio')?.touched &&
+             formGroup.get('precio')?.dirty
+                    ">
+            <span *ngIf="formGroup.get('precio')?.hasError('required')">
+            Precio requerido
+            </span>
+            <span *ngIf="formGroup.get('precio')?.hasError('maxlength')">
+            Máximo 6 caracteres
+            </span>
+            <span *ngIf="formGroup.get('precio')?.hasError('pattern')">
+              Ingre el precio con un máximo de dos decimales.
+            </span>
+
+          </div>
+        </div>
+      </div>
+      <!-- Bodega -->
+
+      <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <label for="bodega"
+               class="form-label">
+          Multijugador:
+        </label>
+
+        <select class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+                class="form-control"
+                formControlName="bodega"
+                id="bodega"
+                aria-describedby="bodegaHelp"
+
+        >
+
+          <option value="Falso">Falso</option>
+          <option value="Verdadero">Verdadero</option>
+
+        </select>
+
+
+
+        <div id="bodegaHelp"
+             class="form-text">
+          Seleccione si el videojuego cuenta con multijugador.
+        </div>
+        <div *ngIf="formGroup.get('bodega')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('bodega')?.invalid &&
+             formGroup.get('bodega')?.touched &&
+             formGroup.get('bodega')?.dirty
+                    ">
+          <span *ngIf="formGroup.get('bodega')?.hasError('required')">
+            Multijugador requerido
+          </span>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Boton -->
+      <div >
+
+        <button type="submit" class="btn btn-success " id="bonton-enviar"
+                [disabled]="formGroup.invalid">
+          Iniciar Sesión</button>
+      </div>
+
+    </div>
+  </form>
+
+</div>
