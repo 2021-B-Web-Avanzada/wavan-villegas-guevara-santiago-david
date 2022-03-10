@@ -39,6 +39,7 @@ export class DialogoAlmacenComponent implements OnInit {
 
   }
   acceder(){
+    localStorage.setItem('admin', 'si');
     var idAlmacen=this.prepararBodega().idAlmacen
     const ruta = ['/operador',idAlmacen,'paquetesSalida'];
     this.dialogRef.close();

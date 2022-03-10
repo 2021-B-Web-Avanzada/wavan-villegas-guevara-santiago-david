@@ -5,6 +5,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { DialogoEstadosPaqueteComponent } from './dialogo-estados-paquete/dialogo-estados-paquete.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import { DialogoPesarComponent } from './dialogo-pesar/dialogo-pesar.component';
+import {MatDialogActions, MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 
 
@@ -12,17 +15,21 @@ import { DialogoPesarComponent } from './dialogo-pesar/dialogo-pesar.component';
 @NgModule({
   declarations: [
     DialogoAlmacenComponent,
-    DialogoEstadosPaqueteComponent
+    DialogoEstadosPaqueteComponent,
     DialogoPesarComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   exports:[
     DialogoAlmacenComponent,
     DialogoEstadosPaqueteComponent,
+    DialogoPesarComponent,
   ]
 })
 export class DialogosModule { }
