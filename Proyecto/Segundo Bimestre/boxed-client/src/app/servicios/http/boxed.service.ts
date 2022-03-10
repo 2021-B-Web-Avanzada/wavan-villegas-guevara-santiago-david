@@ -92,6 +92,14 @@ export class BoxedService {
     return this.httpCliente
       .get<{paquete:paqueteInterface, ultimoEstado:Estado}[]>(url);
   }
+
+  registrarPesoPaquete(emailUsuario:string, idPaquete:string, peso:number){
+    const url = environment.urlBoxed + '/usuario/' + emailUsuario + '/paquete/' + idPaquete + '/peso';
+    return this.httpCliente
+      .put(url,
+        {peso}
+        );
+  }
 }
 
 
