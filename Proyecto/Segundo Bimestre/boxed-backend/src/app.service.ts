@@ -48,7 +48,7 @@ export class AppService {
     const resultadoEscritura = await identificadorGenerado.set(paquete);
     const estadoBase: Estado = {
       nombre: 'bodega',
-      fecha: new Date(),
+      fecha: new Date().toString(),
     };
     await this.registrarEstado(paquete.id, identificadorUsuario, estadoBase);
     return resultadoEscritura;

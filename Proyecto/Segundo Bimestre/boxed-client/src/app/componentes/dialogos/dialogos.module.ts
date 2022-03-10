@@ -2,33 +2,27 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogoAlmacenComponent } from './dialogo-almacen/dialogo-almacen.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {BrowserModule} from "@angular/platform-browser";
-import {AppRoutingModule} from "../../app-routing.module";
+import { DialogoEstadosPaqueteComponent } from './dialogo-estados-paquete/dialogo-estados-paquete.component';
+import {MatStepperModule} from "@angular/material/stepper";
 import { DialogoPesarComponent } from './dialogo-pesar/dialogo-pesar.component';
+
 
 
 
 @NgModule({
   declarations: [
     DialogoAlmacenComponent,
+    DialogoEstadosPaqueteComponent
     DialogoPesarComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    BrowserModule,
-    AppRoutingModule,
-
+    MatStepperModule
   ],
   exports:[
     DialogoAlmacenComponent,
-
+    DialogoEstadosPaqueteComponent,
   ]
 })
 export class DialogosModule { }

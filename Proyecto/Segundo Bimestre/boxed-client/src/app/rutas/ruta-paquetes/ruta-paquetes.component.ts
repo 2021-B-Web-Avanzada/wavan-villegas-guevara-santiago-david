@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import {BoxedService} from "../../servicios/http/boxed.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {paqueteInterface} from "../../servicios/http/interfaces/paquete.interface";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {
+  DialogoEstadosPaqueteComponent
+} from "../../componentes/dialogos/dialogo-estados-paquete/dialogo-estados-paquete.component";
 
 @Component({
   selector: 'app-ruta-paquetes',
@@ -17,6 +21,7 @@ export class RutaPaquetesComponent implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
     private readonly boxedService:BoxedService,
+    public dialogo:MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -47,8 +52,16 @@ export class RutaPaquetesComponent implements OnInit {
 
   }
   seguimientoPaquete(posicion:number){
-    console.log(posicion);
-
+  //todo abrir cuadro de dialogo
+    let dialogoRef = this.dialogo
+      .open(DialogoEstadosPaqueteComponent,{
+        height: "50vh",
+        width: "45vw",
+        data:{
+          emailUsuario: this.userEmail,
+          paquete: this.arregloPaquetes[posicion],
+        }
+      });
   }
   consultarEstado(){
     this.arregloPaquetes.forEach((paquete)=>{
