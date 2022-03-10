@@ -8,6 +8,7 @@ import {usuarioInterface} from "./interfaces/usuario-interface";
 import {EmpresaJphInterface} from "../../../../../../../Deber03/AppCRUD/src/app/servicios/http/interfaces/empresa-jph.interface";
 import {paqueteInterface} from "./interfaces/paquete.interface";
 import {Estado} from "./interfaces/estado";
+import {Almacen} from "./interfaces/almacen";
 
 
 @Injectable({
@@ -53,7 +54,7 @@ export class BoxedService {
   listarEstadosPaquetesPorUsuario(emailUsuario: string, idPaquete: string) {
     const url = environment.urlBoxed + '/usuario/' + emailUsuario + '/paquete/' + idPaquete + '/estados';
     return this.httpCliente
-      .get<Estado>(url);
+      .get<Estado[]>(url);
   }
 
   crearPaquete(emailUsuario:string, paqueteACrear:paqueteInterface){
@@ -68,7 +69,13 @@ export class BoxedService {
   listarPaquetesConPagosPendientesPorUsuario(emailUsuario:string){
     const url = environment.urlBoxed + '/usuario/'+ emailUsuario + '/paquetes?filter=true';
     return this.httpCliente
-      .get<paqueteInterface>(url)
+      .get<paqueteInterface[]>(url)
+  }
+
+  listarAlmacenes(){
+    const url = environment.urlBoxed + '/almacenes';
+    return this.httpCliente
+      .get<Almacen[]>(url);
   }
 }
 
