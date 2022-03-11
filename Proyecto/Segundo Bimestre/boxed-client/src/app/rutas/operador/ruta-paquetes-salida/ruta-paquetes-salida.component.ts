@@ -70,7 +70,7 @@ export class RutaPaquetesSalidaComponent implements OnInit {
     const dialogRef=this.dialog.open(DialogoCambiarEstadoComponent, {data: { paquete: this.arregloFiltrado[id],id:id, almacen:this.almacenId }});
     dialogRef.afterClosed().subscribe((data)=>{
       if (data.estado==='reparto'){
-        this.arregloPaquetes.splice(data.number,1);
+        this.arregloFiltrado.splice(data.number,1);
 
       }else {
         this.arregloFiltrado[data.number].ultimoEstado=data.estado;
