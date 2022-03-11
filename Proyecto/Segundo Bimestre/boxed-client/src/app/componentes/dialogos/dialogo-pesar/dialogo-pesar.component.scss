@@ -1,0 +1,45 @@
+h1{
+  color: #CE9940;
+  width: 99%;
+  margin: auto;
+}
+
+#bonton-enviar{
+  background-color: #FFC350;
+  border-color: #FFD164;
+  float: right;
+
+}
+
+.mensaje{
+  color: #da1010;
+}
+input:focus {
+  border-color: #FFD164;
+  box-shadow: inset 0 1px 1px rgba(200,225,125, 0), 0 0 8px rgba(200,225,125, 0.1);
+
+}
+#div-registro{
+  text-align: center;
+
+}
+#div-registro a{
+  color: #FFC350;
+
+}
+#div-registro a:hover{
+  color: rgba(255, 209, 100, 0.75);
+
+}
+#contenedor-inicio{
+  width: 90%;
+  margin: auto;
+}
+@media (max-width:767px) {
+  #contenedor-inicio{
+    width: 90%;
+
+    margin: auto;
+  }
+
+}

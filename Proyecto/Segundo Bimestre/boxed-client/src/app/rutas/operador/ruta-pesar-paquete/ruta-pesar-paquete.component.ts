@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {paqueteInterface} from "../../../servicios/http/interfaces/paquete.interface";
 import {BoxedService} from "../../../servicios/http/boxed.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {DialogoAlmacenComponent} from "../../../componentes/dialogos/dialogo-almacen/dialogo-almacen.component";
+import {DialogoPesarComponent} from "../../../componentes/dialogos/dialogo-pesar/dialogo-pesar.component";
 
 @Component({
   selector: 'app-ruta-pesar-paquete',
@@ -15,7 +18,8 @@ export class RutaPesarPaqueteComponent implements OnInit {
 
   constructor(private readonly boxedService:BoxedService,
               private readonly router: Router,
-              private readonly activatedRoute: ActivatedRoute,) { }
+              private readonly activatedRoute: ActivatedRoute,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     const parametroRuta$ = this.activatedRoute.parent?.params;
@@ -60,6 +64,14 @@ export class RutaPesarPaqueteComponent implements OnInit {
 
   }
   pesarPquete(id:number){
+    const dialogConfig = new MatDialogConfig();
+
+
+    const dialogRef=this.dialog.open(DialogoPesarComponent, {data: { paquete: this.arregloFiltrado[id],id:id, almacen:this.almacenId }});
+    dialogRef.afterClosed().subscribe((data)=>{
+
+      }
+    );
 
   }
 

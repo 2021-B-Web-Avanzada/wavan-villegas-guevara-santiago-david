@@ -68,8 +68,6 @@ import {DialogosModule} from "./componentes/dialogos/dialogos.module";
   ],
   providers: [ esUsuario,esOperador],
   bootstrap: [AppComponent],
-  entryComponents:[
-    DialogoAlmacenComponent,
-  ]
+
 })
 export class AppModule { }
