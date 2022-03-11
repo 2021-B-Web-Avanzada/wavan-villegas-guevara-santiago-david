@@ -1,0 +1,64 @@
+<h2>Paquete {{data.paquete.nombre}}</h2>
+<h3>{{mensaje}}</h3>
+<div
+  id="contenedor-inicio"
+  *ngIf="formGroup"
+>
+  <div [formGroup]="formGroup"  >
+
+
+
+    <!-- comentario -->
+    <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <label for="comentario"
+             class="form-label">
+        Comentatio:
+      </label>
+      <textarea type="text"
+             class="form-control"
+             formControlName="comentario"
+             id="comentario"
+             aria-describedby="comentarioHelp"
+                ></textarea>
+      <div id="comentarioHelp"
+           class="form-text">
+        Ingrese el comentario acerca del paquete.
+      </div>
+
+      <div *ngIf="formGroup.get('comentario')">
+        <div class="alert alert-danger"
+             role="alert" *ngIf="
+             formGroup.get('comentario')?.invalid &&
+             formGroup.get('comentario')?.touched &&
+             formGroup.get('comentario')?.dirty
+                    ">
+            <span *ngIf="formGroup.get('comentario')?.hasError('required')">
+            Comentario requerido
+            </span>
+          <span *ngIf="formGroup.get('comentario')?.hasError('maxlength')">
+            Máximo 150 caracteres
+          </span>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Boton -->
+    <mat-dialog-actions >
+
+      <button type="submit" class="btn btn-success " id="bonton-enviar"
+              [disabled]="formGroup.invalid"
+              (click)="mandarEstado()"
+      >
+        Registrar Estado</button>
+    </mat-dialog-actions>
+
+
+
+  </div>
+</div>
+
+

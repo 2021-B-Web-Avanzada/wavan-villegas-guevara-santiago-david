@@ -1,0 +1,64 @@
+<h2>Paquete {{data.paquete.nombre}}</h2>
+<div
+  id="contenedor-inicio"
+  *ngIf="formGroup"
+>
+  <div [formGroup]="formGroup"  >
+
+
+
+    <!-- Precio -->
+    <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <label for="precio"
+             class="form-label">
+        Peso del paquete (en Kg):
+      </label>
+      <input type="text"
+             class="form-control"
+             formControlName="precio"
+             id="precio"
+             aria-describedby="precioHelp" >
+      <div id="precioHelp"
+           class="form-text">
+        Ingrese el peso del paquete.
+      </div>
+
+      <div *ngIf="formGroup.get('precio')">
+        <div class="alert alert-danger"
+             role="alert" *ngIf="
+             formGroup.get('precio')?.invalid &&
+             formGroup.get('precio')?.touched &&
+             formGroup.get('precio')?.dirty
+                    ">
+            <span *ngIf="formGroup.get('precio')?.hasError('required')">
+            Peso requerido
+            </span>
+          <span *ngIf="formGroup.get('precio')?.hasError('maxlength')">
+            Máximo 6 caracteres
+            </span>
+          <span *ngIf="formGroup.get('precio')?.hasError('pattern')">
+              Ingre el peso con un máximo de dos decimales.
+            </span>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Boton -->
+    <mat-dialog-actions >
+
+      <button type="submit" class="btn btn-success " id="bonton-enviar"
+              [disabled]="formGroup.invalid"
+              (click)="mandarPeso()"
+      >
+        Registrar Peso</button>
+    </mat-dialog-actions>
+
+
+
+  </div>
+</div>
+
+

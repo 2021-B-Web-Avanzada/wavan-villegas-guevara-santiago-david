@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+<div >
+  <div class="contenedor">
+    <a  class="logo"><img src="assets/img/logo.png" alt="Logo boxed"></a>
+    <i class="toggle-btn fas fa-bars" (click)="jquerry()"></i>
+
+    <nav class="nav-menus">
+      <ul>
+        <li class="sub-menus corto" ><div class="circle ">{{letra}}</div>
+          <div (click)="cerrarSesion()">
+            <ul >
+              <li ><a><i class="fab"></i> Cerrar Sesión</a></li>
+            </ul>
+          </div>
+
+        </li>
+      </ul>
+      <ul>
+        <li><a href="operador/{{almacenId}}/paquetesSalida"><i class="fas fa-solid fa-box-open"></i> Paquete en salida</a></li>
+      </ul>
+      <ul>
+        <li><a href="operador/{{almacenId}}/pesar"><i class="fas  fa-weight-hanging"></i> Pesar paquete</a></li>
+      </ul>
+      <ul>
+        <li><a href="operador/{{almacenId}}/empacar"><i class="fas fa-solid  fa-pallet"></i> Empacar</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</div>
+
+
+<div *ngIf="almacen">
+  <router-outlet></router-outlet>
+</div>
+
+
+
+

@@ -1,0 +1,101 @@
+<div class="logo">
+  <img src="./assets/img/logo.png" class="img-responsive" alt="titulo" />
+</div>
+
+<div
+  id="contenedor-inicio"
+  *ngIf="formGroup"
+>
+  <h1>Iniciar sesión</h1>
+  <form [formGroup]="formGroup">
+    <div class="row">
+      <!-- Correo -->
+      <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <label for="correo"
+               class="form-label">
+          Dirección de correo electrónico:
+        </label>
+        <input type="email"
+               class="form-control"
+               formControlName="correo"
+               id="correo"
+               aria-describedby="correoHelp" >
+        <div id="correoHelp"
+             class="form-text">
+          Ingrese su correo electrónico.
+        </div>
+
+        <div *ngIf="formGroup.get('correo')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('correo')?.invalid &&
+             formGroup.get('correo')?.touched &&
+             formGroup.get('correo')?.dirty
+                    ">
+            <span *ngIf="formGroup.get('correo')?.hasError('required')">
+              Correo requerido
+            </span>
+            <span *ngIf="formGroup.get('correo')?.hasError('minlength')">
+              Mínimo 5 caracteres
+            </span>
+            <span *ngIf="formGroup.get('correo')?.hasError('email')">
+              Correo no válido
+            </span>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Contraseña -->
+      <div class="mb-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <label for="contrasena"
+               class="form-label">
+          Contraseña:
+        </label>
+        <input type="password"
+               class="form-control"
+               formControlName="contrasena"
+               id="contrasena"
+               aria-describedby="contrasenaHelp" >
+        <div id="contrasenaHelp"
+             class="form-text">
+          Ingrese su contraseña.
+        </div>
+
+        <div *ngIf="formGroup.get('contrasena')">
+          <div class="alert alert-danger"
+               role="alert" *ngIf="
+             formGroup.get('contrasena')?.invalid &&
+             formGroup.get('contrasena')?.touched &&
+             formGroup.get('contrasena')?.dirty
+                    ">
+            <span *ngIf="formGroup.get('contrasena')?.hasError('required')">
+            Contraseña requerida
+            </span>
+            <span *ngIf="formGroup.get('contrasena')?.hasError('minlength')">
+            Mínimo 6 caracteres
+            </span>
+
+          </div>
+        </div>
+      </div>
+      <p class="mensaje">{{mensaje}}</p>
+
+      <!-- Boton -->
+      <div >
+
+        <button type="submit" class="btn btn-success " id="bonton-enviar"  (click)="iniciarSesion()"
+                [disabled]="formGroup.invalid">
+          Iniciar Sesión</button>
+      </div>
+
+    </div>
+  </form>
+
+</div>
+<div id="div-registro">
+  Nuevo en Boxed? -
+  <a href="/registro">Resgistrate</a>
+</div>
+
