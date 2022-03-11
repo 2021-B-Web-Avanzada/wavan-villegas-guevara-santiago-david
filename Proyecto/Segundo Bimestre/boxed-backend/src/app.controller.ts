@@ -238,4 +238,21 @@ export class AppController {
         response.status(501).send(err);
       });
   }
+
+  @Post('almacen/:idAlmacen/paquete/:idPaquete/estado/nuevo')
+  registrarEstoEnAlmacen(
+    @Body() body,
+    @Param('idAlmacen') idAlmacen: string,
+    @Param('idPaquete') idPaquete: string,
+    @Res() response: Response,
+  ) {
+    this.appService
+      .registrarEstadoAlmacen(idPaquete, idAlmacen, body)
+      .then((data) => {
+        response.status(HttpStatus.OK).send();
+      })
+      .catch((err) => {
+        response.status(501).send(err);
+      });
+  }
 }

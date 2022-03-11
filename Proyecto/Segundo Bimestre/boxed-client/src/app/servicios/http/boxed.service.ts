@@ -136,6 +136,15 @@ export class BoxedService {
         {comentario}
         )
   }
+
+  registrarNuevoEstadoAlmacen(idAlmacen:string,idPaquete:string, estado:Estado){
+    const url = environment.urlBoxed + '/almacen/' + idAlmacen + '/paquete/' + idPaquete + '/estado/nuevo';
+    return this.httpCliente
+      .post(
+        url,
+        estado
+      )
+  }
 }
 
 

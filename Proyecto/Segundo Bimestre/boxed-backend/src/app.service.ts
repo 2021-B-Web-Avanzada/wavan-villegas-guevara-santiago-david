@@ -257,6 +257,38 @@ export class AppService {
     return promesaActualizacion;
   }
 
+  async registrarEstadoAlmacen(
+    idPaquete: string,
+    idAlmacen: string,
+    nuevoEstado: Estado,
+  ) {
+    const listaPaquetesRef = await this.db
+      .collectionGroup('paquete')
+      .where('idAlmacen', '==', idAlmacen)
+      .get();
+    let referenciaPaquete: FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData> =
+      undefined;
+    listaPaquetesRef.forEach((document) => {
+      const paquete = document.data() as Paquete;
+      if (paquete.id == idPaquete) {
+        referenciaPaquete = document.ref;
+      }
+    });
+    try {
+      const refNuevoEstado = await referenciaPaquete.collection('estado').doc();
+      nuevoEstado.id = refNuevoEstado.id;
+      nuevoEstado.fecha = new Date().toString();
+      await this.db.runTransaction(async (tran) => {
+        tran.update(referenciaPaquete, { ultimoEstado: refNuevoEstado.id });
+      });
+      return await refNuevoEstado.set(nuevoEstado);
+    } catch (e) {
+      return new Promise((resolve, reject) => {
+        reject(e);
+      });
+    }
+  }
+
   private async actualizarEstado(
     referenciaEstado: FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData>,
     nuevaInfoEstado: Estado,
