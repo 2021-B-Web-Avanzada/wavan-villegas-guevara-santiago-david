@@ -70,6 +70,12 @@ export class RutaPesarPaqueteComponent implements OnInit {
     const dialogRef=this.dialog.open(DialogoPesarComponent, {data: { paquete: this.arregloFiltrado[id],id:id, almacen:this.almacenId }});
     dialogRef.afterClosed().subscribe((data)=>{
 
+      if(data){
+
+        this.arregloFiltrado.splice(data.number,1);
+      }
+
+
       }
     );
 

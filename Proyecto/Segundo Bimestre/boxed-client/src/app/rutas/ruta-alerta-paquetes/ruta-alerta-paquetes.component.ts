@@ -119,7 +119,7 @@ export class RutaAlertaPaquetesComponent implements OnInit {
             [
               Validators.required, // min, max, minLength maxLength, email, pattern
               Validators.maxLength(6),
-              Validators.pattern("\\d+(,\\d+)?"),
+              Validators.pattern("[0-9]{1,}\\.{1}[0-9]{1,2}"),
             ]
           ),
           bodega: new FormControl(

@@ -16,7 +16,7 @@ export class DialogoPesarComponent implements OnInit {
   constructor(private readonly boxedService:BoxedService,
               readonly formBuilder: FormBuilder,
               public dialogRef: MatDialogRef<DialogoPesarComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: {paquete: paqueteInterface,id:number,almacen:number}
+              @Inject(MAT_DIALOG_DATA) public data: {paquete: paqueteInterface,id:number,almacen:string}
 
               ) { }
 
@@ -35,15 +35,50 @@ export class DialogoPesarComponent implements OnInit {
             [
               Validators.required, // min, max, minLength maxLength, email, pattern
               Validators.maxLength(6),
-              Validators.pattern("\\d+(,\\d+)?"),
+              Validators.pattern("[0-9]{1,}\\.{1}[0-9]{1,2}"),
             ]
           ),
 
         }
       );
   }
+  prepararPeso() {
+    if (this.formGroup) {
+      const peso = this.formGroup.get('precio');
+
+      if (peso
+        ) {
+        return {
+          peso: peso.value,
+
+        }
+      }
+    }
+    return {
+      peso: ''
+    }
+  }
   mandarPeso(){
-    this.dialogRef.close({number:this.data.id});
+    var peso=this.prepararPeso().peso;
+    const mandarPesoPaquete$ = this.boxedService.registrarPesoPaquete(this.data.almacen,
+      this.data.paquete.id!,
+      peso)
+    mandarPesoPaquete$
+      .subscribe(
+        {
+          next: (data) => {
+            this.dialogRef.close({number:this.data.id});
+
+          },
+          error: (error) => {
+
+          }
+
+        }
+
+      );
+
+
 
 
   }
