@@ -78,9 +78,6 @@ export class DialogoPesarComponent implements OnInit {
 
       );
 
-
-
-
   }
 
 }

@@ -18,6 +18,8 @@
 
             <td >{{paquete.nombre}}</td>
             <td>{{paquete.precio}}</td>
+            <td >{{paquete.recibo?.costoTotal}}</td>
+            <td> <p [class]="paquete.ultimoEstado"> {{paquete.ultimoEstado}}</p></td>
 
 
 
