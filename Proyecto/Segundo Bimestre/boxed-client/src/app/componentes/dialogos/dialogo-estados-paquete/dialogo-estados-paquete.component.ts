@@ -30,7 +30,22 @@ export class DialogoEstadosPaqueteComponent implements OnInit {
     )
       .subscribe({
         next: (data) =>{
-          this.estadosPaquete = data.reverse();
+          this.estadosPaquete = data.sort((estado1, estado2) => {
+            const estados = {
+              bodega: 1,
+              empacado:2,
+              despachado:3,
+              'en-aduana':4,
+              reparto:5
+            }
+            if(estados[estado1.nombre] < estados[estado2.nombre]){
+              return -1;
+            }
+            if(estados[estado1.nombre] > estados[estado2.nombre]){
+              return 1;
+            }
+            return 0;
+          });
       }
       })
   }
