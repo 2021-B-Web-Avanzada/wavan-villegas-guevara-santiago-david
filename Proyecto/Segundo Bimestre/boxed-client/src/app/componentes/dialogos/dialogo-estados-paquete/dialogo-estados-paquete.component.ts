@@ -30,7 +30,7 @@ export class DialogoEstadosPaqueteComponent implements OnInit {
     )
       .subscribe({
         next: (data) =>{
-          this.estadosPaquete = data;
+          this.estadosPaquete = data.reverse();
       }
       })
   }

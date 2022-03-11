@@ -49,14 +49,20 @@ export class RutaPagosComponent implements OnInit {
   }
   pagarPaquete(posicion:number){
     this.dialog.open(DialogoRegistroPagoComponent,{
-      height: "50vh",
+      height: "55vh",
       width: "55vw",
       data: {
         emailUsuario: this.userEmail,
-        paquete: this.arregloPaquetes[posicion]
+        paquete: this.arregloPaquetes[posicion],
+        posicion: posicion
       }
     })
-
+      .afterClosed()
+      .subscribe({
+        next: datos =>{
+          this.arregloPaquetes.splice(datos.posicion,1);
+        }
+      })
   }
 
 }
