@@ -1,0 +1,33 @@
+
+.contenedor{
+  width: 100%;
+  padding: 5px 15px 5px 15px;
+  text-align: center;
+}
+.cajaTexto{
+  font-size: 16px;
+  font-family: Poppins-Regular;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.textoIzquierda{
+  display: flex;
+  align-items: center;
+
+}
+.textDerecha{
+  display: flex;
+  align-items: center;
+
+}
+ion-button{
+  padding: 5px 20px 5px 20px;
+  border-radius: 15px;
+  font-size: 15px;
+  font-family: Poppins-Regular;
+  border: 3px solid #000000;
+
+
+}

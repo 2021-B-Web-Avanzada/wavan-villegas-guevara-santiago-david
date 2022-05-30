@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 1
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+<div class="contenedor"
+     [style.background-color]="colorFondo">
+
+  <div class="cajaTexto table-row">
+    <div class="textoIzquierda table-cell">{{textoPrecio}}</div>
+    <div class="textDerecha table-cell">{{textoValorPrecio}}</div>
+  </div>
+
+
+  <ion-button fill="clear"
+              [style.background-color]="colorBoton"
+              [style.color]="colorTexto"
+  >
+    {{textoBoton}}
+  </ion-button>
+
+
+
+
+</div>
+  </ion-content>
